@@ -114,7 +114,7 @@ python3 scripts/validate-content.py      # frameworks/methods/profile/recipes va
 node --test tests/                       # hooks, ID generator, validators
 ```
 
-The documentation in [`docs/`](docs/index.md) is an MkDocs Material site organised by [Diátaxis](https://diataxis.fr/). Preview it with:
+The documentation in [`docs/`](docs/index.md) is an MkDocs Material site organised by [Diátaxis](https://diataxis.fr/), published at **https://majlisofai.github.io/govkit/** on every push to `main`. Preview it with:
 
 ```bash
 pip install -r requirements-docs.txt && mkdocs serve

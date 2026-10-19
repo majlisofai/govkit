@@ -1,6 +1,7 @@
 site_name: GovKit
 site_description: A customizable governance overlay for ArcKit, built as a Claude Code plugin.
 site_author: The Majlis of AI
+site_url: https://majlisofai.github.io/govkit/
 repo_url: https://github.com/majlisofai/govkit
 repo_name: majlisofai/govkit
 edit_uri: edit/main/docs/
