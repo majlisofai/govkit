@@ -73,7 +73,9 @@ const profilePath = join(cwd, '.govkit', 'profile.yaml');
 if (existsSync(profilePath)) {
   const text = readFileSync(profilePath, 'utf8');
   const name = (text.match(/^\s*name:\s*["']?([^"'\n]+)/m) || [])[1];
-  lines.push(`GovKit profile active: .govkit/profile.yaml${name ? ` (${name.trim()})` : ''}. GovKit commands resolve approach, methods, frameworks and tools from it.`);
+  const brand = (text.match(/^brand:\s*["']?([\w-]+)/m) || [])[1];
+  lines.push(`GovKit profile active: .govkit/profile.yaml${name ? ` (${name.trim()})` : ''}. GovKit commands resolve approach, methods, frameworks, tools and brand from it.` +
+    (brand ? ` Brand: ${brand}.` : ' Brand: inherited (default tmofai unless the org profile sets one).'));
 } else if (existsSync(join(cwd, 'projects'))) {
   lines.push('GovKit: no .govkit/profile.yaml in this repository — run /govkit:init to choose an approach, methods, frameworks and tools. Built-in defaults apply until then.');
 }

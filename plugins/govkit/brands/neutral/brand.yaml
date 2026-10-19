@@ -1,0 +1,68 @@
+# GovKit brand — neutral (unbranded).
+# Use `brand: neutral` to switch every GovKit output off any house style:
+# no logo, system fonts, standard notation colours, stock ArcKit presentation.
+
+id: neutral
+kind: brand
+brand_version: "1.0"
+name: "{organisation.name}"       # takes the profile's organisation name
+short_name: ""
+tagline: ""
+descriptor: ""
+
+colours:
+  paper: "#FFFFFF"
+  poche: "#F5F5F5"
+  poche_strong: "#E6E6E6"
+  ink: "#1F1F1F"
+  ink_muted: "#595959"
+  linework: "#999999"
+  hairline: "#D9D9D9"
+  border: "#767676"
+  accent: "#1D5FA8"
+  on_accent: "#FFFFFF"
+  link: "#1D5FA8"
+  rag: { red: "#B3261E", amber: "#7A5200", green: "#1E6B3A" }
+  chart: ["#1F1F1F", "#1D5FA8", "#595959", "#9E9E9E"]
+  text_pairs:
+    - [ink, paper]
+    - [ink_muted, paper]
+    - [accent, paper]
+    - [on_accent, accent]
+    - [rag.red, paper]
+    - [rag.amber, paper]
+    - [rag.green, paper]
+
+typography:
+  display: { family: system-ui, weight: 600 }
+  label: { family: system-ui, weight: 600, case: none }
+  text: { family: system-ui, weight: 400 }
+  code: { family: ui-monospace }
+  fallback: "Segoe UI, Helvetica, Arial, sans-serif"
+  google_fonts: ""
+
+logo: {}
+
+voice:
+  persona: Clear and neutral.
+  titles: Sentence case.
+  rules: []
+  banned_terms: []
+
+documents:
+  header: ""
+  header_logo: none
+  status_labels: [Draft, In review, Approved]
+  rag_format: "{word}"
+  rag_glyphs: {}
+  date_format: YYYY-MM-DD
+  footer: ""
+
+diagrams:
+  drawio_style: standard
+  mermaid_init: ""
+  mermaid_classes: ""
+
+arckit:
+  pages: false
+  presentation: false

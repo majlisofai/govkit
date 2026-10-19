@@ -1,0 +1,119 @@
+# GovKit brand template — copied and filled by /govkit:create-brand.
+# Every field is optional except id, kind, name, colours (paper, ink, ink_muted,
+# accent, on_accent, rag, text_pairs), typography.text and diagrams.drawio_style.
+# Values shown are The Majlis of AI's; replace them with yours.
+
+id: my-brand
+kind: brand
+brand_version: "1.0"
+name: My Organisation
+short_name: ""
+tagline: ""
+descriptor: ""                    # optional sub-brand or line of work, shown beside the name
+source:
+  guideline: ""                   # where this brand came from (file, URL, skill)
+  design_system: ""
+
+colours:
+  # Light theme tokens. Only these colours may appear in branded output.
+  paper: "#FFFFFF"                # surface-100
+  poche: "#F5F5F5"                # surface-200
+  poche_strong: "#E6E6E6"         # surface-300
+  ink: "#111111"
+  ink_muted: "#5C5C5C"
+  linework: "#999999"             # never text
+  hairline: "#D9D9D9"
+  border: "#767676"
+  accent: "#CC3A1C"               # redline — the only colour; focal point, annotations, stamps
+  on_accent: "#FFFFFF"
+  link: "#111111"
+  rag: { red: "#A82F18", amber: "#7E5300", green: "#2E6B47" }
+  chart: ["#111111", "#5C5C5C", "#CC3A1C", "#8C8C8C"]
+  dark:
+    paper: "#121212"
+    ink: "#FFFFFF"
+    ink_muted: "#B3B3B3"
+    accent: "#FF7A5C"
+  # Pairs that must hold WCAG AA 4.5:1 (checked by check-contrast.mjs).
+  text_pairs:
+    - [ink, paper]
+    - [ink, poche]
+    - [ink, poche_strong]
+    - [ink_muted, paper]
+    - [ink_muted, poche]
+    - [accent, paper]
+    - [on_accent, accent]
+    - [rag.red, paper]
+    - [rag.amber, paper]
+    - [rag.green, paper]
+    - [rag.red, poche_strong]
+
+typography:
+  display: { family: IBM Plex Sans, weight: 300 }
+  label: { family: IBM Plex Sans Condensed, weight: 600, case: upper }
+  text: { family: IBM Plex Sans, weight: 400 }
+  hand: { family: Architects Daughter, use: "annotations and pull quotes only, ≤12 words" }
+  code: { family: IBM Plex Mono }
+  fallback: "Segoe UI, Helvetica, Arial, sans-serif"
+  google_fonts: "https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@300;400;500;600&family=IBM+Plex+Sans+Condensed:wght@600&family=IBM+Plex+Mono&family=Architects+Daughter&display=swap"
+  banned: [Inter, Roboto]
+
+logo:
+  symbol: assets/symbol.svg               # default, light grounds — put your files in assets/
+  symbol_reversed: assets/symbol-reversed.svg
+  symbol_mono: assets/symbol-mono.svg     # under 24px, print
+  lockup: assets/lockup.svg               # first contact only: covers, proposal first pages
+  alt: The Majlis of AI
+  rules:
+    - Use the symbol alone almost everywhere; the lockup only for first contact.
+    - Never rotate, recolour, redraw, add effects or place in a container.
+    - Clear space 12/64 of the symbol on every side; minimum 16px screen, 5mm print.
+
+voice:
+  persona: A senior counsellor — calm, exact, generous.
+  pronouns: '"We" for the practice, "you" for the reader.'
+  titles: Sentence case; titles state the finding.
+  technical_writing: ASD-STE100 for procedures, runbooks and specifications (procedural ≤20 words, descriptive ≤25, verb first, active voice).
+  rules:
+    - Name the regulation, framework and control precisely (e.g. "ISO/IEC 42001 A.5", not "the AI standard").
+    - Three or more things in a sentence become a table.
+    - No exclamation marks, no emoji.
+  banned_terms: [revolutionary, game-changer, cutting-edge, unleash, harness the power, seamless, synergy, disrupt, magic, AI-powered, leverage, journey]
+
+documents:
+  # Applied to GOV-* Markdown artefacts (contract §7). ArcKit artefacts keep
+  # ArcKit's structure; only /govkit:apply overrides theme ArcKit's HTML/decks.
+  # {logo_path} is relative from the artefact to projects/000-global/brand/<file>
+  # (published there by /govkit:apply). {descriptor_sep} is " · " when a descriptor is set.
+  header: '<img src="{logo_path}" alt="{logo_alt}" height="24"> **{name}**{descriptor_sep}{descriptor} · `{doc_id}`'
+  header_logo: symbol             # symbol | lockup | none
+  status_labels: [Draft, For review, Issued for decision, Approved]
+  rag_format: "{glyph} {word}"    # always word + glyph, never colour alone
+  rag_glyphs: { red: "▲", amber: "◆", green: "●" }
+  date_format: YYYY-MM-DD
+  number_format: "USD 4.2m · EUR 1.1bn"
+  callout: "> **{title}** — {body}\n> **Act:** {action}"
+  footer: "{name} · {classification} · {doc_id}"
+
+diagrams:
+  drawio_style: my-brand          # write diagram-styles/my-brand.yaml beside the brand
+  mermaid_init: |
+    %%{init: {"theme": "base", "themeVariables": {
+      "fontFamily": "IBM Plex Sans, Segoe UI, sans-serif", "fontSize": "14px",
+      "background": "#FFFFFF", "primaryColor": "#FFFFFF", "primaryTextColor": "#111111",
+      "primaryBorderColor": "#111111", "secondaryColor": "#F5F5F5", "tertiaryColor": "#FFFFFF",
+      "lineColor": "#5C5C5C", "textColor": "#111111", "mainBkg": "#FFFFFF",
+      "clusterBkg": "#FFFFFF", "clusterBorder": "#D9D9D9", "edgeLabelBackground": "#FFFFFF",
+      "noteBkgColor": "#F5F5F5", "noteTextColor": "#111111", "noteBorderColor": "#D9D9D9",
+      "actorBkg": "#FFFFFF", "actorBorder": "#111111", "signalColor": "#111111",
+      "pie1": "#111111", "pie2": "#5C5C5C", "pie3": "#CC3A1C"
+    }}}%%
+  mermaid_classes: |
+    classDef focal fill:#FFFFFF,stroke:#CC3A1C,stroke-width:3px,color:#111111;
+    classDef context fill:#FFFFFF,stroke:#999999,color:#5C5C5C;
+
+# ArcKit presentation layers GovKit can theme through .arckit/templates-custom/
+# (rules in references/govkit/arckit-overrides.md). Set false to leave stock.
+arckit:
+  pages: true                     # /arckit:pages dashboard CSS + fonts
+  presentation: true              # /arckit:presentation MARP theme

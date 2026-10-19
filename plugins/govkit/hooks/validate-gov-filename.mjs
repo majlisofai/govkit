@@ -5,7 +5,9 @@
  * The GovKit counterpart of ArcKit's validate-arc-filename.mjs. ArcKit's hook
  * ignores GOV-* files; this one checks them against
  *   projects/{NNN-name}/[subdir/]GOV-{PID}-{TYPE}[-{SEQ}]-v{N.N}.md
- * and blocks with a model-visible reason naming the corrected path. Like
+ * plus, for types that declare them, companion files with the same stem
+ * (.drawio, .drawio.svg, .drawio.png), and blocks with a model-visible reason
+ * naming the corrected path. Like
  * ArcKit, it never rewrites the tool input — a block is a gate, not a grant.
  *
  * Exit 0 always; emits {decision:'block', reason} or nothing.
@@ -13,7 +15,10 @@
 
 import { readFileSync, readdirSync } from 'node:fs';
 import { basename, dirname, join } from 'node:path';
-import { loadDocTypes, PREFIX } from '../config/doc-types.mjs';
+import { EXTENSIONS, loadDocTypes, PREFIX } from '../config/doc-types.mjs';
+
+// Alternation for the extension group of the filename pattern.
+const EXT_ALT = [...EXTENSIONS].sort((a, b) => b.length - a.length).map((e) => e.replace(/\./g, '\\.')).join('|');
 
 let data;
 try {
@@ -29,7 +34,7 @@ if (!filePath) process.exit(0);
 if (!filePath.startsWith('/') && data.cwd) filePath = join(data.cwd, filePath);
 
 const filename = basename(filePath);
-if (!filePath.includes('/projects/') || !filename.startsWith(`${PREFIX}-`) || !filename.endsWith('.md')) process.exit(0);
+if (!filePath.includes('/projects/') || !filename.startsWith(`${PREFIX}-`) || !EXTENSIONS.some((e) => filename.endsWith(e))) process.exit(0);
 
 const block = (reason) => {
   console.log(JSON.stringify({ decision: 'block', reason: `GovKit: ${reason}` }));
@@ -42,14 +47,21 @@ const projectDirName = afterProjects.split('/')[0];
 const projectDir = join(repoRoot, 'projects', projectDirName);
 const dirNum = (projectDirName.match(/^(\d+)-/) || [])[1];
 
-const m = filename.match(new RegExp(`^${PREFIX}-(\\d+)-([A-Z][A-Z0-9-]*?)(?:-(\\d{3}))?-v(\\d+(?:\\.\\d+)?)\\.md$`));
+const m = filename.match(new RegExp(`^${PREFIX}-(\\d+)-([A-Z][A-Z0-9-]*?)(?:-(\\d{3}))?-v(\\d+(?:\\.\\d+)?)(${EXT_ALT})$`));
 if (!m) block(`'${filename}' does not match ${PREFIX}-{PID}-{TYPE}[-{SEQ}]-v{N.N}.md. Generate it with node \${CLAUDE_PLUGIN_ROOT}/scripts/generate-gov-id.mjs.`);
 
-const [, rawPid, docType, seq, rawVersion] = m;
-const { known, multi, subdirs } = loadDocTypes(repoRoot);
+const [, rawPid, docType, seq, rawVersion, ext] = m;
+const { types, known, multi, subdirs } = loadDocTypes(repoRoot);
 
 if (!known.has(docType)) {
   block(`Unknown document type '${docType}' in '${filename}'. Valid: ${[...known].sort().join(' ')}. Register custom codes in .govkit/doc-types.json.`);
+}
+const allowedExt = types[docType].extensions || ['.md'];
+if (!allowedExt.includes(ext)) {
+  block(`${docType} artefacts cannot be '${ext}' files (allowed: ${allowedExt.join(' ')}).`);
+}
+if (ext !== '.md' && multi.has(docType) && !seq) {
+  block(`'${filename}' is a companion file: give it the same name as its ${PREFIX}-*-${docType}-NNN-v*.md, sequence number included.`);
 }
 
 const pid = String(parseInt(dirNum ?? rawPid, 10)).padStart(3, '0');
@@ -75,7 +87,7 @@ if (multi.has(docType)) {
   block(`${docType} is single-instance and takes no sequence number ('${filename}').`);
 }
 
-const expected = join(expectedDir, `${PREFIX}-${pid}-${docType}${seqPart}-v${version}.md`);
+const expected = join(expectedDir, `${PREFIX}-${pid}-${docType}${seqPart}-v${version}${ext}`);
 if (expected !== join(dirname(filePath), filename)) {
   block(`Write to '${expected}' instead of '${filePath}' (project ID, sequence, version format or subdirectory corrected).`);
 }

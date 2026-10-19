@@ -28,6 +28,8 @@ GovKit separates **what** is governed, which is ArcKit's artefacts, from **how**
    - **Frameworks** are cited as `framework-id:control-id`.
 3. If an ArcKit command is running and its template has a GovKit override (`.arckit/templates-custom/*` with a `govkit-override` comment), fill the overridden sections with the profile's values.
 4. If the user's question needs an artefact that doesn't exist, name the command that produces it. Respect `tools.arckit.commands.exclude` and `substitute`.
+5. Everything you write for governance follows the profile's `brand:` (runtime contract §6): voice, banned terms, status and RAG wording. Any Mermaid you write starts with the brand's `mermaid_init`. To change the brand, use `/govkit:create-brand`, or set `brand:` in the profile (or centrally, in the org profile it `extends:`). Never hand-style output.
+6. Diagrams follow `tools.diagrams`. With `drawio` (the default), use `/govkit:diagram` and the `drawio-diagrams` skill, never `/arckit:diagram` or new Mermaid.
 
 ## Anti-patterns
 

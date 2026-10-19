@@ -15,6 +15,13 @@
 
 govkit_profile: 1
 
+# BRAND — one setting for the look and voice of everything GovKit produces
+# (GOV documents, draw.io diagrams, Mermaid theming, ArcKit dashboard and decks).
+# brands/<id>/brand.yaml, resolved: .govkit/brands → org profile layer (extends) → built-in.
+# Built-ins: tmofai (default), neutral. Create your own with /govkit:create-brand.
+# Set it in the org-wide profile named by `extends:` to change it centrally.
+brand: tmofai
+
 organisation:
   name: "[Organisation name]"
   sector: "[sector]"
@@ -54,7 +61,13 @@ tools:
     # own commands use this profile's scales and vocabulary (see /govkit:apply).
     template_overrides: [risk-register]
     recipes: [govkit-baseline]      # copied into .arckit/recipes/ for /arckit:build
-  diagrams: mermaid                 # mermaid | plantuml — passed to /arckit:diagram
+  # drawio  — diagrams are editable .drawio files from /govkit:diagram, which
+  #           replaces /arckit:diagram in every recommendation (ArcKit untouched).
+  # mermaid | plantuml — diagrams come from /arckit:diagram in that syntax.
+  diagrams: drawio
+  drawio:
+    style: brand                    # brand = the brand's diagrams.drawio_style; or a diagram-styles/<id> to override it
+    export: []                      # [] = the style's export.formats; or [svg], [png], [svg, png]. Needs draw.io desktop; skipped if absent.
   tracker: none                     # none | jira | servicenow | trello — where actions are exported
   publish: [pages]                  # pages = /arckit:pages dashboard
 

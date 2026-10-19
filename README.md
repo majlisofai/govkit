@@ -2,7 +2,7 @@
 
 **A customizable governance overlay for [ArcKit](https://github.com/tractorjuice/arc-kit).** It adds commands, skills and agents for Claude Code.
 
-ArcKit produces the architecture artefacts: principles, requirements, risk, designs, ADRs and more. GovKit governs them the way *your* organisation does. You choose the **approach** (operating model, lifecycle and posture), the **methods** (assessment scale, risk method and evidence rules), the **frameworks** you measure against, and the **tools** (which ArcKit commands and overlays to use, diagrams and tracker). GovKit then runs assessments, crosswalks, control and evidence registers, stage gates, exceptions and board reports on top of ArcKit.
+ArcKit produces the architecture artefacts: principles, requirements, risk, designs, ADRs and more. GovKit governs them the way *your* organisation does. You choose the **approach** (operating model, lifecycle and posture), the **methods** (assessment scale, risk method and evidence rules), the **frameworks** you measure against, the **tools** (which ArcKit commands and overlays to use, diagrams and tracker), and the **brand** that every output is presented in. GovKit then runs assessments, crosswalks, control and evidence registers, stage gates, exceptions and board reports on top of ArcKit.
 
 GovKit **never forks or edits ArcKit**. It depends on the `arckit` plugin, and it reaches ArcKit only through the extension points ArcKit supports. You can therefore take every future ArcKit release.
 
@@ -26,6 +26,7 @@ To set up a team repository so teammates get both automatically, copy [`examples
 /govkit:apply                # renders the profile into ArcKit's .arckit/templates-custom/ and .arckit/recipes/
 /govkit:operating-model      # organisation-wide Governance Operating Model (000-global)
 /govkit:start my-project     # recommended ArcKit + GovKit sequence to the next gate
+/govkit:create-brand         # optional: your own brand guideline (default: The Majlis of AI)
 ```
 
 ## Commands
@@ -47,11 +48,14 @@ To set up a team repository so teammates get both automatically, copy [`examples
 | `/govkit:gate` | `GOV-NNN-GATE-NNN` | Stage-gate review with a GO / NO-GO recommendation |
 | `/govkit:exception` | `GOV-NNN-EXCP-NNN` | Time-boxed exception with risk and approver |
 | `/govkit:board-report` | `GOV-000-BRPT-NNN` | Portfolio report for the governing body |
+| `/govkit:diagram` | `GOV-NNN-DGRM-NNN` + `.drawio` (+ `.drawio.svg`/`.png`) | draw.io ArchiMate, C4, DFD, process or sequence view, or `--from` an ArcKit Mermaid diagram |
 
 The plugin also ships these **skills**:
 
 - `governance-method`: applies your profile's vocabulary and scales whenever governance comes up, including inside ArcKit commands.
 - `framework-authoring`: helps you model your own policies and regulations.
+- `drawio-diagrams`: writes valid, styled, editable draw.io diagrams, then validates and exports them.
+- `create-brand` (`/govkit:create-brand`): builds your own brand guideline from a PDF, URL, design system or interview, then checks contrast and activates it.
 
 It also ships these **agents**:
 
@@ -69,11 +73,25 @@ It also ships these **agents**:
 | Risk methods | `iso31000-5x5` | `.govkit/methods/risk/` |
 | Frameworks | `iso-iec-42001`, `nist-ai-rmf`, `iso-iec-38500` | `.govkit/frameworks/` |
 | Templates | 9 GovKit artefact templates | `.govkit/templates-custom/` |
-| Doc types | `GMOD APPL ASMT XWLK CTRL EVID GATE EXCP BRPT` | `.govkit/doc-types.json` |
+| Doc types | `GMOD APPL ASMT XWLK CTRL EVID GATE EXCP BRPT DGRM` | `.govkit/doc-types.json` |
+| Brands | `tmofai` (default), `neutral` | `.govkit/brands/<id>/` or the org layer, via `/govkit:create-brand` |
+| Diagram styles | `standard`, `tmofai` | `.govkit/diagram-styles/` |
 
 The built-in frameworks hold **paraphrased** control intents only. Assess against your licensed copy of each standard. For jurisdiction-specific regulation (EU AI Act, UAE AI Charter, NIST 800-53 and so on), GovKit hands off to ArcKit's overlay plugins and does not duplicate them.
 
 See [docs/CUSTOMIZING.md](docs/CUSTOMIZING.md).
+
+## Brand and diagrams
+
+A single setting, `brand:` in the profile, controls how everything looks and reads:
+
+- GOV document headers, status and RAG wording, voice and banned terms
+- the draw.io diagram style and Mermaid theming
+- through ArcKit's own template overrides: ArcKit's `/arckit:pages` dashboard and `/arckit:presentation` decks
+
+Brands resolve from your repository, then the **organisation layer** (the directory of the profile you `extends:`), then the built-ins. Put `brand:` and your brand folder in a shared org-governance repository, and every repository that extends it changes together.
+
+The default diagram tool is **draw.io** (`tools.diagrams: drawio`). `/arckit:diagram` is replaced by `/govkit:diagram` in every recommendation. Exports need [draw.io desktop](https://github.com/jgraph/drawio-desktop/releases); without it you still get the editable `.drawio` file. Set `tools.diagrams: mermaid` to go back to ArcKit's Mermaid diagrams.
 
 ## How compatibility with ArcKit is maintained
 

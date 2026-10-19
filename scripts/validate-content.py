@@ -134,9 +134,117 @@ def validate_risk(path: Path) -> None:
         err(path, f"bands do not cover scores {sorted(missing)}")
 
 
-def resolve(kind: str, ident: str, project: Path | None) -> Path | None:
-    for base in ([project] if project else []) + [PLUGIN]:
-        p = base / kind / f"{ident}.yaml"
+def validate_diagram_style(path: Path) -> None:
+    ds = load(path)
+    if not isinstance(ds, dict):
+        return
+    if ds.get("id") != path.stem:
+        err(path, f"id '{ds.get('id')}' must equal filename '{path.stem}'")
+    if ds.get("kind") != "diagram-style":
+        err(path, "kind must be 'diagram-style'")
+    page = ds.get("page") or {}
+    for key in ("width", "height", "grid"):
+        if not isinstance(page.get(key), int) or page[key] <= 0:
+            err(path, f"page.{key} must be a positive integer")
+    for key in ("vertex", "edge"):
+        if not (ds.get("base") or {}).get(key):
+            err(path, f"base.{key} missing")
+    notations = ds.get("notations") or {}
+    for name in ("archimate", "c4", "flow", "sequence"):
+        if name not in notations:
+            err(path, f"notations.{name} missing")
+    arch = notations.get("archimate") or {}
+    if "{type}" not in (arch.get("element") or "") or "{form}" not in (arch.get("element") or ""):
+        err(path, "notations.archimate.element must contain {type} and {form}")
+    for state in ("focal", "context", "out_of_scope"):
+        if state not in (ds.get("states") or {}):
+            err(path, f"states.{state} missing")
+    for fmt in (ds.get("export") or {}).get("formats") or []:
+        if fmt not in ("svg", "png"):
+            err(path, f"export format '{fmt}' must be svg or png")
+    # Every style string must be ;-terminated key=value pairs (or a bare shape name).
+    def walk(node, where):
+        if isinstance(node, dict):
+            for k, v in node.items():
+                walk(v, f"{where}.{k}")
+        elif isinstance(node, str) and where.split(".")[1] in ("base", "notations", "states") and "=" in node:
+            if not node.endswith(";"):
+                err(path, f"{where}: style string must end with ';'")
+    walk(ds, path.stem)
+
+
+HEX_RE = re.compile(r"^#[0-9A-Fa-f]{6}$")
+
+
+def contrast(fg: str, bg: str) -> float:
+    def lum(h: str) -> float:
+        rgb = [int(h[i:i + 2], 16) / 255 for i in (1, 3, 5)]
+        r, g, b = [c / 12.92 if c <= 0.03928 else ((c + 0.055) / 1.055) ** 2.4 for c in rgb]
+        return 0.2126 * r + 0.7152 * g + 0.0722 * b
+    hi, lo = sorted((lum(fg), lum(bg)), reverse=True)
+    return (hi + 0.05) / (lo + 0.05)
+
+
+def validate_brand(path: Path, project: Path | None, org: Path | None) -> None:
+    br = load(path)
+    if not isinstance(br, dict):
+        return
+    bid = path.parent.name
+    if br.get("id") != bid:
+        err(path, f"id '{br.get('id')}' must equal directory name '{bid}'")
+    if br.get("kind") != "brand":
+        err(path, "kind must be 'brand'")
+    if not br.get("name"):
+        err(path, "name missing")
+    colours = br.get("colours") or {}
+    for key in ("paper", "ink", "ink_muted", "accent", "on_accent"):
+        if not HEX_RE.match(str(colours.get(key, ""))):
+            err(path, f"colours.{key} must be #RRGGBB")
+    for key in ("red", "amber", "green"):
+        if not HEX_RE.match(str((colours.get("rag") or {}).get(key, ""))):
+            err(path, f"colours.rag.{key} must be #RRGGBB")
+
+    def token(name: str):
+        node = colours
+        for part in name.split("."):
+            node = node.get(part) if isinstance(node, dict) else None
+        return node
+
+    pairs = colours.get("text_pairs") or []
+    if not pairs:
+        err(path, "colours.text_pairs must list the text/background pairs to check")
+    for fg, bg in pairs:
+        a, b = token(fg), token(bg)
+        if not (isinstance(a, str) and HEX_RE.match(a) and isinstance(b, str) and HEX_RE.match(b)):
+            err(path, f"text pair [{fg}, {bg}] does not resolve to two hex colours")
+        elif contrast(a, b) < 4.5:
+            err(path, f"text pair [{fg}, {bg}] contrast {contrast(a, b):.2f}:1 is below WCAG AA 4.5:1")
+    if not ((br.get("typography") or {}).get("text") or {}).get("family"):
+        err(path, "typography.text.family missing")
+    for key, rel in (br.get("logo") or {}).items():
+        if key in ("alt", "rules"):
+            continue
+        f = path.parent / str(rel)
+        if not f.exists():
+            err(path, f"logo.{key}: {rel} not found beside brand.yaml")
+        elif f.suffix == ".svg" and re.search(r"<script|\son\w+=|javascript:|<foreignObject", f.read_text(), re.I):
+            err(path, f"logo.{key}: {rel} contains active content")
+    style = (br.get("diagrams") or {}).get("drawio_style")
+    if not style or not resolve("diagram-styles", style, project, org):
+        err(path, f"diagrams.drawio_style '{style}' does not resolve to a diagram style")
+    banned = set((br.get("voice") or {}).get("banned_terms") or [])
+    for key in ("header", "footer", "callout"):
+        text = str((br.get("documents") or {}).get(key) or "").lower()
+        for term in banned:
+            if term.lower() in text:
+                err(path, f"documents.{key} uses banned term '{term}'")
+
+
+def resolve(kind: str, ident: str, project: Path | None, org: Path | None = None) -> Path | None:
+    """Project -> organisation (extends) -> built-in, as runtime-contract.md section 2."""
+    suffix = Path(kind) / (f"{ident}/brand.yaml" if kind == "brands" else f"{ident}.yaml")
+    for base in [b for b in (project, org) if b] + [PLUGIN]:
+        p = base / suffix
         if p.exists():
             return p
     return None
@@ -146,6 +254,17 @@ def validate_profile(path: Path, project: Path | None) -> None:
     prof = load(path)
     if not isinstance(prof, dict):
         return
+    org = None
+    if prof.get("extends"):
+        ext = (path.parent / prof["extends"]).resolve()
+        if not ext.exists():
+            err(path, f"extends: {prof['extends']} not found")
+        else:
+            org = ext.parent
+            parent = load(ext) or {}
+            # The org layer supplies keys the project profile leaves out.
+            for key, value in parent.items():
+                prof.setdefault(key, value)
     approach = prof.get("approach") or {}
     methods = prof.get("methods") or {}
     refs = [
@@ -156,9 +275,14 @@ def validate_profile(path: Path, project: Path | None) -> None:
     ]
     fws = prof.get("frameworks") or {}
     refs += [("frameworks", f) for f in fws.get("active") or []]
+    tools = prof.get("tools") or {}
+    if tools.get("diagrams") not in (None, "drawio", "mermaid", "plantuml"):
+        err(path, "tools.diagrams must be drawio, mermaid or plantuml")
+    refs.append(("diagram-styles", (tools.get("drawio") or {}).get("style")))
+    refs.append(("brands", prof.get("brand")))
     for kind, ident in refs:
-        if ident and not resolve(kind, ident, project):
-            err(path, f"{kind}/{ident}.yaml not found")
+        if ident and ident != "brand" and not resolve(kind, ident, project, org):
+            err(path, f"{kind}/{ident}{'/brand' if kind == 'brands' else ''}.yaml not found")
     if fws.get("primary") and fws.get("active") and fws["primary"] not in fws["active"]:
         err(path, "frameworks.primary must be in frameworks.active")
 
@@ -192,6 +316,11 @@ def run(base: Path, project: Path | None) -> None:
         validate_risk(p)
     for p in (base / "recipes").glob("*.yaml"):
         validate_recipe(p)
+    for p in (base / "diagram-styles").glob("*.yaml"):
+        validate_diagram_style(p)
+    for p in (base / "brands").glob("*/brand.yaml"):
+        if not p.parent.name.startswith("_"):
+            validate_brand(p, project, None)
 
 
 run(PLUGIN, None)

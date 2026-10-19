@@ -1,0 +1,86 @@
+# GovKit diagram style — standard notation colours.
+#
+# A diagram style turns notation (ArchiMate, C4, flow, sequence) into draw.io
+# style strings. /govkit:diagram composes a cell's style as:
+#   base.vertex + notations.<n>.<element> [+ states.<state>]
+#   base.edge   + notations.<n>.relationships.<rel> [+ states.<state>]
+# {type}/{form}/{fill} placeholders are filled from the notation catalogue in
+# skills/drawio-diagrams/references/notations.md.
+#
+# Copy to .govkit/diagram-styles/<id>.yaml and set tools.drawio.style: <id>
+# to use your own. Every style string here has been rendered with the draw.io
+# desktop CLI; keep new ones to stencils you have rendered too.
+
+id: standard
+kind: diagram-style
+name: Standard notation colours
+page: { width: 1920, height: 1080, grid: 10, background: "#FFFFFF" }
+element_size: { width: 160, height: 80 }
+spacing: { horizontal: 80, vertical: 60 }
+font: { family: Helvetica, size: 12 }
+
+base:
+  vertex: "html=1;whiteSpace=wrap;fontFamily=Helvetica;fontSize=12;"
+  edge: "html=1;rounded=0;edgeStyle=orthogonalEdgeStyle;fontFamily=Helvetica;fontSize=11;labelBackgroundColor=#FFFFFF;"
+  title: "text;html=1;align=left;verticalAlign=top;fontSize=20;fontStyle=1;"
+  note: "shape=note;whiteSpace=wrap;html=1;size=14;fillColor=#FFF2CC;strokeColor=#D6B656;align=left;spacingLeft=6;"
+
+notations:
+  archimate:
+    element: "outlineConnect=0;shape=mxgraph.archimate3.application;appType={type};archiType={form};fillColor={fill};strokeColor=#000000;"
+    device: "outlineConnect=0;shape=mxgraph.archimate3.application;appType=device;fillColor={fill};strokeColor=#000000;"
+    grouping: "outlineConnect=0;shape=mxgraph.archimate3.application;appType=grouping;archiType=square;dashed=1;fillColor=none;verticalAlign=top;align=left;spacingLeft=8;"
+    layer_fill:
+      strategy: "#F5DEAA"
+      motivation: "#CCCCFF"
+      business: "#FFFFB5"
+      application: "#B5FFFF"
+      technology: "#C9E7B7"
+      implementation: "#FFE0E0"
+      migration: "#E0FFE0"
+      location: "#FBB875"
+    relationships:
+      composition:    "startArrow=diamondThin;startFill=1;startSize=10;endArrow=none;"
+      aggregation:    "startArrow=diamondThin;startFill=0;startSize=10;endArrow=none;"
+      assignment:     "endArrow=block;endFill=1;startArrow=oval;startFill=1;"
+      realization:    "endArrow=block;endFill=0;dashed=1;"
+      serving:        "endArrow=open;endFill=1;"
+      access:         "endArrow=open;endFill=0;dashed=1;dashPattern=1 4;"
+      influence:      "endArrow=open;endFill=0;dashed=1;dashPattern=6 4;"
+      triggering:     "endArrow=block;endFill=1;"
+      flow:           "endArrow=block;endFill=1;dashed=1;dashPattern=6 4;"
+      specialization: "endArrow=block;endFill=0;"
+      association:    "endArrow=none;"
+  c4:
+    person: "shape=mxgraph.c4.person2;align=center;fillColor=#08427B;strokeColor=#073B6F;fontColor=#FFFFFF;"
+    software_system: "rounded=1;arcSize=10;fillColor=#1168BD;strokeColor=#0B4884;fontColor=#FFFFFF;"
+    external_system: "rounded=1;arcSize=10;fillColor=#999999;strokeColor=#8A8A8A;fontColor=#FFFFFF;"
+    container: "rounded=1;arcSize=10;fillColor=#438DD5;strokeColor=#3C7FC0;fontColor=#FFFFFF;"
+    database: "shape=cylinder3;boundedLbl=1;backgroundOutline=1;size=15;fillColor=#438DD5;strokeColor=#3C7FC0;fontColor=#FFFFFF;"
+    component: "rounded=1;arcSize=10;fillColor=#85BBF0;strokeColor=#78A8D8;fontColor=#000000;"
+    boundary: "rounded=0;dashed=1;dashPattern=8 4;fillColor=none;strokeColor=#666666;fontColor=#666666;verticalAlign=bottom;align=left;spacingLeft=8;"
+    relationships:
+      uses: "endArrow=open;endFill=0;dashed=1;dashPattern=6 4;strokeColor=#707070;fontColor=#707070;"
+  flow:
+    process: "rounded=1;arcSize=10;fillColor=#FFFFFF;strokeColor=#000000;"
+    decision: "rhombus;fillColor=#FFFFFF;strokeColor=#000000;"
+    terminator: "rounded=1;arcSize=50;fillColor=#FFFFFF;strokeColor=#000000;"
+    data_store: "shape=cylinder3;boundedLbl=1;backgroundOutline=1;size=15;fillColor=#FFFFFF;strokeColor=#000000;"
+    external_entity: "rounded=0;fillColor=#F5F5F5;strokeColor=#666666;"
+    trust_boundary: "rounded=0;dashed=1;dashPattern=8 4;fillColor=none;strokeColor=#B85450;fontColor=#B85450;verticalAlign=top;align=left;spacingLeft=8;"
+    relationships:
+      flow: "endArrow=block;endFill=1;"
+  sequence:
+    lifeline: "shape=umlLifeline;perimeter=lifelinePerimeter;container=1;collapsible=0;recursiveResize=0;outlineConnect=0;size=40;"
+    actor: "shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;"
+    relationships:
+      call: "endArrow=block;endFill=1;"
+      reply: "endArrow=open;endFill=0;dashed=1;"
+
+states:
+  focal: "strokeWidth=3;strokeColor=#B85450;"
+  context: "opacity=60;"
+  out_of_scope: "dashed=1;dashPattern=4 3;strokeColor=#999999;fontColor=#666666;"
+
+export:
+  formats: [svg]          # svg (editable .drawio.svg) | png (.drawio.png at 2×)

@@ -8,7 +8,8 @@ GovKit is a Claude Code plugin (`plugins/govkit/`, namespace `/govkit:*`) that o
 2. **Never write `ARC-*` artefacts from GovKit.** GovKit produces `GOV-*` files. For ArcKit artefacts, hand off to `/arckit:*` commands, and customize ArcKit only via `.arckit/templates-custom/` and `.arckit/recipes/`.
 3. **Every `arckit:<cmd>` you write must exist** in `upstream/snapshot/commands.json`. Every ArcKit doc-type code must exist in `upstream/snapshot/doc-types.json`. `check-compat.mjs` and `validate-content.py` enforce both.
 4. **Don't pin a version in the `arckit` dependency** in `plugin.json`. ArcKit publishes no `arckit--v*` tags, so a pinned version cannot resolve. The tested range lives in `upstream/compat.json`, and must be copied byte-identical to `plugins/govkit/config/compat.json`.
-5. **Plugin scripts and hooks are zero-dependency Node ESM.** Plugins are cloned and never `npm install`ed. Repo tooling may use Python with PyYAML.
+5. **Never hard-code presentation.** Colours, fonts, logos, status words and diagram styling come from the resolved brand (runtime contract §6) and diagram style. A new output surface gets new brand fields, not inline styling.
+6. **Plugin scripts and hooks are zero-dependency Node ESM.** Plugins are cloned and never `npm install`ed. Repo tooling may use Python with PyYAML.
 
 ## Adding things
 

@@ -22,6 +22,9 @@
  *   multiInstance Allocates a -NNN- sequence (one file per instance).
  *   subdir        Subdirectory under the project for multi-instance types.
  *   command       The /govkit:* command that writes it.
+ *   extensions    File extensions allowed for the type (default ['.md']). Non-.md
+ *                 files are companions of the .md with the same stem, e.g.
+ *                 diagrams/GOV-001-DGRM-001-v1.0.drawio beside ...-v1.0.md.
  */
 
 import { readFileSync } from 'node:fs';
@@ -39,7 +42,12 @@ export const DOC_TYPES = {
   GATE: { name: 'Stage Gate Review',              category: 'Assurance',  command: 'gate',      multiInstance: true, subdir: 'gates' },
   EXCP: { name: 'Policy Exception',               category: 'Governance', command: 'exception', multiInstance: true, subdir: 'exceptions' },
   BRPT: { name: 'Governance Board Report',        category: 'Reporting',  command: 'board-report', multiInstance: true, subdir: 'board-reports' },
+  DGRM: { name: 'Architecture Diagram (draw.io)', category: 'Architecture', command: 'diagram',  multiInstance: true, subdir: 'diagrams',
+          extensions: ['.md', '.drawio', '.drawio.svg', '.drawio.png'] },
 };
+
+/** File extensions the GOV filename convention covers (per type, `extensions`; default .md). */
+export const EXTENSIONS = ['.md', '.drawio', '.drawio.svg', '.drawio.png'];
 
 /** Merge built-in types with a project's .govkit/doc-types.json (built-ins win). */
 export function loadDocTypes(projectRoot) {

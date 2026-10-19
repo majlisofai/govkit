@@ -108,13 +108,13 @@ check('doc-types', Object.keys(DOC_TYPES).filter((c) => arckitTypes.has(c)).map(
   const templates = new Set(json(join(SNAP, 'templates.json')));
   const rules = readFileSync(join(PLUGIN, 'references', 'govkit', 'arckit-overrides.md'), 'utf8')
     .split('\n').filter((l) => l.startsWith('## ')).map((l) => l.slice(3).trim());
-  check('overrides', rules.filter((r) => !templates.has(`${r}-template.md`)).map((r) => `override rule '${r}' — ArcKit ${lock.version} has no ${r}-template.md`));
+  check('overrides', rules.filter((r) => !templates.has(`${r}-template.md`) && !templates.has(`${r}-template.html`)).map((r) => `override rule '${r}' — ArcKit ${lock.version} has no ${r}-template.md or .html`));
 }
 
 // templates
 {
   const problems = [];
-  const tmplFor = { GMOD: 'operating-model', APPL: 'applicability', ASMT: 'assessment', XWLK: 'crosswalk', CTRL: 'controls', EVID: 'evidence', GATE: 'gate', EXCP: 'exception', BRPT: 'board-report' };
+  const tmplFor = { GMOD: 'operating-model', APPL: 'applicability', ASMT: 'assessment', XWLK: 'crosswalk', CTRL: 'controls', EVID: 'evidence', GATE: 'gate', EXCP: 'exception', BRPT: 'board-report', DGRM: 'diagram' };
   for (const [code, info] of Object.entries(DOC_TYPES)) {
     const cmdFile = join(PLUGIN, 'commands', `${info.command}.md`);
     if (!existsSync(cmdFile)) { problems.push(`${code}: command ${info.command}.md missing`); continue; }

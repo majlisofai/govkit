@@ -6,7 +6,9 @@
 ┌────────────────────────────────────────────────────────────────────┐
 │ Your repository                                                    │
 │   .govkit/profile.yaml            ← approach, methods, frameworks, │
-│   .govkit/{frameworks,methods,templates-custom}/   tools (yours)   │
+│   .govkit/{frameworks,methods,brands,diagram-styles,              │
+│           templates-custom}/      ← your overrides                 │
+│   <org>/  (extends:)              ← central org layer              │
 │   .arckit/templates-custom/       ← written by /govkit:apply        │
 │   .arckit/recipes/                ← written by /govkit:apply        │
 │   projects/NNN-name/ARC-*.md      ← ArcKit artefacts               │

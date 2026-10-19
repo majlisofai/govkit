@@ -1,0 +1,89 @@
+# GovKit diagram style — The Majlis of AI drawing sheet.
+#
+# Monochrome ArchiMate on an architect's sheet: white paper, black linework,
+# one redline for focus. Values follow the TMofAI brand's draw.io kit
+# (brand-tmofai skill, §11). For the full sheet furniture (header, insight card,
+# key, title block, stamp), the brand skill's majlis-archimate-template.drawio
+# remains the reference; /govkit:diagram lays out the drawing area only unless
+# sheet.title_block is true.
+
+id: tmofai
+kind: diagram-style
+name: The Majlis of AI — monochrome drawing sheet
+page: { width: 1920, height: 1080, grid: 8, background: "#FFFFFF" }
+element_size: { width: 160, height: 80 }
+spacing: { horizontal: 80, vertical: 56 }
+font: { family: IBM Plex Sans, size: 12 }
+sheet:
+  drawing_area: { x: 64, y: 184, width: 1184, height: 720 }
+  title_block: true
+  drawing_title_y: 928
+
+base:
+  vertex: "html=1;whiteSpace=wrap;fontFamily=IBM Plex Sans;fontSource=https%3A%2F%2Ffonts.googleapis.com%2Fcss%3Ffamily%3DIBM%2BPlex%2BSans%3A300%2C400%2C500%2C600;fontSize=12;fontColor=#111111;"
+  edge: "html=1;rounded=0;edgeStyle=elbowEdgeStyle;elbow=vertical;strokeColor=#5C5C5C;strokeWidth=1;fontFamily=IBM Plex Sans;fontSize=11;fontColor=#5C5C5C;labelBackgroundColor=#FFFFFF;"
+  title: "text;html=1;align=left;verticalAlign=top;fontFamily=IBM Plex Sans;fontSize=44;fontStyle=0;fontColor=#111111;"
+  note: "text;html=1;align=left;verticalAlign=top;whiteSpace=wrap;fontFamily=Architects Daughter;fontSize=15;fontColor=#CC3A1C;"
+
+notations:
+  archimate:
+    element: "outlineConnect=0;shape=mxgraph.archimate3.application;appType={type};archiType={form};fillColor=#FFFFFF;strokeColor=#111111;strokeWidth=1;"
+    device: "outlineConnect=0;shape=mxgraph.archimate3.application;appType=device;fillColor=#FFFFFF;strokeColor=#111111;strokeWidth=1;"
+    grouping: "outlineConnect=0;shape=mxgraph.archimate3.application;appType=grouping;archiType=square;dashed=1;fillColor=none;strokeColor=#111111;verticalAlign=top;align=left;spacingLeft=8;"
+    # Monochrome: layers are told apart by bands and icons, not fill.
+    layer_fill:
+      strategy: "#FFFFFF"
+      motivation: "#FFFFFF"
+      business: "#FFFFFF"
+      application: "#FFFFFF"
+      technology: "#FFFFFF"
+      implementation: "#FFFFFF"
+      migration: "#FFFFFF"
+      location: "#FFFFFF"
+    layer_band: "rounded=0;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#D9D9D9;strokeWidth=1;verticalAlign=top;align=left;spacingLeft=8;fontFamily=IBM Plex Sans Condensed;fontSize=11;fontColor=#5C5C5C;"
+    relationships:
+      composition:    "startArrow=diamondThin;startFill=1;startSize=10;endArrow=none;"
+      aggregation:    "startArrow=diamondThin;startFill=0;startSize=10;endArrow=none;"
+      assignment:     "endArrow=block;endFill=1;startArrow=oval;startFill=1;"
+      realization:    "endArrow=block;endFill=0;dashed=1;"
+      serving:        "endArrow=open;endFill=1;"
+      access:         "endArrow=open;endFill=0;dashed=1;dashPattern=1 4;"
+      influence:      "endArrow=open;endFill=0;dashed=1;dashPattern=6 4;"
+      triggering:     "endArrow=block;endFill=1;"
+      flow:           "endArrow=block;endFill=1;dashed=1;dashPattern=6 4;"
+      specialization: "endArrow=block;endFill=0;"
+      association:    "endArrow=none;"
+  c4:
+    person: "shape=mxgraph.c4.person2;align=center;fillColor=#FFFFFF;strokeColor=#111111;"
+    software_system: "rounded=0;fillColor=#FFFFFF;strokeColor=#111111;"
+    external_system: "rounded=0;fillColor=#FFFFFF;strokeColor=#999999;fontColor=#5C5C5C;"
+    container: "rounded=0;fillColor=#FFFFFF;strokeColor=#111111;"
+    database: "shape=cylinder3;boundedLbl=1;backgroundOutline=1;size=15;fillColor=#FFFFFF;strokeColor=#111111;"
+    component: "rounded=0;fillColor=#FFFFFF;strokeColor=#111111;dashed=0;"
+    boundary: "rounded=0;dashed=1;dashPattern=4 3;fillColor=none;strokeColor=#999999;fontColor=#5C5C5C;verticalAlign=bottom;align=left;spacingLeft=8;"
+    relationships:
+      uses: "endArrow=open;endFill=1;"
+  flow:
+    process: "rounded=0;fillColor=#FFFFFF;strokeColor=#111111;"
+    decision: "rhombus;fillColor=#FFFFFF;strokeColor=#111111;"
+    terminator: "rounded=1;arcSize=50;fillColor=#FFFFFF;strokeColor=#111111;"
+    data_store: "shape=cylinder3;boundedLbl=1;backgroundOutline=1;size=15;fillColor=#FFFFFF;strokeColor=#111111;"
+    external_entity: "rounded=0;fillColor=#FFFFFF;strokeColor=#999999;fontColor=#5C5C5C;"
+    trust_boundary: "rounded=0;dashed=1;dashPattern=4 3;fillColor=none;strokeColor=#CC3A1C;fontColor=#CC3A1C;verticalAlign=top;align=left;spacingLeft=8;"
+    relationships:
+      flow: "endArrow=block;endFill=1;"
+  sequence:
+    lifeline: "shape=umlLifeline;perimeter=lifelinePerimeter;container=1;collapsible=0;recursiveResize=0;outlineConnect=0;size=40;fillColor=#FFFFFF;strokeColor=#111111;"
+    actor: "shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;strokeColor=#111111;"
+    relationships:
+      call: "endArrow=block;endFill=1;strokeColor=#111111;"
+      reply: "endArrow=open;endFill=0;dashed=1;"
+
+states:
+  focal: "strokeColor=#CC3A1C;strokeWidth=3;"
+  context: "strokeColor=#999999;fontColor=#5C5C5C;"
+  out_of_scope: "strokeColor=#999999;fontColor=#5C5C5C;dashed=1;dashPattern=4 3;"
+  annotation_leader: "endArrow=oval;endFill=1;endSize=5;strokeColor=#CC3A1C;"
+
+export:
+  formats: [svg, png]     # brand: PNG 2× for slides/documents, SVG for web

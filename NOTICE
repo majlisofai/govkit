@@ -7,6 +7,12 @@ plugins/govkit/references/ (excluding references/govkit/),
 plugins/govkit/templates/_partials/ and plugins/govkit/scripts/bash/, and are
 listed with their source commit in upstream/arckit.lock.json.
 
+Brand assets under plugins/govkit/brands/tmofai/assets/ (The Majlis of AI symbol
+and lockup) are trademarks of The Majlis of AI and are NOT licensed under the MIT
+License. They are included so the default brand renders; do not use them outside
+deliverables for The Majlis of AI. Other organisations should create their own
+brand with /govkit:create-brand or use `brand: neutral`.
+
 GovKit is an independent project and is not affiliated with or endorsed by ArcKit.
 Framework names (ISO/IEC 42001, ISO/IEC 38500, NIST AI RMF, ISO 31000, IIA Three
 Lines Model) belong to their publishers; GovKit contains only paraphrased

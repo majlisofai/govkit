@@ -6,7 +6,7 @@
   },
   "metadata": {
     "description": "GovKit — a customizable governance overlay for ArcKit",
-    "version": "0.1.0"
+    "version": "0.2.0"
   },
   "allowCrossMarketplaceDependenciesOn": [
     "arckit-claude"
@@ -16,7 +16,7 @@
       "name": "govkit",
       "source": "./plugins/govkit",
       "description": "Governance overlay for ArcKit — profile-driven approach, methods, frameworks and tools. Requires the arckit core plugin.",
-      "version": "0.1.0",
+      "version": "0.2.0",
       "author": {
         "name": "The Majlis of AI"
       },
