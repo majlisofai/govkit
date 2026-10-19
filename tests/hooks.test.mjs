@@ -99,7 +99,7 @@ test('session hook reports a missing profile when projects/ exists', () => {
 
 test('session hook warns when ArcKit is outside the tested range', () => {
   const cache = mkdtempSync(join(tmpdir(), 'govkit-cache-'));
-  const gov = join(cache, 'govkit', 'govkit', '0.1.0');
+  const gov = join(cache, 'majlisofai', 'govkit', '0.1.0');
   const arc = join(cache, 'arckit-claude', 'arckit', '9.0.0', '.claude-plugin');
   mkdirSync(join(gov, 'config'), { recursive: true });
   mkdirSync(arc, { recursive: true });

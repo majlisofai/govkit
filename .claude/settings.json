@@ -3,12 +3,12 @@
     "arckit-claude": {
       "source": { "source": "github", "repo": "tractorjuice/arckit-claude" }
     },
-    "govkit": {
+    "majlisofai": {
       "source": { "source": "directory", "path": "./" }
     }
   },
   "enabledPlugins": {
     "arckit@arckit-claude": true,
-    "govkit@govkit": true
+    "govkit@majlisofai": true
   }
 }

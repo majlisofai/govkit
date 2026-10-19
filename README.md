@@ -12,9 +12,9 @@ GovKit needs ArcKit core from ArcKit's own marketplace:
 
 ```bash
 claude plugin marketplace add tractorjuice/arckit-claude
-claude plugin marketplace add <your-org>/govkit          # or a local path to this repo
+claude plugin marketplace add majlisofai/govkit         # or a local path to this repo
 claude plugin install arckit@arckit-claude
-claude plugin install govkit@govkit
+claude plugin install govkit@majlisofai
 ```
 
 To set up a team repository so teammates get both automatically, copy [`examples/project-settings.json`](examples/project-settings.json) to `.claude/settings.json`.

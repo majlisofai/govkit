@@ -4,8 +4,8 @@ Governance overlay for ArcKit. It requires the `arckit` core plugin (`arckit@arc
 
 ```bash
 claude plugin marketplace add tractorjuice/arckit-claude
-claude plugin marketplace add <owner>/govkit
-claude plugin install govkit@govkit
+claude plugin marketplace add majlisofai/govkit
+claude plugin install govkit@majlisofai
 ```
 
 See the [repository README](../../README.md) for commands and setup, and [docs/CUSTOMIZING.md](../../docs/CUSTOMIZING.md) to tailor the approach, methods, frameworks and tools.

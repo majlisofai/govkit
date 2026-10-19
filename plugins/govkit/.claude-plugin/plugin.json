@@ -8,9 +8,20 @@
     "name": "The Majlis of AI"
   },
   "license": "MIT",
+  "homepage": "https://github.com/majlisofai/govkit",
+  "repository": "https://github.com/majlisofai/govkit",
   "icon": "./assets/icon.svg",
-  "keywords": ["governance", "architecture", "ai-governance", "compliance", "arckit"],
+  "keywords": [
+    "governance",
+    "architecture",
+    "ai-governance",
+    "compliance",
+    "arckit"
+  ],
   "dependencies": [
-    { "name": "arckit", "marketplace": "arckit-claude" }
+    {
+      "name": "arckit",
+      "marketplace": "arckit-claude"
+    }
   ]
 }

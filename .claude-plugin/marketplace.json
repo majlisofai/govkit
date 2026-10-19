@@ -1,6 +1,6 @@
 {
   "$schema": "https://json.schemastore.org/claude-code-marketplace.json",
-  "name": "govkit",
+  "name": "majlisofai",
   "owner": {
     "name": "The Majlis of AI"
   },
@@ -8,7 +8,9 @@
     "description": "GovKit — a customizable governance overlay for ArcKit",
     "version": "0.1.0"
   },
-  "allowCrossMarketplaceDependenciesOn": ["arckit-claude"],
+  "allowCrossMarketplaceDependenciesOn": [
+    "arckit-claude"
+  ],
   "plugins": [
     {
       "name": "govkit",
@@ -19,11 +21,22 @@
         "name": "The Majlis of AI"
       },
       "license": "MIT",
-      "keywords": ["governance", "architecture", "ai-governance", "compliance", "arckit"],
+      "keywords": [
+        "governance",
+        "architecture",
+        "ai-governance",
+        "compliance",
+        "arckit"
+      ],
       "category": "productivity",
       "dependencies": [
-        { "name": "arckit", "marketplace": "arckit-claude" }
-      ]
+        {
+          "name": "arckit",
+          "marketplace": "arckit-claude"
+        }
+      ],
+      "homepage": "https://github.com/majlisofai/govkit",
+      "repository": "https://github.com/majlisofai/govkit"
     }
   ]
 }

@@ -37,7 +37,7 @@ function readJson(p) {
 function findArckitVersion() {
   const candidates = [];
   // Marketplace cache: <cache>/<marketplace>/<plugin>/<version>/ — GovKit is at
-  // <cache>/govkit/govkit/<ver>, ArcKit at <cache>/arckit-claude/arckit/<ver>.
+  // <cache>/majlisofai/govkit/<ver>, ArcKit at <cache>/arckit-claude/arckit/<ver>.
   const cache = join(pluginRoot, '..', '..', '..');
   const arckitCache = join(cache, 'arckit-claude', 'arckit');
   if (existsSync(arckitCache)) {
