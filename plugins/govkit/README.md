@@ -8,7 +8,7 @@ claude plugin marketplace add majlisofai/govkit
 claude plugin install govkit@majlisofai
 ```
 
-See the [repository README](../../README.md) for commands and setup, and [docs/CUSTOMIZING.md](../../docs/CUSTOMIZING.md) to tailor the approach, methods, frameworks and tools.
+See the [repository README](../../README.md) for commands and setup, and the [how-to guides](../../docs/how-to/index.md) to tailor the approach, methods, frameworks and tools.
 
 ## Data
 

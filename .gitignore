@@ -4,3 +4,6 @@ __pycache__/
 # upstream-watch workflow logs
 sync.log
 compat.log
+
+# mkdocs build output
+site/

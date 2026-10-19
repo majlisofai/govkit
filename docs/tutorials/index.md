@@ -1,0 +1,10 @@
+# Tutorials
+
+Tutorials are lessons. Each one takes you through a complete piece of work, step by step, and you see a result at every stage. Start here if you are new to GovKit.
+
+| Tutorial | You will | Time |
+|----------|----------|------|
+| [Your first governed repository](first-governed-repository.md) | Install GovKit, write a profile, connect it to ArcKit, and produce your first GOV artefact | 20 minutes |
+| [Your first team matrix](first-team-matrix.md) | Validate a team model, break and fix it, and render it as a draw.io team matrix | 15 minutes |
+
+When you have finished, the [how-to guides](../how-to/index.md) help with specific tasks, and the [explanation](../explanation/index.md) pages tell you why GovKit works as it does.

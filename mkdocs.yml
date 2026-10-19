@@ -1,0 +1,135 @@
+site_name: GovKit
+site_description: A customizable governance overlay for ArcKit, built as a Claude Code plugin.
+site_author: The Majlis of AI
+repo_url: https://github.com/majlisofai/govkit
+repo_name: majlisofai/govkit
+edit_uri: edit/main/docs/
+copyright: MIT licence · © The Majlis of AI · includes files vendored from ArcKit (MIT, © TractorJuice)
+
+docs_dir: docs
+
+theme:
+  name: material
+  language: en
+  logo: assets/logo-reversed.svg
+  favicon: assets/logo.svg
+  font:
+    text: IBM Plex Sans
+    code: IBM Plex Mono
+  palette:
+    - media: "(prefers-color-scheme: light)"
+      scheme: default
+      primary: custom
+      accent: custom
+      toggle:
+        icon: material/weather-night
+        name: Switch to dark mode
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      primary: custom
+      accent: custom
+      toggle:
+        icon: material/weather-sunny
+        name: Switch to light mode
+  icon:
+    repo: fontawesome/brands/github
+  features:
+    - navigation.tabs
+    - navigation.sections
+    - navigation.top
+    - navigation.footer
+    - navigation.indexes
+    - navigation.instant
+    - search.suggest
+    - search.highlight
+    - content.code.copy
+    - content.code.annotate
+    - content.tabs.link
+    - content.action.edit
+    - toc.follow
+
+extra_css:
+  - stylesheets/extra.css
+
+markdown_extensions:
+  - abbr
+  - admonition
+  - attr_list
+  - def_list
+  - footnotes
+  - md_in_html
+  - tables
+  - toc:
+      permalink: true
+  - pymdownx.details
+  - pymdownx.highlight:
+      anchor_linenums: true
+  - pymdownx.inlinehilite
+  - pymdownx.keys
+  - pymdownx.snippets
+  - pymdownx.superfences:
+      custom_fences:
+        - name: mermaid
+          class: mermaid
+          format: !!python/name:pymdownx.superfences.fence_code_format
+  - pymdownx.tabbed:
+      alternate_style: true
+  - pymdownx.tasklist:
+      custom_checkbox: true
+
+nav:
+  - Home: index.md
+  - Tutorials:
+      - tutorials/index.md
+      - Your first governed repository: tutorials/first-governed-repository.md
+      - Your first team matrix: tutorials/first-team-matrix.md
+  - How-to guides:
+      - how-to/index.md
+      - Set up and configure:
+          - Share GovKit with your team: how-to/share-govkit-with-your-team.md
+          - Share configuration across repositories: how-to/share-configuration-across-repositories.md
+          - Use your own method: how-to/use-your-own-method.md
+          - Add a framework: how-to/add-a-framework.md
+          - Customize templates: how-to/customize-templates.md
+          - Register a new artefact type: how-to/register-an-artefact-type.md
+      - Brand:
+          - Create your own brand: how-to/create-a-brand.md
+          - Switch or update the brand: how-to/switch-or-update-the-brand.md
+      - Diagrams:
+          - Choose the diagram tool: how-to/choose-the-diagram-tool.md
+          - Draw an architecture diagram: how-to/draw-an-architecture-diagram.md
+          - Convert a Mermaid diagram: how-to/convert-a-mermaid-diagram.md
+          - Use your own diagram style: how-to/use-your-own-diagram-style.md
+      - Teams:
+          - Design teams for a project: how-to/design-teams.md
+          - Evolve a team design: how-to/evolve-a-team-design.md
+          - Change the team rules: how-to/change-the-team-rules.md
+      - Maintain GovKit:
+          - Take a new ArcKit release: how-to/maintainers/take-an-arckit-release.md
+          - Fix a failing compatibility gate: how-to/maintainers/fix-a-failing-compatibility-gate.md
+          - Add a command or artefact type: how-to/maintainers/add-a-command-or-doc-type.md
+          - Release a new version: how-to/maintainers/release-govkit.md
+  - Reference:
+      - reference/index.md
+      - Commands: reference/commands.md
+      - Skills, agents and hooks: reference/skills-agents-hooks.md
+      - Profile: reference/profile.md
+      - Configuration layers: reference/configuration-layers.md
+      - Doc types and filenames: reference/doc-types.md
+      - Methods: reference/methods.md
+      - Frameworks: reference/frameworks.md
+      - Brand: reference/brand.md
+      - Diagram styles: reference/diagram-styles.md
+      - Team model: reference/team-model.md
+      - Scripts: reference/scripts.md
+      - Compatibility: reference/compatibility.md
+  - Explanation:
+      - explanation/index.md
+      - The overlay model: explanation/overlay-model.md
+      - The GOV- prefix: explanation/gov-prefix.md
+      - Configuration layers: explanation/configuration-layers.md
+      - Evidence and judgement: explanation/evidence-and-judgement.md
+      - Brands: explanation/brands.md
+      - Diagrams as draw.io files: explanation/drawio-diagrams.md
+      - Team design: explanation/team-design.md
+      - Tracking ArcKit: explanation/tracking-arckit.md

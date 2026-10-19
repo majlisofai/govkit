@@ -5,12 +5,12 @@ description: "Take a new ArcKit release into GovKit: sync vendored assets and sn
 
 # Upstream Sync
 
-Follow `docs/UPSTREAM.md`. The steps:
+Follow `docs/how-to/maintainers/take-an-arckit-release.md`. The steps:
 
 1. `node scripts/sync-arckit.mjs --ref <tag|latest>`. Note the old and new versions it prints.
 2. `git diff --stat upstream/ plugins/govkit/references plugins/govkit/templates/_partials plugins/govkit/scripts/bash`, then `git diff upstream/snapshot/`, to list renamed or removed commands, templates and codes.
 3. Run the gate: `node scripts/check-compat.mjs`, `python3 scripts/validate-content.py` and `node --test tests/`.
-4. Fix each failure **in GovKit**, using the table in `docs/UPSTREAM.md`. Never edit a vendored file to make the gate pass.
+4. Fix each failure **in GovKit**, using the table in `docs/how-to/maintainers/fix-a-failing-compatibility-gate.md`. Never edit a vendored file to make the gate pass.
 5. **Contract review, which the snapshot can't see.** Clone or fetch the ArcKit release and read the CHANGELOG entries between the two versions. Search them for:
    - `validate-arc-filename`: does it still ignore non-`ARC-` files? Run `tests/hooks.test.mjs` logic mentally against the new hook, or execute ArcKit's hook with a `GOV-` path to check.
    - `templates-custom`: is the lookup order unchanged?

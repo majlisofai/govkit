@@ -81,7 +81,7 @@ It also ships these **agents**:
 
 The built-in frameworks hold **paraphrased** control intents only. Assess against your licensed copy of each standard. For jurisdiction-specific regulation (EU AI Act, UAE AI Charter, NIST 800-53 and so on), GovKit hands off to ArcKit's overlay plugins and does not duplicate them.
 
-See [docs/CUSTOMIZING.md](docs/CUSTOMIZING.md).
+See the [how-to guides](docs/how-to/index.md) to customize methods, frameworks, templates and brands.
 
 ## Brand and diagrams
 
@@ -97,7 +97,7 @@ The default diagram tool is **draw.io** (`tools.diagrams: drawio`). `/arckit:dia
 
 ## How compatibility with ArcKit is maintained
 
-See [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md) and [docs/UPSTREAM.md](docs/UPSTREAM.md). In short:
+See [the overlay model](docs/explanation/overlay-model.md), [tracking ArcKit](docs/explanation/tracking-arckit.md) and the [compatibility reference](docs/reference/compatibility.md). In short:
 
 - **Separate plugin and namespace.** GovKit is `/govkit:*` and declares `arckit` as a plugin dependency.
 - **Separate filename prefix.** GovKit writes `GOV-*` artefacts in ArcKit's `projects/NNN-name/` layout. ArcKit's filename hook ignores them and GovKit's own hook validates them.
@@ -112,6 +112,12 @@ node scripts/sync-arckit.mjs --check     # vendored files untouched
 node scripts/check-compat.mjs            # compatible with locked ArcKit
 python3 scripts/validate-content.py      # frameworks/methods/profile/recipes valid (needs pyyaml)
 node --test tests/                       # hooks, ID generator, validators
+```
+
+The documentation in [`docs/`](docs/index.md) is an MkDocs Material site organised by [Diátaxis](https://diataxis.fr/). Preview it with:
+
+```bash
+pip install -r requirements-docs.txt && mkdocs serve
 ```
 
 ## Licence

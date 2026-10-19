@@ -1,0 +1,70 @@
+/* GovKit docs: The Majlis of AI palette (plugins/govkit/brands/tmofai/brand.yaml). */
+
+:root,
+[data-md-color-scheme="default"] {
+  --md-primary-fg-color: #111111;
+  --md-primary-fg-color--light: #5c5c5c;
+  --md-primary-fg-color--dark: #000000;
+  --md-primary-bg-color: #ffffff;
+  --md-primary-bg-color--light: #ffffffb3;
+  --md-accent-fg-color: #cc3a1c;
+  --md-accent-fg-color--transparent: #cc3a1c1a;
+  --md-typeset-a-color: #111111;
+}
+
+[data-md-color-scheme="slate"] {
+  --md-primary-fg-color: #121212;
+  --md-primary-fg-color--light: #b3b3b3;
+  --md-primary-fg-color--dark: #000000;
+  --md-accent-fg-color: #ff7a5c;
+  --md-accent-fg-color--transparent: #ff7a5c1a;
+  --md-typeset-a-color: #ffffff;
+  --md-default-bg-color: #121212;
+}
+
+/* Links read as ink with a redline underline, as in the brand. */
+.md-typeset a {
+  text-decoration: underline;
+  text-decoration-color: var(--md-accent-fg-color);
+  text-underline-offset: 0.2em;
+}
+.md-typeset a:hover {
+  color: var(--md-accent-fg-color);
+}
+.md-typeset .headerlink,
+.md-typeset .md-button {
+  text-decoration: none;
+}
+
+.md-typeset h1 {
+  font-weight: 300;
+  color: var(--md-default-fg-color);
+}
+
+/* Condensed upper-case labels for table headers. */
+.md-typeset table:not([class]) th {
+  font-family: "IBM Plex Sans Condensed", var(--md-text-font-family), sans-serif;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  font-size: 0.68rem;
+}
+
+/* Diagram images get a hairline frame and stay inside the content column. */
+.md-typeset img.diagram {
+  border: 1px solid var(--md-default-fg-color--lightest);
+  background: #ffffff;
+  max-width: 100%;
+  height: auto;
+}
+
+/* Colour swatches on the brand page. */
+.md-typeset .swatch {
+  display: inline-block;
+  width: 0.9em;
+  height: 0.9em;
+  margin-right: 0.35em;
+  vertical-align: -0.1em;
+  border: 1px solid var(--md-default-fg-color--lighter);
+  border-radius: 2px;
+}
