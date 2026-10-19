@@ -1,5 +1,24 @@
 # Changelog
 
+## 0.3.0 — 2026-10-19
+
+Tested against ArcKit 6.18.2.
+
+- **`team-design` skill** (`/govkit:team-design`). Team organisation with Team Topologies, virtual chapters and business streams:
+  - Stream-aligned teams own one business stream each, derived from ArcKit `SOBC`/`STRAT`/`ROAD`/Wardley/`PLAT` artefacts or an interview, split by named fracture planes.
+  - Virtual chapters align craft across streams.
+  - Platform teams serve X-as-a-Service; enabling and complicated-subsystem teams need justification and time-boxed interactions.
+  - `--evolve` produces the next version from the last model.
+- **TEAM doc type.** `GOV-NNN-TEAM-vN.N.{md,json,drawio}`. The JSON model is the source of truth (`schemas/team-topology.schema.json`), and the matrix is rendered from it.
+- **`methods/team-models/team-topologies.yaml`**: team types, interaction modes, chapter rules, fracture planes and 11 machine-checked rules. Override it per project or centrally. Selected by `approach.team_model`.
+- **`validate-team.mjs`** checks a model against the rules: team size, stream ownership and leadership, chapter lead and span, required chapters, platform interaction mode, time-boxing, concurrent collaborations, capability consumers and Dunbar limit. **`render-team-matrix.mjs`** draws the stream × chapter matrix deterministically:
+  - platform capabilities, enabling and complicated-subsystem teams
+  - lane-routed interactions that never cross stream columns
+  - summary and legend
+- **`notations.team` in diagram styles**, so the matrix follows the brand: `standard` uses the draw.io palette, `tmofai` is monochrome with a redline focal team.
+- Example: `examples/teams/ai-innovation-hub.*` (8 streams × 5 chapters + platform).
+- The filename hook accepts `.json` companions for types that declare them.
+
 ## 0.2.0 — 2026-10-19
 
 Tested against ArcKit 6.18.2.

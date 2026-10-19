@@ -55,6 +55,7 @@ The plugin also ships these **skills**:
 - `governance-method`: applies your profile's vocabulary and scales whenever governance comes up, including inside ArcKit commands.
 - `framework-authoring`: helps you model your own policies and regulations.
 - `drawio-diagrams`: writes valid, styled, editable draw.io diagrams, then validates and exports them.
+- `team-design` (`/govkit:team-design`): designs teams with Team Topologies. Stream-aligned teams each own one business stream, virtual chapters align craft across streams, and platform, enabling and complicated-subsystem teams use explicit interaction modes. It derives streams from ArcKit artefacts, checks the design against the team-model rules, and renders a branded draw.io team matrix plus a TEAM artefact. See [examples/teams/](examples/teams/).
 - `create-brand` (`/govkit:create-brand`): builds your own brand guideline from a PDF, URL, design system or interview, then checks contrast and activates it.
 
 It also ships these **agents**:
@@ -73,7 +74,8 @@ It also ships these **agents**:
 | Risk methods | `iso31000-5x5` | `.govkit/methods/risk/` |
 | Frameworks | `iso-iec-42001`, `nist-ai-rmf`, `iso-iec-38500` | `.govkit/frameworks/` |
 | Templates | 9 GovKit artefact templates | `.govkit/templates-custom/` |
-| Doc types | `GMOD APPL ASMT XWLK CTRL EVID GATE EXCP BRPT DGRM` | `.govkit/doc-types.json` |
+| Team models | `team-topologies` (team types, interaction modes, chapters, 11 checkable rules) | `.govkit/methods/team-models/` |
+| Doc types | `GMOD APPL ASMT XWLK CTRL EVID GATE EXCP BRPT DGRM TEAM` | `.govkit/doc-types.json` |
 | Brands | `tmofai` (default), `neutral` | `.govkit/brands/<id>/` or the org layer, via `/govkit:create-brand` |
 | Diagram styles | `standard`, `tmofai` | `.govkit/diagram-styles/` |
 

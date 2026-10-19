@@ -26,6 +26,7 @@ Every content file is resolved through three layers, first match wins:
 | Lifecycle | `methods/lifecycles/<id>.yaml` |
 | Assessment scale | `methods/scales/<id>.yaml` |
 | Risk method | `methods/risk/<id>.yaml` |
+| Team model | `methods/team-models/<id>.yaml` |
 | Framework | `frameworks/<id>.yaml` |
 | Brand | `brands/<id>/brand.yaml` (with that brand's `assets/`) |
 | Diagram style | `diagram-styles/<id>.yaml` |

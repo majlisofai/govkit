@@ -1,0 +1,76 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "govkit/team-topology.schema.json",
+  "title": "GovKit team topology model (GOV-NNN-TEAM-vN.N.json)",
+  "description": "Source of truth for /govkit:team-design. validate-team.mjs checks it; render-team-matrix.mjs draws it.",
+  "type": "object",
+  "required": ["title", "method", "chapters", "teams"],
+  "properties": {
+    "title": { "type": "string" },
+    "subtitle": { "type": "string", "description": "Optional; generated when absent, e.g. '8 Stream-Aligned Teams (Vertical) × 5 Virtual Chapters (Horizontal) – Max 8 per team'" },
+    "organisation": { "type": "string" },
+    "method": { "type": "string", "description": "team-model id, e.g. team-topologies" },
+    "rules": { "type": "object", "description": "Resolved rules block from the team-model method file" },
+    "chapters": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "name"],
+        "properties": {
+          "id": { "type": "string", "pattern": "^[a-z0-9-]+$" },
+          "name": { "type": "string" },
+          "scope": { "type": "string" },
+          "lead": { "type": "string", "description": "Role or person; must practise in a team" }
+        }
+      }
+    },
+    "teams": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "type", "name"],
+        "properties": {
+          "id": { "type": "string", "pattern": "^[a-z0-9-]+$" },
+          "type": { "enum": ["stream-aligned", "platform", "enabling", "complicated-subsystem"] },
+          "name": { "type": "string", "description": "e.g. STREAM 1" },
+          "short": { "type": "string", "description": "e.g. Wealth/Elite" },
+          "mission": { "type": "string" },
+          "business_stream": { "type": "string", "description": "stream-aligned: the value stream / business case owned end to end" },
+          "source": { "type": "string", "description": "ArcKit artefact the stream comes from, e.g. ARC-001-SOBC-v1.0 §2" },
+          "leadership": { "type": "array", "items": { "type": "string" } },
+          "members": { "type": "object", "additionalProperties": { "type": "integer", "minimum": 0 }, "description": "chapter id -> member count" },
+          "size": { "type": "integer", "minimum": 1, "description": "for teams without per-chapter members" },
+          "capabilities": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "required": ["name"],
+              "properties": {
+                "name": { "type": "string" },
+                "detail": { "type": "string" },
+                "consumers": { "type": "array", "items": { "type": "string" }, "description": "team ids; omit for all streams" }
+              }
+            }
+          },
+          "focal": { "type": "boolean" }
+        }
+      }
+    },
+    "interactions": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["from", "to", "mode"],
+        "properties": {
+          "from": { "type": "string" },
+          "to": { "type": "string", "description": "team id, or '*stream' for all stream-aligned teams" },
+          "mode": { "enum": ["collaboration", "x-as-a-service", "facilitating"] },
+          "purpose": { "type": "string" },
+          "until": { "type": "string", "format": "date" }
+        }
+      }
+    },
+    "styles": { "type": "object", "additionalProperties": { "type": "string" }, "description": "Resolved draw.io style strings from the diagram style's notations.team (base.vertex already prepended)" },
+    "page": { "type": "object", "properties": { "grid": { "type": "integer" } } }
+  }
+}

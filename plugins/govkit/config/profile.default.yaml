@@ -33,6 +33,7 @@ approach:
   operating_model: three-lines      # methods/operating-models/<id>.yaml
   lifecycle: stage-gate             # methods/lifecycles/<id>.yaml
   posture: risk-based               # risk-based | compliance-led | principles-led — tone of findings
+  team_model: team-topologies       # methods/team-models/<id>.yaml — used by /govkit:team-design
 
 # METHODS — how things are measured.
 methods:

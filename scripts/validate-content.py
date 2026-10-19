@@ -150,7 +150,7 @@ def validate_diagram_style(path: Path) -> None:
         if not (ds.get("base") or {}).get(key):
             err(path, f"base.{key} missing")
     notations = ds.get("notations") or {}
-    for name in ("archimate", "c4", "flow", "sequence"):
+    for name in ("archimate", "c4", "flow", "sequence", "team"):
         if name not in notations:
             err(path, f"notations.{name} missing")
     arch = notations.get("archimate") or {}
@@ -272,6 +272,7 @@ def validate_profile(path: Path, project: Path | None) -> None:
         ("methods/lifecycles", approach.get("lifecycle")),
         ("methods/scales", methods.get("assessment_scale")),
         ("methods/risk", methods.get("risk")),
+        ("methods/team-models", approach.get("team_model")),
     ]
     fws = prof.get("frameworks") or {}
     refs += [("frameworks", f) for f in fws.get("active") or []]
@@ -285,6 +286,33 @@ def validate_profile(path: Path, project: Path | None) -> None:
             err(path, f"{kind}/{ident}{'/brand' if kind == 'brands' else ''}.yaml not found")
     if fws.get("primary") and fws.get("active") and fws["primary"] not in fws["active"]:
         err(path, "frameworks.primary must be in frameworks.active")
+
+
+TEAM_RULES = {"team_size", "stream_ownership", "stream_leadership", "chapter_lead", "chapter_span",
+              "required_chapters", "platform_interaction", "time_boxed", "max_collaborations",
+              "capability_consumed", "dunbar"}
+
+
+def validate_team_model(path: Path) -> None:
+    tm = load(path)
+    if not isinstance(tm, dict):
+        return
+    if tm.get("id") != path.stem:
+        err(path, "id must equal filename")
+    for key in ("team_types", "interaction_modes", "rules"):
+        if not tm.get(key):
+            err(path, f"{key} missing")
+    for t in ("stream-aligned", "platform"):
+        if t not in (tm.get("team_types") or {}):
+            err(path, f"team_types.{t} missing")
+    for rid, rule in (tm.get("rules") or {}).items():
+        if rid not in TEAM_RULES:
+            err(path, f"rule '{rid}' is not implemented by validate-team.mjs (known: {sorted(TEAM_RULES)})")
+        elif (rule or {}).get("severity") not in ("error", "warn"):
+            err(path, f"rule '{rid}' severity must be error or warn")
+    size = (tm.get("rules") or {}).get("team_size") or {}
+    if size and not (0 < size.get("min", 0) <= size.get("max", 0)):
+        err(path, "rules.team_size needs 0 < min <= max")
 
 
 def validate_recipe(path: Path) -> None:
@@ -314,6 +342,8 @@ def run(base: Path, project: Path | None) -> None:
         validate_scale(p)
     for p in (base / "methods/risk").glob("*.yaml"):
         validate_risk(p)
+    for p in (base / "methods/team-models").glob("*.yaml"):
+        validate_team_model(p)
     for p in (base / "recipes").glob("*.yaml"):
         validate_recipe(p)
     for p in (base / "diagram-styles").glob("*.yaml"):

@@ -13,7 +13,7 @@ GovKit is a Claude Code plugin (`plugins/govkit/`, namespace `/govkit:*`) that o
 
 ## Adding things
 
-- **A GovKit doc type:** register it in `plugins/govkit/config/doc-types.mjs`, then add a command with a matching `doc-type:` frontmatter, a template, and the template mapping in `check-compat.mjs`. Check that the code doesn't collide with ArcKit's.
+- **A GovKit doc type:** register it in `plugins/govkit/config/doc-types.mjs`, then add a command or skill (`skills/<name>/SKILL.md`) with a matching `doc-type:` frontmatter, a template, and the template mapping in `check-compat.mjs`. Check that the code doesn't collide with ArcKit's.
 - **A command:** follow `references/govkit/artefact-procedure.md` (steps P1–P8). Don't restate the shared steps.
 - **An ArcKit template override:** add a `## <arckit-template-name>` rule to `references/govkit/arckit-overrides.md`. The heading must match an ArcKit `<name>-template.md`.
 - **A built-in framework:** paraphrase intents only. Use titles only for paywalled standards. Set `verified`, and use doc-type codes in `evidence_hints`.

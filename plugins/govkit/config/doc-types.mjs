@@ -21,7 +21,7 @@
  *   category      Grouping for reports.
  *   multiInstance Allocates a -NNN- sequence (one file per instance).
  *   subdir        Subdirectory under the project for multi-instance types.
- *   command       The /govkit:* command that writes it.
+ *   command       The /govkit:* command or skill that writes it.
  *   extensions    File extensions allowed for the type (default ['.md']). Non-.md
  *                 files are companions of the .md with the same stem, e.g.
  *                 diagrams/GOV-001-DGRM-001-v1.0.drawio beside ...-v1.0.md.
@@ -44,10 +44,12 @@ export const DOC_TYPES = {
   BRPT: { name: 'Governance Board Report',        category: 'Reporting',  command: 'board-report', multiInstance: true, subdir: 'board-reports' },
   DGRM: { name: 'Architecture Diagram (draw.io)', category: 'Architecture', command: 'diagram',  multiInstance: true, subdir: 'diagrams',
           extensions: ['.md', '.drawio', '.drawio.svg', '.drawio.png'] },
+  TEAM: { name: 'Team Topology Design',           category: 'Governance', command: 'team-design',
+          extensions: ['.md', '.json', '.drawio', '.drawio.svg', '.drawio.png'] },
 };
 
 /** File extensions the GOV filename convention covers (per type, `extensions`; default .md). */
-export const EXTENSIONS = ['.md', '.drawio', '.drawio.svg', '.drawio.png'];
+export const EXTENSIONS = ['.md', '.json', '.drawio', '.drawio.svg', '.drawio.png'];
 
 /** Merge built-in types with a project's .govkit/doc-types.json (built-ins win). */
 export function loadDocTypes(projectRoot) {

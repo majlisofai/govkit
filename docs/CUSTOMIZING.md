@@ -36,6 +36,7 @@ To define your own, add YAML files with the same structure as the built-in ones:
 | Use a different rating scale | `.govkit/methods/scales/<id>.yaml` | `methods/scales/maturity-0-5.yaml` |
 | Run your own gates | `.govkit/methods/lifecycles/<id>.yaml` | `methods/lifecycles/stage-gate.yaml` |
 | Model your governance roles | `.govkit/methods/operating-models/<id>.yaml` | `methods/operating-models/three-lines.yaml` |
+| Change team rules (size, required roles, chapter span, interaction limits) | `.govkit/methods/team-models/team-topologies.yaml` (same id overrides) | `methods/team-models/team-topologies.yaml` |
 | Assess against your own policy | `.govkit/frameworks/<id>.yaml` | `frameworks/_template.yaml`, or `/govkit:framework add` |
 | Use licensed ISO text | `.govkit/frameworks/iso-iec-42001.yaml` (same id, overrides) | the built-in file |
 

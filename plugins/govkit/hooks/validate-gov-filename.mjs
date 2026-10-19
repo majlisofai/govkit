@@ -6,9 +6,8 @@
  * ignores GOV-* files; this one checks them against
  *   projects/{NNN-name}/[subdir/]GOV-{PID}-{TYPE}[-{SEQ}]-v{N.N}.md
  * plus, for types that declare them, companion files with the same stem
- * (.drawio, .drawio.svg, .drawio.png), and blocks with a model-visible reason
- * naming the corrected path. Like
- * ArcKit, it never rewrites the tool input — a block is a gate, not a grant.
+ * (.json, .drawio, .drawio.svg, .drawio.png), and blocks with a model-visible
+ * reason naming the corrected path. Like ArcKit, it never rewrites the tool input — a block is a gate, not a grant.
  *
  * Exit 0 always; emits {decision:'block', reason} or nothing.
  */

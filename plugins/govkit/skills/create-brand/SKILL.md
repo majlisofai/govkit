@@ -16,7 +16,7 @@ A GovKit **brand** is one configuration that controls the look and voice of ever
 | Surface | Brand fields used |
 |---------|-------------------|
 | GOV-* Markdown artefacts | `documents.*` (header, status labels, RAG wording, dates, callouts, footer), `voice.*`, `logo.symbol` |
-| draw.io diagrams | `diagrams.drawio_style`, which points at a diagram style built from `colours` and `typography` |
+| draw.io diagrams and team matrices | `diagrams.drawio_style`, which points at a diagram style built from `colours` and `typography` |
 | Mermaid written in GovKit-governed repos | `diagrams.mermaid_init`, `diagrams.mermaid_classes` |
 | ArcKit `/arckit:pages` dashboard | `colours`, `typography`, `logo`, when `arckit.pages: true`. Applied through `.arckit/templates-custom/` by `/govkit:apply` |
 | ArcKit `/arckit:presentation` decks (MARP) | `colours`, `typography`, `logo`, when `arckit.presentation: true` |
@@ -66,6 +66,7 @@ Fill every gap with the value from `neutral`, and list those fields to the user 
    - Ink and stroke colours come from `colours.ink` and `colours.linework`.
    - `states.focal` comes from `colours.accent`.
    - `layer_fill` keeps ArchiMate's standard layer colours unless the guideline says otherwise. For a monochrome guideline, set them all to `colours.paper`.
+   - In `notations.team`, which drives the team matrix from `team-design`, set fonts, ink, poché for chapters, and the accent for `focal`. Keep the four team types distinguishable by shape or line, not by colour alone.
 
    Set `diagrams.drawio_style: <id>` in the brand.
 3. Generate `diagrams.mermaid_init` from the colours and fonts, using the `tmofai` brand's block as the pattern.

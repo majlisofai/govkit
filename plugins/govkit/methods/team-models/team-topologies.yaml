@@ -1,0 +1,71 @@
+id: team-topologies
+kind: team-model
+name: Team Topologies with virtual chapters and business streams
+source:
+  - title: "Team Topologies: Organizing Business and Technology Teams for Fast Flow"
+    authors: Matthew Skelton, Manuel Pais
+    year: 2019
+    url: https://teamtopologies.com/
+  - title: Scaling Agile @ Spotify with Tribes, Squads, Chapters & Guilds
+    authors: Henrik Kniberg, Anders Ivarsson
+    year: 2012
+    url: https://blog.crisp.se/wp-content/uploads/2012/11/SpotifyScaling.pdf
+summary: >
+  Business streams (value streams / business cases) are owned end to end by
+  stream-aligned teams (vertical). Craft is kept consistent across streams by
+  virtual chapters (horizontal): every member sits in one team for delivery
+  and one chapter for practice. Platform teams provide shared services
+  X-as-a-Service; enabling and complicated-subsystem teams are used sparingly
+  and with explicit interaction modes. Rules below are GovKit defaults —
+  override them in .govkit/methods/team-models/team-topologies.yaml.
+
+team_types:
+  stream-aligned:
+    purpose: Owns one business stream end to end — discovery, build, run, outcomes.
+    owns: one business stream / business case
+    leadership: [Product Owner, Tech Lead]
+  platform:
+    purpose: Provides internal services that reduce stream teams' cognitive load, consumed self-service.
+    default_interaction: x-as-a-service
+  enabling:
+    purpose: Helps stream teams acquire missing capability, then steps away.
+    default_interaction: facilitating
+    time_boxed: true
+  complicated-subsystem:
+    purpose: Owns a subsystem that needs scarce specialist knowledge (e.g. a pricing or scoring engine core).
+    default_interaction: x-as-a-service
+
+interaction_modes:
+  collaboration: { meaning: Two teams work closely for a defined period to discover something new., time_boxed: true }
+  x-as-a-service: { meaning: One team consumes what another provides with minimal collaboration., time_boxed: false }
+  facilitating: { meaning: One team helps another learn or adopt a capability., time_boxed: true }
+
+chapters:
+  kind: virtual            # virtual = practice community across streams; line management stays with the team
+  lead_must_practise: true # the chapter lead is a member of a team, not an overhead role
+  member_chapters_max: 1   # each person belongs to at most one chapter
+
+fracture_planes:           # ways to split work into streams (Team Topologies ch. 6)
+  - Business domain / bounded context
+  - Regulatory compliance
+  - Change cadence
+  - Team location
+  - Risk
+  - Performance isolation
+  - Technology
+  - User personas
+
+# Machine-checked rules. validate-team.mjs implements each id; the skill copies
+# the resolved values into the model's "rules" block. severity: error | warn.
+rules:
+  team_size:            { severity: error, min: 5, max: 8, count_leadership: false }   # Team Topologies: 5–9; this default follows a max-8 hub
+  stream_ownership:     { severity: error }          # each stream-aligned team names exactly one business_stream, and no two share one
+  stream_leadership:    { severity: error, required: [Product Owner, Tech Lead] }
+  chapter_lead:         { severity: error }          # every chapter names a lead
+  chapter_span:         { severity: warn, min_streams: 2 }    # a chapter with members in fewer streams is not cross-stream
+  required_chapters:    { severity: warn, chapters: [] }      # chapter ids every stream team must staff
+  platform_interaction: { severity: error }          # platform → stream interactions are x-as-a-service
+  time_boxed:           { severity: error }          # collaboration and facilitating interactions carry an "until" date
+  max_collaborations:   { severity: warn, max: 2 }   # a team in more concurrent collaborations is overloaded
+  capability_consumed:  { severity: warn }           # every platform capability is consumed by at least one stream
+  dunbar:               { severity: warn, limit: 150 }        # whole group above this needs splitting into tribes/hubs

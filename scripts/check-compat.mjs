@@ -114,12 +114,13 @@ check('doc-types', Object.keys(DOC_TYPES).filter((c) => arckitTypes.has(c)).map(
 // templates
 {
   const problems = [];
-  const tmplFor = { GMOD: 'operating-model', APPL: 'applicability', ASMT: 'assessment', XWLK: 'crosswalk', CTRL: 'controls', EVID: 'evidence', GATE: 'gate', EXCP: 'exception', BRPT: 'board-report', DGRM: 'diagram' };
+  const tmplFor = { GMOD: 'operating-model', APPL: 'applicability', ASMT: 'assessment', XWLK: 'crosswalk', CTRL: 'controls', EVID: 'evidence', GATE: 'gate', EXCP: 'exception', BRPT: 'board-report', DGRM: 'diagram', TEAM: 'team' };
   for (const [code, info] of Object.entries(DOC_TYPES)) {
-    const cmdFile = join(PLUGIN, 'commands', `${info.command}.md`);
-    if (!existsSync(cmdFile)) { problems.push(`${code}: command ${info.command}.md missing`); continue; }
+    // A doc type is written by a command or by a skill carrying doc-type: frontmatter.
+    const cmdFile = [join(PLUGIN, 'commands', `${info.command}.md`), join(PLUGIN, 'skills', info.command, 'SKILL.md')].find(existsSync);
+    if (!cmdFile) { problems.push(`${code}: no command or skill '${info.command}'`); continue; }
     const fm = readFileSync(cmdFile, 'utf8').match(/^doc-type:\s*(\S+)/m)?.[1];
-    if (fm !== code) problems.push(`${info.command}.md doc-type is '${fm}', registry says ${code}`);
+    if (fm !== code) problems.push(`${relative(ROOT, cmdFile)} doc-type is '${fm}', registry says ${code}`);
     if (!tmplFor[code] || !existsSync(join(PLUGIN, 'templates', `${tmplFor[code]}-template.md`))) problems.push(`${code}: template missing`);
   }
   check('templates', problems);
