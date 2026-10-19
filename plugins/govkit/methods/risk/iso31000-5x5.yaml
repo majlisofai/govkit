@@ -1,0 +1,34 @@
+id: iso31000-5x5
+kind: risk-method
+name: ISO 31000-aligned 5×5 risk matrix
+source:
+  title: ISO 31000:2018 Risk management — Guidelines
+  url: https://www.iso.org/standard/65694.html
+summary: >
+  Likelihood × impact on 1–5 scales. ISO 31000 sets the process
+  (identify, analyse, evaluate, treat, monitor); the scales and bands below are
+  GovKit defaults, not text from the standard — replace them with your
+  organisation's own. /govkit:apply renders them into ArcKit's risk template.
+likelihood:
+  - { value: 1, label: Rare }
+  - { value: 2, label: Unlikely }
+  - { value: 3, label: Possible }
+  - { value: 4, label: Likely }
+  - { value: 5, label: Almost certain }
+impact:
+  - { value: 1, label: Negligible }
+  - { value: 2, label: Minor }
+  - { value: 3, label: Moderate }
+  - { value: 4, label: Major }
+  - { value: 5, label: Severe }
+bands:
+  - { min: 1,  max: 4,  label: Low,      treatment: Accept and monitor }
+  - { min: 5,  max: 9,  label: Medium,   treatment: Treat within the delivery plan }
+  - { min: 10, max: 16, label: High,     treatment: Treat before next gate; owner at second line }
+  - { min: 17, max: 25, label: Critical, treatment: Escalate to governing body; NO-GO until treated }
+appetite_default: Medium
+treatments:            # ArcKit 4Ts -> ISO 31000 treatment options
+  Tolerate: Retain the risk by informed decision
+  Treat: Change likelihood or consequence
+  Transfer: Share the risk with another party
+  Terminate: Avoid the risk by not starting or continuing the activity

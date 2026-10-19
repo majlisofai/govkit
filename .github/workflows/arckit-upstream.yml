@@ -1,0 +1,51 @@
+name: ArcKit upstream watch
+
+# Weekly: sync to the newest ArcKit release tag, run the compatibility gate,
+# and open a PR either way. A green PR is a routine bump; a red one lists
+# exactly which ArcKit commands, templates or codes GovKit must adapt to.
+on:
+  schedule:
+    - cron: "0 6 * * 1"
+  workflow_dispatch:
+    inputs:
+      ref:
+        description: ArcKit tag to test (default latest)
+        required: false
+        default: latest
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install pyyaml
+      - name: Sync ArcKit
+        id: sync
+        run: |
+          node scripts/sync-arckit.mjs --ref "${{ inputs.ref || 'latest' }}" | tee sync.log
+          echo "version=$(node -p "require('./upstream/arckit.lock.json').version")" >> "$GITHUB_OUTPUT"
+      - name: Compatibility gate
+        id: compat
+        continue-on-error: true
+        run: |
+          set -o pipefail
+          { node scripts/check-compat.mjs && python3 scripts/validate-content.py && node --test tests/; } 2>&1 | tee compat.log
+      - name: Open PR
+        if: ${{ hashFiles('upstream/arckit.lock.json') != '' }}
+        uses: peter-evans/create-pull-request@v7
+        with:
+          branch: arckit-upstream/${{ steps.sync.outputs.version }}
+          title: "chore(upstream): ArcKit ${{ steps.sync.outputs.version }} — ${{ steps.compat.outcome == 'success' && 'compatible' || 'NEEDS ADAPTATION' }}"
+          commit-message: "chore(upstream): sync ArcKit ${{ steps.sync.outputs.version }}"
+          body-path: compat.log
+          labels: upstream

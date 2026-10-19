@@ -1,0 +1,13 @@
+GovKit
+Copyright (c) 2026 The Majlis of AI — MIT License (see LICENSE)
+
+This product includes files from ArcKit (https://github.com/tractorjuice/arc-kit),
+Copyright (c) TractorJuice, MIT License. They are vendored unmodified under
+plugins/govkit/references/ (excluding references/govkit/),
+plugins/govkit/templates/_partials/ and plugins/govkit/scripts/bash/, and are
+listed with their source commit in upstream/arckit.lock.json.
+
+GovKit is an independent project and is not affiliated with or endorsed by ArcKit.
+Framework names (ISO/IEC 42001, ISO/IEC 38500, NIST AI RMF, ISO 31000, IIA Three
+Lines Model) belong to their publishers; GovKit contains only paraphrased
+summaries of them.

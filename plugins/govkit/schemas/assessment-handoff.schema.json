@@ -1,0 +1,28 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "govkit/assessment-handoff.schema.json",
+  "title": "GovKit control assessor handoff",
+  "type": "object",
+  "required": ["ratings"],
+  "additionalProperties": false,
+  "properties": {
+    "ratings": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["control_id", "rating", "target", "evidence_ids", "no_evidence", "finding", "recommendation"],
+        "additionalProperties": false,
+        "properties": {
+          "control_id": { "type": "string" },
+          "rating": { "type": "integer", "minimum": 0 },
+          "target": { "type": "integer", "minimum": 0 },
+          "evidence_ids": { "type": "array", "items": { "type": "string" } },
+          "no_evidence": { "type": "boolean" },
+          "finding": { "type": "string", "maxLength": 600 },
+          "recommendation": { "type": "string", "maxLength": 400 },
+          "command": { "type": ["string", "null"], "description": "e.g. arckit:risk or govkit:exception" }
+        }
+      }
+    }
+  }
+}

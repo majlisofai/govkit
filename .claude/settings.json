@@ -1,0 +1,14 @@
+{
+  "extraKnownMarketplaces": {
+    "arckit-claude": {
+      "source": { "source": "github", "repo": "tractorjuice/arckit-claude" }
+    },
+    "govkit": {
+      "source": { "source": "directory", "path": "./" }
+    }
+  },
+  "enabledPlugins": {
+    "arckit@arckit-claude": true,
+    "govkit@govkit": true
+  }
+}

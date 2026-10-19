@@ -1,0 +1,8 @@
+[
+  ".markdownlint-cli2.jsonc",
+  "architecture-workflow",
+  "arckit-build",
+  "mermaid-syntax",
+  "plantuml-syntax",
+  "wardley-mapping"
+]

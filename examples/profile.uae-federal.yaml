@@ -1,0 +1,31 @@
+# Example .govkit/profile.yaml for a UAE federal entity running AI programmes.
+# Only keys that differ from the built-in defaults are listed.
+govkit_profile: 1
+
+organisation:
+  name: "Example Federal Authority"
+  sector: government
+  jurisdictions: [UAE]
+
+approach:
+  posture: compliance-led
+
+methods:
+  assessment_scale: rag
+
+frameworks:
+  active: [iso-iec-42001, nist-ai-rmf]
+  primary: iso-iec-42001
+
+tools:
+  arckit:
+    overlays: [arckit-uae]          # UAE AI Charter, PDPL, IAS, autonomy tiers… delegated to these commands
+    commands:
+      exclude: [tcop, service-assessment, gcloud-search, gcloud-clarify, dos]   # UK-specific
+    template_overrides: [risk-register, requirements]
+
+document_control:
+  partial: document-control-uae.md
+  default_classification: Confidential
+  owner_role: "Chief AI Officer"
+  approvers: ["AI Governance Committee"]

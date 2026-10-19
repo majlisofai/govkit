@@ -1,0 +1,16 @@
+{
+  "$schema": "https://json.schemastore.org/claude-code-plugin-manifest.json",
+  "name": "govkit",
+  "displayName": "GovKit",
+  "version": "0.1.0",
+  "description": "Governance overlay for ArcKit — profile-driven approach, methods, frameworks and tools. Adds framework assessments, crosswalks, control and evidence registers, stage gates, exceptions and board reporting. Requires the arckit core plugin.",
+  "author": {
+    "name": "The Majlis of AI"
+  },
+  "license": "MIT",
+  "icon": "./assets/icon.svg",
+  "keywords": ["governance", "architecture", "ai-governance", "compliance", "arckit"],
+  "dependencies": [
+    { "name": "arckit", "marketplace": "arckit-claude" }
+  ]
+}

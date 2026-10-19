@@ -1,0 +1,6 @@
+node_modules/
+__pycache__/
+.DS_Store
+# upstream-watch workflow logs
+sync.log
+compat.log

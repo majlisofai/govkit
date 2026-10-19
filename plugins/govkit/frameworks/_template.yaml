@@ -1,0 +1,27 @@
+# Template for a custom framework. Copy to .govkit/frameworks/<id>.yaml in your
+# repository (or ask /govkit:framework add <name-or-url> to draft it for you).
+# A file in .govkit/frameworks/ with the same id as a built-in one replaces it.
+# /govkit:framework validate <id> checks it; in this repo, CI runs scripts/validate-content.py.
+
+id: my-framework                 # lowercase-hyphenated; must equal the file name
+kind: framework
+name: My Organisation's Framework
+version: "1.0"
+publisher: My Organisation
+url: https://example.org/framework
+type: policy                     # regulation | management-system | risk-framework | principles | policy | standard
+verified: 2026-01-01             # date the source was last checked
+text_policy: >
+  State whether intents are verbatim (only if the licence allows) or paraphrased.
+related_arckit:
+  overlay_commands: []           # e.g. ["arckit-uae:uae-ai-charter"] — GovKit hands off to these
+structure: [domain]
+controls:
+  - id: D1-01                    # unique within the framework
+    group: Domain 1
+    title: Short title
+    intent: One-sentence paraphrase of what must be true.
+    evidence_hints: [PRIN, RISK]   # ArcKit or GovKit doc-type codes likely to evidence it
+    # Optional:
+    # target: 3                  # overrides the scale's default target for this control
+    # mappings: { nist-ai-rmf: [GOVERN-1], iso-iec-42001: [A2] }   # feeds /govkit:crosswalk

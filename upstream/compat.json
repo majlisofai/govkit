@@ -1,0 +1,8 @@
+{
+  "$comment": "ArcKit versions GovKit is tested against. The SessionStart hook warns outside this range; CI fails if the locked version falls outside it. Widen 'max_exclusive' only after scripts/check-compat.mjs passes against the new release.",
+  "arckit": {
+    "min": "6.18.0",
+    "max_exclusive": "7.0.0",
+    "tested": ["6.18.2"]
+  }
+}

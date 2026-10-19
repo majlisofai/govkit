@@ -1,0 +1,25 @@
+{
+  "repo": "https://github.com/tractorjuice/arc-kit.git",
+  "ref": "v6.18.2",
+  "commit": "43e3322b52601d1b831277a059f09f92ab7ed417",
+  "version": "6.18.2",
+  "synced_at": "2026-10-19",
+  "files": {
+    "references/citation-instructions.md": "5b7ece585a2a174c0b258c9e1f6b6df27a8c6d9801eddd57e7eb164a147900c3",
+    "references/executive-summary-pattern.md": "311153c1b3d6b6f2056b82bc86b97affcc63039ec3a6e73b272b7d6d34865187",
+    "references/interview-pattern.md": "9d9e4977daabcf653029ace9b6e9ae12b2ea9925d2bfb0edf9f253de61132504",
+    "references/quality-checklist.md": "f51bd4ec1a50ba7ee5414afcda2262583a2a079626b8636b7a64bb4bd4bb9bdb",
+    "scripts/bash/common.sh": "0edd330ad59d81d88c988247cec2794b7d6fdba0b128375d907529bc37f526a3",
+    "scripts/bash/create-project.sh": "8396a58e378257d2a4c4ecbcb519dc5696743a1324cefdf1d4eb16c0878b0fcf",
+    "scripts/bash/list-projects.sh": "d4e6ff386c7331a712dfc4c388cd34617474ea7c4c763e59c7d8c34d9a4cf622",
+    "templates/_partials/RENDERING.md": "d62c6ce08fa4f5e8791b3829327d56ebde11914fa5e56d36fb30845d5a9bfb99",
+    "templates/_partials/document-control-at.md": "3c53602948843a88beb3d43fe44ff3151b56c5f650e2dc09a6c54ce311d6dc87",
+    "templates/_partials/document-control-au.md": "4e5a5ab4615c52d4182ac0913dbe77fbf52292a34d4d0c678abf45036e173e45",
+    "templates/_partials/document-control-ca.md": "59002a9228a5030612cb263929b901e7d15462cbff15aca94c1840160d693ae2",
+    "templates/_partials/document-control-fr.md": "87dcbe179ef7afcbf3561732105e189afa5fb5a94528c15d4e0b588974b736a0",
+    "templates/_partials/document-control-nl.md": "777a21649ead51a41fed8353973d045acb73bacb1e6d13c8fae9063bedf6327d",
+    "templates/_partials/document-control-uae.md": "d1cdd63a09fd8709e3188bbf420db90434837a0e1824df8042819e40f0d334da",
+    "templates/_partials/document-control-uk.md": "9b610af6bd8960e7b10ba2292237bc3318021eb5ad64775ac4a910e5a4f4eab3",
+    "templates/_partials/document-control-us.md": "ce4f4f1c53d290fa2c1ace2eb70930d20d794f048f65b0592d002e8964c921e0"
+  }
+}

@@ -1,0 +1,36 @@
+id: nist-ai-rmf
+kind: framework
+name: NIST AI Risk Management Framework
+version: "1.0"
+publisher: National Institute of Standards and Technology
+url: https://www.nist.gov/itl/ai-risk-management-framework
+document: https://doi.org/10.6028/NIST.AI.100-1
+type: risk-framework
+verified: 2026-10-19
+text_policy: >
+  Control intents are short paraphrases for navigation. Assessors must work
+  from the source text; subcategories (e.g. GOVERN 1.1) can be added with
+  /govkit:framework refresh nist-ai-rmf.
+related_arckit:
+  overlay_commands: ["arckit-us:us-ai-rmf"]   # informational; check-compat verifies it exists
+structure: [function, category]
+controls:
+  - { id: GOVERN-1, group: GOVERN, title: "Policies and procedures for AI risk", intent: "Policies, processes and practices for mapping, measuring and managing AI risk are in place, transparent and implemented.", evidence_hints: [PRIN, GMOD, CTRL] }
+  - { id: GOVERN-2, group: GOVERN, title: "Accountability structures", intent: "Teams and individuals are empowered, responsible and trained for AI risk.", evidence_hints: [GMOD, STKE] }
+  - { id: GOVERN-3, group: GOVERN, title: "Diverse, inclusive teams", intent: "Workforce diversity, equity, inclusion and accessibility are prioritised in AI risk work.", evidence_hints: [STKE] }
+  - { id: GOVERN-4, group: GOVERN, title: "Risk-aware culture", intent: "Teams are committed to a culture that considers and communicates AI risk.", evidence_hints: [GMOD, BRPT] }
+  - { id: GOVERN-5, group: GOVERN, title: "Engagement with AI actors", intent: "Processes exist for robust engagement with relevant AI actors and affected parties.", evidence_hints: [STKE] }
+  - { id: GOVERN-6, group: GOVERN, title: "Third-party and supply-chain risk", intent: "Policies address AI risks and benefits from third-party software, data and supply chain.", evidence_hints: [SOW, EVAL] }
+  - { id: MAP-1, group: MAP, title: "Context established", intent: "The context of use is established and understood.", evidence_hints: [REQ, STKE, SOBC] }
+  - { id: MAP-2, group: MAP, title: "System categorised", intent: "The AI system is categorised.", evidence_hints: [APPL, ATRS] }
+  - { id: MAP-3, group: MAP, title: "Capabilities, benefits and costs", intent: "Capabilities, intended use, benefits and costs are understood against benchmarks.", evidence_hints: [SOBC, REQ] }
+  - { id: MAP-4, group: MAP, title: "Component risks mapped", intent: "Risks and benefits are mapped for all components, including third-party software and data.", evidence_hints: [RISK, DATA, DIAG] }
+  - { id: MAP-5, group: MAP, title: "Impacts characterised", intent: "Impacts on individuals, groups, communities, organisations and society are characterised.", evidence_hints: [DPIA, RISK] }
+  - { id: MEASURE-1, group: MEASURE, title: "Methods and metrics", intent: "Appropriate methods and metrics are identified and applied.", evidence_hints: [MLOPS, TRAC] }
+  - { id: MEASURE-2, group: MEASURE, title: "Trustworthiness evaluated", intent: "The system is evaluated for trustworthy characteristics.", evidence_hints: [EVID, ASMT] }
+  - { id: MEASURE-3, group: MEASURE, title: "Risk tracking over time", intent: "Mechanisms track identified AI risks over time.", evidence_hints: [RISK, OPS] }
+  - { id: MEASURE-4, group: MEASURE, title: "Measurement feedback", intent: "Feedback on measurement efficacy is gathered and assessed.", evidence_hints: [BRPT] }
+  - { id: MANAGE-1, group: MANAGE, title: "Risks prioritised and treated", intent: "Risks from MAP and MEASURE are prioritised, responded to and managed.", evidence_hints: [RISK] }
+  - { id: MANAGE-2, group: MANAGE, title: "Benefit and impact strategies", intent: "Strategies to maximise benefit and minimise negative impact are planned and documented.", evidence_hints: [SOBC, ADR] }
+  - { id: MANAGE-3, group: MANAGE, title: "Third-party risk managed", intent: "Risks and benefits from third parties are managed.", evidence_hints: [SOW, EVAL] }
+  - { id: MANAGE-4, group: MANAGE, title: "Treatment, response and recovery", intent: "Treatments, response, recovery and communication plans are documented and monitored.", evidence_hints: [OPS, RISK] }

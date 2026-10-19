@@ -1,0 +1,32 @@
+{
+  "description": "GovKit hooks: SessionStart compatibility check against the installed ArcKit core and profile detection; PreToolUse Write enforcement of the GOV-* filename convention. ArcKit core's own hooks continue to run for ARC-* files.",
+  "hooks": {
+    "SessionStart": [
+      {
+        "matcher": ".*",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node",
+            "args": ["${CLAUDE_PLUGIN_ROOT}/hooks/govkit-session.mjs"],
+            "timeout": 5
+          }
+        ]
+      }
+    ],
+    "PreToolUse": [
+      {
+        "matcher": "Write",
+        "hooks": [
+          {
+            "type": "command",
+            "if": "Write(/projects/**)",
+            "command": "node",
+            "args": ["${CLAUDE_PLUGIN_ROOT}/hooks/validate-gov-filename.mjs"],
+            "timeout": 5
+          }
+        ]
+      }
+    ]
+  }
+}

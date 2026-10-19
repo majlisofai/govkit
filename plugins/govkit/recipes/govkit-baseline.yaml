@@ -1,0 +1,104 @@
+# ArcKit build recipe — GovKit baseline
+#
+# Installed into .arckit/recipes/ by /govkit:apply, then run with
+#   /arckit:build govkit-baseline
+# ArcKit's build harness resolves .arckit/recipes/ first, so this works with an
+# unmodified ArcKit. Targets mix ArcKit commands (arckit:*) and GovKit commands
+# (govkit:*). `output.type` is a state-key only for the harness (see ArcKit's
+# arckit-build SKILL.md); GovKit filenames are enforced by GovKit's own hook.
+#
+# Waves (computed by the harness from deps):
+#   0  PRIN, GMOD
+#   1  STKE
+#   2  REQ, APPL
+#   3  RISK, XWLK
+#   4  CTRL
+#   5  EVID
+#   6  ASMT
+#   7  GATE-G1
+
+recipe: govkit-baseline
+schema_version: 1
+description: >
+  GovKit baseline — ArcKit foundation (principles, stakeholders, requirements,
+  risk) plus GovKit operating model, applicability, crosswalk, control register,
+  evidence register, primary-framework assessment and the G1 gate review.
+
+defaults:
+  version: "1.0"
+
+optional_targets:
+  XWLK:
+    description: Framework crosswalk (skip when only one framework is active)
+    default: true
+
+post_build_hooks:
+  - skill: arckit:pages
+    args: ""
+
+targets:
+  - id: PRIN
+    skill: arckit:principles
+    args: ""
+    output: { project: "000-global", type: PRIN }
+    deps: []
+
+  - id: GMOD
+    skill: govkit:operating-model
+    args: ""
+    output: { project: "000-global", type: GMOD }
+    deps: []
+
+  - id: STKE
+    skill: arckit:stakeholders
+    args: "{NAME}"
+    output: { project: "{P}-{NAME}", type: STKE }
+    deps: [PRIN]
+
+  - id: REQ
+    skill: arckit:requirements
+    args: "{NAME}"
+    output: { project: "{P}-{NAME}", type: REQ }
+    deps: [PRIN, STKE]
+
+  - id: APPL
+    skill: govkit:applicability
+    args: "{P}"
+    output: { project: "{P}-{NAME}", type: APPL }
+    deps: [GMOD, STKE]
+
+  - id: RISK
+    skill: arckit:risk
+    args: "{NAME}"
+    output: { project: "{P}-{NAME}", type: RISK }
+    deps: [REQ]
+
+  - id: XWLK
+    skill: govkit:crosswalk
+    args: "{P}"
+    output: { project: "{P}-{NAME}", type: XWLK }
+    deps: [APPL]
+
+  - id: CTRL
+    skill: govkit:controls
+    args: "{P}"
+    output: { project: "{P}-{NAME}", type: CTRL }
+    deps: [APPL, XWLK, REQ]
+
+  - id: EVID
+    skill: govkit:evidence
+    args: "{P}"
+    output: { project: "{P}-{NAME}", type: EVID }
+    deps: [CTRL, RISK]
+
+  - id: ASMT
+    skill: govkit:assess
+    args: "{P}"
+    output: { project: "{P}-{NAME}", type: ASMT, subfolder: assessments, multi_instance: true }
+    deps: [EVID]
+
+  - id: GATE-G1
+    skill: govkit:gate
+    args: "{P} G1"
+    output: { project: "{P}-{NAME}", type: GATE, subfolder: gates, multi_instance: true }
+    deps: [ASMT, RISK]

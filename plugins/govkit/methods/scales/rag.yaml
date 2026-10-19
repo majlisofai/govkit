@@ -1,0 +1,13 @@
+id: rag
+kind: assessment-scale
+name: Red / Amber / Green conformance
+summary: Three-level conformance scale for organisations that prefer a pass/partial/fail view to maturity.
+levels:
+  - { value: 0, label: Red,   meaning: "Not met, or no evidence" }
+  - { value: 1, label: Amber, meaning: "Partially met, or evidence incomplete or stale" }
+  - { value: 2, label: Green, meaning: "Met with current evidence" }
+default_target: 2
+gap_severity:
+  "0": none
+  "1": minor
+  "2+": critical

@@ -1,0 +1,65 @@
+id: stage-gate
+kind: lifecycle
+name: Five-gate governance lifecycle
+summary: >
+  A gate is a decision point. /govkit:gate checks that the required artefacts
+  exist and are current, that the listed criteria are evidenced, and records a
+  decision of GO, GO-WITH-CONDITIONS, or NO-GO. Required artefacts mix ArcKit
+  codes (ARC-*) and GovKit codes (GOV-*); the gate command reports which
+  command produces each missing one.
+decisions: [GO, GO-WITH-CONDITIONS, NO-GO]
+gates:
+  - id: G0
+    name: Mandate
+    question: Is there a sanctioned need and an accountable owner?
+    approver: governing-body
+    required:
+      arckit: [PRIN, STKE]
+      govkit: [GMOD, APPL]
+    criteria:
+      - Accountable owner named
+      - Applicable frameworks agreed (APPL)
+      - Risk appetite stated for this initiative
+  - id: G1
+    name: Discovery complete
+    question: Do we understand the need, the risks and the obligations?
+    approver: second-line
+    required:
+      arckit: [REQ, RISK, SOBC]
+      govkit: [CTRL]
+    criteria:
+      - Requirements trace to stakeholder goals
+      - Initial risk register has owners for every HIGH risk
+      - Control register scoped to the applicable frameworks
+  - id: G2
+    name: Design approved
+    question: Is the design fit to govern?
+    approver: second-line
+    required:
+      arckit: [HLDR, ADR, DPIA]
+      govkit: [ASMT]
+    criteria:
+      - Primary framework assessment has no unmitigated critical gaps
+      - Key decisions recorded as ADRs
+      - Data protection impact assessed
+  - id: G3
+    name: Ready for service
+    question: Can it go live safely?
+    approver: governing-body
+    required:
+      arckit: [TRAC, OPS]
+      govkit: [EVID, ASMT]
+    criteria:
+      - Every in-scope control has current evidence
+      - Open exceptions are approved and time-boxed
+      - Operational runbooks exist
+  - id: G4
+    name: Benefits and assurance review
+    question: Is it delivering, and is assurance still valid?
+    approver: governing-body
+    required:
+      arckit: []
+      govkit: [BRPT, EVID]
+    criteria:
+      - Evidence refreshed within the profile's max_age_days
+      - Expired exceptions closed or renewed

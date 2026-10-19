@@ -1,0 +1,40 @@
+id: three-lines
+kind: operating-model
+name: Three Lines Model
+source:
+  title: "The IIA's Three Lines Model: An update of the Three Lines of Defense"
+  publisher: The Institute of Internal Auditors
+  year: 2020
+  url: https://www.theiia.org/en/content/position-papers/2020/the-iias-three-lines-model-an-update-of-the-three-lines-of-defense/
+summary: >
+  Governing body oversees; management (first and second line roles) delivers
+  and supports risk management; internal audit (third line) gives independent
+  assurance. GovKit uses it to assign every control, evidence item and gate
+  decision to an accountable role.
+roles:
+  - id: governing-body
+    name: Governing body
+    responsibilities: [accountability to stakeholders, sets risk appetite, approves gates G0 and G4, receives board reports]
+  - id: first-line
+    name: First line — delivery and operations
+    responsibilities: [owns controls, produces evidence, raises exceptions]
+  - id: second-line
+    name: Second line — risk, compliance, architecture
+    responsibilities: [defines frameworks and methods, reviews assessments, maintains control register, approves exceptions within appetite]
+  - id: third-line
+    name: Third line — internal audit
+    responsibilities: [independent assurance over the control register and evidence, samples assessments]
+artefact_ownership:
+  # GovKit and ArcKit doc-type codes -> accountable role
+  GMOD: second-line
+  APPL: second-line
+  ASMT: second-line
+  XWLK: second-line
+  CTRL: second-line
+  EVID: first-line
+  GATE: governing-body
+  EXCP: second-line
+  BRPT: second-line
+  RISK: first-line
+  PRIN: second-line
+  ADR: first-line

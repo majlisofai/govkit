@@ -1,0 +1,45 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "govkit/framework.schema.json",
+  "title": "GovKit framework definition (YAML or JSON)",
+  "type": "object",
+  "required": ["id", "kind", "name", "version", "publisher", "url", "type", "verified", "text_policy", "controls"],
+  "properties": {
+    "id": { "type": "string", "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$" },
+    "kind": { "const": "framework" },
+    "name": { "type": "string" },
+    "version": { "type": "string" },
+    "publisher": { "type": "string" },
+    "url": { "type": "string", "format": "uri" },
+    "document": { "type": "string" },
+    "type": { "enum": ["regulation", "management-system", "risk-framework", "principles", "policy", "standard"] },
+    "verified": { "type": "string", "format": "date" },
+    "text_policy": { "type": "string" },
+    "related_arckit": {
+      "type": "object",
+      "properties": {
+        "overlay_commands": { "type": "array", "items": { "type": "string", "pattern": "^arckit(-[a-z0-9-]+)?:[a-z0-9.-]+$" } }
+      }
+    },
+    "structure": { "type": "array", "items": { "type": "string" } },
+    "model": { "type": "array", "items": { "type": "string" } },
+    "controls": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": ["id", "group", "title", "intent"],
+        "properties": {
+          "id": { "type": "string" },
+          "group": { "type": "string" },
+          "title": { "type": "string" },
+          "intent": { "type": "string" },
+          "evidence_hints": { "type": "array", "items": { "type": "string" } },
+          "target": { "type": "integer", "minimum": 0 },
+          "mappings": { "type": "object", "additionalProperties": { "type": "array", "items": { "type": "string" } } },
+          "citation_url": { "type": "string" }
+        }
+      }
+    }
+  }
+}

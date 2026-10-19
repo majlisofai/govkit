@@ -1,0 +1,31 @@
+id: iso-iec-42001
+kind: framework
+name: ISO/IEC 42001 — AI management system
+version: "2023"
+publisher: ISO/IEC JTC 1/SC 42
+url: https://www.iso.org/standard/81230.html
+type: management-system
+verified: 2026-10-19
+text_policy: >
+  ISO text is copyrighted. Titles below name clause and Annex A areas only;
+  assessors need a licensed copy of the standard. Add the individual Annex A
+  controls from your licensed copy in .govkit/frameworks/iso-iec-42001.yaml
+  (same id, it overrides this file).
+structure: [part, area]
+controls:
+  - { id: CL4,  group: Clauses, title: "Context of the organisation", intent: "Scope of the AI management system, interested parties and the organisation's role relative to AI systems.", evidence_hints: [APPL, STKE] }
+  - { id: CL5,  group: Clauses, title: "Leadership", intent: "Top management commitment, AI policy, roles and responsibilities.", evidence_hints: [GMOD, PRIN] }
+  - { id: CL6,  group: Clauses, title: "Planning", intent: "Actions for risks and opportunities, AI risk assessment and treatment, AI system impact assessment, objectives.", evidence_hints: [RISK, CTRL] }
+  - { id: CL7,  group: Clauses, title: "Support", intent: "Resources, competence, awareness, communication, documented information.", evidence_hints: [GMOD] }
+  - { id: CL8,  group: Clauses, title: "Operation", intent: "Operational planning and control; performing risk assessment, treatment and impact assessment.", evidence_hints: [RISK, ASMT, OPS] }
+  - { id: CL9,  group: Clauses, title: "Performance evaluation", intent: "Monitoring and measurement, internal audit, management review.", evidence_hints: [ASMT, BRPT, EVID] }
+  - { id: CL10, group: Clauses, title: "Improvement", intent: "Continual improvement, nonconformity and corrective action.", evidence_hints: [EXCP, BRPT] }
+  - { id: A2,  group: Annex A, title: "Policies related to AI", intent: "AI policy and its alignment with other organisational policies.", evidence_hints: [PRIN, GMOD] }
+  - { id: A3,  group: Annex A, title: "Internal organisation", intent: "Roles, responsibilities and reporting of concerns.", evidence_hints: [GMOD] }
+  - { id: A4,  group: Annex A, title: "Resources for AI systems", intent: "Data, tooling, system, computing and human resources are documented.", evidence_hints: [DIAG, DATA] }
+  - { id: A5,  group: Annex A, title: "Assessing impacts of AI systems", intent: "Impact assessment process for individuals, groups and society.", evidence_hints: [DPIA, ATRS] }
+  - { id: A6,  group: Annex A, title: "AI system life cycle", intent: "Objectives and processes for responsible design, development, verification, deployment, operation and monitoring.", evidence_hints: [REQ, ADR, MLOPS, OPS] }
+  - { id: A7,  group: Annex A, title: "Data for AI systems", intent: "Data acquisition, quality, provenance and preparation.", evidence_hints: [DATA, DSCT] }
+  - { id: A8,  group: Annex A, title: "Information for interested parties", intent: "System documentation and information for users and affected parties, including incident communication.", evidence_hints: [ATRS] }
+  - { id: A9,  group: Annex A, title: "Use of AI systems", intent: "Processes and objectives for responsible use, and intended use.", evidence_hints: [REQ, OPS] }
+  - { id: A10, group: Annex A, title: "Third-party and customer relationships", intent: "Responsibilities shared with suppliers and customers are allocated.", evidence_hints: [SOW, EVAL] }

@@ -1,0 +1,67 @@
+# GovKit profile — built-in defaults.
+#
+# /govkit:init copies this to .govkit/profile.yaml in your repository and
+# tailors it. Every GovKit command reads the *resolved* profile:
+#
+#   1. ${CLAUDE_PLUGIN_ROOT}/config/profile.default.yaml   (this file)
+#   2. the file named by `extends:` in .govkit/profile.yaml (an org-wide profile,
+#      e.g. a git submodule shared by several repositories)
+#   3. .govkit/profile.yaml                                 (this repository)
+#
+# Later layers override earlier ones key by key; lists replace, they do not merge.
+# Every id below names a file that is resolved the same way:
+#   .govkit/<kind>/<id>.yaml first, then ${CLAUDE_PLUGIN_ROOT}/<kind>/<id>.yaml
+# so you can add your own methods and frameworks without forking GovKit.
+
+govkit_profile: 1
+
+organisation:
+  name: "[Organisation name]"
+  sector: "[sector]"
+  jurisdictions: []          # e.g. [UAE], [EU, UK] — selects ArcKit overlays in /govkit:start
+  language: en-GB
+
+# APPROACH — how governance is organised and when it intervenes.
+approach:
+  operating_model: three-lines      # methods/operating-models/<id>.yaml
+  lifecycle: stage-gate             # methods/lifecycles/<id>.yaml
+  posture: risk-based               # risk-based | compliance-led | principles-led — tone of findings
+
+# METHODS — how things are measured.
+methods:
+  assessment_scale: maturity-0-5    # methods/scales/<id>.yaml
+  risk: iso31000-5x5                # methods/risk/<id>.yaml
+  evidence:
+    minimum_per_control: 1
+    accepted_types: [artefact, policy, record, log, test-result, attestation]
+    max_age_days: 365               # older evidence is flagged stale
+
+# FRAMEWORKS — what governance is measured against.
+frameworks:
+  active: [iso-iec-42001, nist-ai-rmf, iso-iec-38500]   # frameworks/<id>.yaml
+  primary: iso-iec-42001            # drives the unified control register's IDs
+
+# TOOLS — which ArcKit capabilities, overlays and integrations GovKit relies on.
+tools:
+  arckit:
+    overlays: []                    # e.g. [arckit-uae, arckit-eu] — must be installed separately
+    commands:
+      # ArcKit commands /govkit:start should never recommend for this organisation.
+      exclude: []
+      # Replace an ArcKit command with a GovKit one in recommended sequences.
+      substitute: {}                # e.g. { conformance: "govkit:assess" }
+    # ArcKit templates GovKit re-renders into .arckit/templates-custom/ so ArcKit's
+    # own commands use this profile's scales and vocabulary (see /govkit:apply).
+    template_overrides: [risk-register]
+    recipes: [govkit-baseline]      # copied into .arckit/recipes/ for /arckit:build
+  diagrams: mermaid                 # mermaid | plantuml — passed to /arckit:diagram
+  tracker: none                     # none | jira | servicenow | trello — where actions are exported
+  publish: [pages]                  # pages = /arckit:pages dashboard
+
+# DOCUMENT CONTROL — GovKit artefacts carry ArcKit's Document Control header.
+document_control:
+  partial: auto                     # auto | document-control-uk.md | document-control-uae.md | ...
+  default_classification: OFFICIAL
+  owner_role: "Head of Governance"
+  approvers: ["Governance Board"]
+  review_cycle_months: 12

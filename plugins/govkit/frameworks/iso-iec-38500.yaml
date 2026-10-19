@@ -1,0 +1,20 @@
+id: iso-iec-38500
+kind: framework
+name: ISO/IEC 38500 — Governance of IT for the organisation
+version: "2015"
+publisher: ISO/IEC JTC 1/SC 40
+url: https://www.iso.org/standard/62816.html
+type: principles
+verified: 2026-10-19
+text_policy: >
+  Names the six principles and the Evaluate–Direct–Monitor model only.
+  Use a licensed copy for assessment wording.
+structure: [principle]
+model: [Evaluate, Direct, Monitor]
+controls:
+  - { id: P1, group: Principles, title: Responsibility,  intent: "Responsibilities for supply and demand of IT are understood and accepted, with authority to act.", evidence_hints: [GMOD, STKE] }
+  - { id: P2, group: Principles, title: Strategy,        intent: "Business strategy accounts for current and future IT capabilities, and IT plans satisfy it.", evidence_hints: [STRAT, ROAD, PRIN] }
+  - { id: P3, group: Principles, title: Acquisition,     intent: "IT acquisitions are made for valid reasons, on analysis, with clear and transparent decisions.", evidence_hints: [SOBC, EVAL, ADR] }
+  - { id: P4, group: Principles, title: Performance,     intent: "IT is fit for purpose and meets current and future business requirements.", evidence_hints: [REQ, TRAC, OPS] }
+  - { id: P5, group: Principles, title: Conformance,     intent: "IT complies with mandatory legislation and regulation, and policies are defined, implemented and enforced.", evidence_hints: [ASMT, CTRL, EVID] }
+  - { id: P6, group: Principles, title: Human behaviour, intent: "IT policies, practices and decisions respect human behaviour and the needs of the people in the process.", evidence_hints: [STKE, DPIA] }

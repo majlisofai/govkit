@@ -1,0 +1,18 @@
+id: maturity-0-5
+kind: assessment-scale
+name: Capability maturity (0–5)
+summary: Six-level maturity scale applied per control. Target levels are set per framework in the profile or the APPL artefact.
+levels:
+  - { value: 0, label: Non-existent, meaning: "No control and no awareness of the need" }
+  - { value: 1, label: Initial,      meaning: "Ad hoc; depends on individuals; no evidence" }
+  - { value: 2, label: Repeatable,   meaning: "Practised but undocumented; evidence partial" }
+  - { value: 3, label: Defined,      meaning: "Documented, owned, evidenced" }
+  - { value: 4, label: Managed,      meaning: "Measured and reviewed against targets" }
+  - { value: 5, label: Optimising,   meaning: "Continuously improved from measurement" }
+default_target: 3
+gap_severity:
+  # gap = target - actual
+  "0": none
+  "1": minor
+  "2": major
+  "3+": critical

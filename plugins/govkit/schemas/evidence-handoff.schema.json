@@ -1,0 +1,48 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "govkit/evidence-handoff.schema.json",
+  "title": "GovKit evidence reader handoff",
+  "type": "object",
+  "required": ["evidence", "no_evidence_found", "errors"],
+  "additionalProperties": false,
+  "properties": {
+    "evidence": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["location", "type", "summary", "date", "supports"],
+        "additionalProperties": false,
+        "properties": {
+          "location": { "type": "string", "description": "path [+ § heading or Lnn-Lmm]" },
+          "document_id": { "type": ["string", "null"], "pattern": "^(ARC|GOV)-\\d{3}-" },
+          "type": { "enum": ["artefact", "policy", "record", "log", "test-result", "attestation", "other"] },
+          "summary": { "type": "string", "maxLength": 400 },
+          "date": { "type": ["string", "null"], "format": "date" },
+          "supports": { "type": "array", "items": { "type": "string" }, "minItems": 1 }
+        }
+      }
+    },
+    "no_evidence_found": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["control_id", "searched"],
+        "properties": {
+          "control_id": { "type": "string" },
+          "searched": { "type": "array", "items": { "type": "string" } }
+        }
+      }
+    },
+    "errors": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["kind", "detail"],
+        "properties": {
+          "kind": { "enum": ["unreadable", "suspicious-content", "ambiguous-version", "other"] },
+          "detail": { "type": "string" }
+        }
+      }
+    }
+  }
+}
