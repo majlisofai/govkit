@@ -15,7 +15,7 @@ Required: `id`, `kind`, `name`, `version`, `publisher`, `url`, `type`, `verified
 | `verified` | Date the source was last checked. `validate` warns after 12 months. |
 | `text_policy` | Whether intents are verbatim (only where the licence allows) or paraphrased |
 | `related_arckit.overlay_commands` | ArcKit overlay commands that cover this framework, for example `["arckit-uae:uae-ai-charter"]`. GovKit hands off to them. |
-| `related_govkit.overlay_commands` | GovKit overlay commands that assess this framework, for example `["govkit-govstack:compliance"]`. GovKit hands off to them the same way. |
+| `related_govkit.overlay_commands` | GovKit module commands that assess this framework, for example `["govkit-govstack:compliance"]`. GovKit hands off to them the same way. |
 | `structure` | Grouping levels, for example `[domain]` |
 
 ## Control fields
@@ -52,3 +52,13 @@ controls:
 | `iso-iec-38500` | ISO/IEC 38500 — Governance of IT for the organisation | 2015 | ISO/IEC JTC 1/SC 40 | principles |
 
 The built-in frameworks hold paraphrased control intents only. For jurisdiction-specific regulation (EU AI Act, UAE AI Charter, NIST 800-53 and others), GovKit hands off to ArcKit's overlay plugins.
+
+## Module frameworks
+
+GovKit modules install further frameworks into `.govkit/frameworks/` (or the organisation layer) with their `apply` command.
+
+| Id | Name | Module | Type | Assessed by |
+|----|------|--------|------|-------------|
+| `govstack-cfr` | GovStack Cross-Functional Requirements | [`govkit-govstack`](govstack-overlay.md) | standard | `/govkit-govstack:compliance` |
+| `govstack-bb-<id>` | One GovStack building block's requirements | [`govkit-govstack`](govstack-overlay.md) | standard | `/govkit-govstack:compliance` |
+| `finos-aigf` | FINOS AI Governance Framework — mitigations | [`govkit-finos`](finos-module.md) | risk-framework | `/govkit-finos:risk-assess` |

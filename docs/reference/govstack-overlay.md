@@ -1,6 +1,11 @@
-# GovStack overlay
+# GovStack module
 
-Plugin `govkit-govstack` 0.1.0, namespace `/govkit-govstack:*`. Requires GovKit 0.4.0 or later and below 1.0.0. Source: [`plugins/govkit-govstack/`](https://github.com/majlisofai/govkit/tree/main/plugins/govkit-govstack). For a picture of how it fits between GovStack, GovKit and ArcKit, see the [integration view](../explanation/overlays.md).
+GovKit's GovStack module, `govkit-govstack` 0.1.0, namespace `/govkit-govstack:*`. Installed from the GovKit marketplace (`majlisofai`). Requires GovKit 0.4.0 or later and below 1.0.0. Source: [`plugins/govkit-govstack/`](https://github.com/majlisofai/govkit/tree/main/plugins/govkit-govstack).
+
+<figure markdown>
+  ![Integration view: GovStack specifications feed GovKit's GovStack module, govkit-govstack, which reaches GovKit only through its extension points; ArcKit core stays unmodified beneath](../assets/diagrams/govkit-govstack-integration.drawio.png){ .diagram loading=lazy }
+  <figcaption>Sheet A1.1, integration view. Edit the <a href="../../assets/diagrams/govkit-govstack-integration.drawio">.drawio source</a> in draw.io. For why the module is built this way, see <a href="../../explanation/overlays/">GovKit modules</a>.</figcaption>
+</figure>
 
 ## Commands
 
@@ -29,7 +34,7 @@ Plugin `govkit-govstack` 0.1.0, namespace `/govkit-govstack:*`. Requires GovKit 
 
 ## Doc types
 
-Registered in `.govkit/doc-types.json` by `apply`. Defined in `govkit-overlay.json`.
+Registered in `.govkit/doc-types.json` by `apply`. Defined in the module's `govkit-overlay.json`.
 
 | Code | Name | Category | Command | Multi-instance | Subdir |
 |------|------|----------|---------|----------------|--------|
@@ -98,4 +103,4 @@ Files that `apply` or `bb` writes start with:
 # govkit-overlay govkit-govstack@0.1.0 — refreshed by /govkit-govstack:apply; delete this line to take ownership
 ```
 
-The overlay refreshes files that carry this line and never overwrites files that don't. GovKit reports these files' source as the overlay.
+The module refreshes files that carry this line and never overwrites files that don't. GovKit reports these files' source as the module.

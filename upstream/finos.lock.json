@@ -1,0 +1,9 @@
+{
+  "$comment": "FINOS AI Governance Framework content behind plugins/govkit-finos (finos-aigf.yaml, references/risk-catalogue.yaml). The v2 tag predates the agentic additions (ri-29, ri-30, mi-24, mi-25) that the published site shows, so the module pins a main-branch commit. Check for drift with: python3 scripts/check-finos.py [--ref <tag|commit>]",
+  "repo": "https://github.com/finos/ai-governance-framework",
+  "ref": "main",
+  "commit": "8b0e80132f05a46e3e64cc27a6a3e56d59b5479f",
+  "version": "v2",
+  "license": "CC-BY-4.0",
+  "synced_at": "2026-10-24"
+}

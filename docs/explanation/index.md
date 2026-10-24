@@ -12,4 +12,4 @@ These pages discuss why GovKit works the way it does: the design decisions, the 
 | [Diagrams as draw.io files](drawio-diagrams.md) | Why draw.io rather than Mermaid, and why validate diagrams? |
 | [Team design](team-design.md) | Why streams and chapters, and why is the JSON model the source of truth? |
 | [Tracking ArcKit](tracking-arckit.md) | How does GovKit stay compatible with releases it hasn't seen yet? |
-| [GovKit overlays](overlays.md) | Why are standards like GovStack separate plugins, and why is the GovStack verdict strict and binary? |
+| [GovKit modules](overlays.md) | Why are standards like GovStack and FINOS separate GovKit modules, why is the GovStack verdict strict and binary, and why does the FINOS module start from risks? |

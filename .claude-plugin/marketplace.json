@@ -5,7 +5,7 @@
     "name": "The Majlis of AI"
   },
   "metadata": {
-    "description": "GovKit — a customizable governance overlay for ArcKit, and GovKit overlays",
+    "description": "GovKit — a customizable governance overlay for ArcKit, and GovKit modules",
     "version": "0.4.0"
   },
   "allowCrossMarketplaceDependenciesOn": [
@@ -41,7 +41,7 @@
     {
       "name": "govkit-govstack",
       "source": "./plugins/govkit-govstack",
-      "description": "GovStack overlay for GovKit — map programmes to GovStack building blocks and self-assess solutions against GovStack requirements. Requires the govkit plugin.",
+      "description": "GovKit's GovStack module — map programmes to GovStack building blocks and self-assess solutions against GovStack requirements. Requires the govkit plugin.",
       "version": "0.1.0",
       "author": {
         "name": "The Majlis of AI"
@@ -52,6 +52,32 @@
         "digital-public-infrastructure",
         "building-blocks",
         "interoperability",
+        "govkit"
+      ],
+      "category": "productivity",
+      "dependencies": [
+        {
+          "name": "govkit",
+          "marketplace": "majlisofai"
+        }
+      ],
+      "homepage": "https://majlisofai.github.io/govkit/",
+      "repository": "https://github.com/majlisofai/govkit"
+    },
+    {
+      "name": "govkit-finos",
+      "source": "./plugins/govkit-finos",
+      "description": "GovKit's FINOS AI Governance Framework module — triage AI systems against the FINOS risk catalogue and check the evidence for their mitigations. Requires the govkit plugin.",
+      "version": "0.1.0",
+      "author": {
+        "name": "The Majlis of AI"
+      },
+      "license": "MIT",
+      "keywords": [
+        "finos",
+        "ai-governance",
+        "ai-risk",
+        "financial-services",
         "govkit"
       ],
       "category": "productivity",

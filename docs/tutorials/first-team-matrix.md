@@ -13,7 +13,7 @@ The model describes an AI Innovation Hub: eight stream-aligned teams, five virtu
 
 You need:
 
-- Node.js 22 or later (the version GovKit is tested on)
+- Node.js 22 or later (GovKit is tested on Node.js 26)
 - git
 - optional: [draw.io desktop](https://github.com/jgraph/drawio-desktop/releases), to export an image at the end
 

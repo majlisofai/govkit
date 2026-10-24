@@ -1,6 +1,6 @@
 # Commands
 
-All commands are in the `/govkit:` namespace. Commands that write an artefact follow the shared artefact procedure (steps P1–P8) and the runtime contract. Overlay commands, such as `/govkit-govstack:*`, are listed in their own reference: see the [GovStack overlay](govstack-overlay.md#commands).
+All commands are in the `/govkit:` namespace. Commands that write an artefact follow the shared artefact procedure (steps P1–P8) and the runtime contract. GovKit module commands are listed in their own references: the [GovStack module](govstack-overlay.md#commands) (`/govkit-govstack:*`) and the [FINOS module](finos-module.md#commands) (`/govkit-finos:*`).
 
 ## Summary
 

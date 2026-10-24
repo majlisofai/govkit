@@ -1,0 +1,21 @@
+# Advisor Copilot model configuration (staging and production)
+provider: example-llm-provider        # invented
+model: example-chat-2026-06-15        # pinned version; change only through change control
+embedding_model: example-embed-2026-03-01
+regions: { primary: eu-west, failover: eu-north }
+parameters:
+  temperature: 0.2
+  max_output_tokens: 1200
+retrieval:
+  index: research-all                 # single index, all research teams
+  top_k: 8
+  filter: none
+safety:
+  provider_content_filter: default
+limits:
+  per_user_requests_per_minute: 10
+  global_requests_per_minute: 600
+budget:
+  monthly_tokens: 400000000
+  alerts_at_percent: [50, 80, 100]
+  pause_new_conversations_over_budget: true

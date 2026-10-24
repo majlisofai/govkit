@@ -30,16 +30,16 @@ GovKit does not rely on ArcKit's internal hook code, its manifest format beyond 
 | `overrides` | Every rule heading in `references/govkit/arckit-overrides.md` names a template in the locked release |
 | `templates` | Every GovKit doc type with a command has that command and a template |
 
-The same checks cover every GovKit overlay: a directory `plugins/govkit-<name>/` with a `govkit-overlay.json`.
+The same checks cover every GovKit module: a directory `plugins/govkit-<name>/` with a `govkit-overlay.json`.
 
-| Check | Verifies for each overlay |
+| Check | Verifies for each module |
 |-------|---------------------------|
-| `versions` | Its `plugin.json` version equals its `marketplace.json` entry. It depends on `govkit`. GovKit's version is inside the overlay's `govkit.min` … `govkit.max_exclusive`. |
-| `doc-types` | Its codes collide with no ArcKit, GovKit or other overlay code |
-| `arckit-refs`, `govkit-refs` | Its references resolve. Every `govkit-<overlay>:<cmd>`, in GovKit or any overlay, names a command or skill of that overlay. |
+| `versions` | Its `plugin.json` version equals its `marketplace.json` entry. It depends on `govkit`. GovKit's version is inside the module's `govkit.min` … `govkit.max_exclusive`. |
+| `doc-types` | Its codes collide with no ArcKit, GovKit or other module code |
+| `arckit-refs`, `govkit-refs` | Its references resolve. Every `govkit-<module>:<cmd>`, in GovKit or any module, names a command or skill of that module. |
 | `templates` | Each doc type's command exists with matching `doc-type:` frontmatter and its template exists. Every `installs` file exists. |
 
-`validate-content.py` also validates each overlay's frameworks and methods, and counts overlay codes as known doc types for `evidence_hints`.
+`validate-content.py` also validates each module's frameworks and methods, and counts module codes as known doc types for `evidence_hints`.
 
 ## Tested range
 

@@ -1,0 +1,27 @@
+{
+  "$schema": "https://json.schemastore.org/claude-code-plugin-manifest.json",
+  "name": "govkit-finos",
+  "displayName": "GovKit FINOS AI governance module",
+  "version": "0.1.0",
+  "description": "GovKit's FINOS AI Governance Framework module — triage an AI system against the FINOS risk catalogue (operational, security, regulatory, agentic), check the evidence for each risk's mitigations, and rate residual risk. Installs the FINOS mitigations as a GovKit framework mapped to ISO/IEC 42001. Requires the govkit plugin.",
+  "author": {
+    "name": "The Majlis of AI"
+  },
+  "license": "MIT",
+  "homepage": "https://majlisofai.github.io/govkit/",
+  "repository": "https://github.com/majlisofai/govkit",
+  "keywords": [
+    "finos",
+    "ai-governance",
+    "ai-risk",
+    "financial-services",
+    "agentic-ai",
+    "govkit"
+  ],
+  "dependencies": [
+    {
+      "name": "govkit",
+      "marketplace": "majlisofai"
+    }
+  ]
+}
