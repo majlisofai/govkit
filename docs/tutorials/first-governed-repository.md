@@ -18,7 +18,7 @@ my-governance/
 You need:
 
 - [Claude Code](https://claude.com/claude-code), signed in
-- Node.js 22 or later (the version GovKit is tested on)
+- Node.js 22 or later (GovKit is tested on Node.js 26)
 - git
 
 ## 1. Create a repository
