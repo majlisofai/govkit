@@ -35,4 +35,4 @@ GovKit shows requirements added, removed, reworded and reclassified. A change of
 
 Some building blocks were still being aligned with the 2.0.0 classifier model during 2026. GovKit maps MUST and SHALL to REQUIRED, and SHOULD to RECOMMENDED, and records the original keyword in each requirement. Check those mappings before relying on a verdict.
 
-For the fields of the framework file, see the [GovStack overlay reference](../../reference/govstack-overlay.md#building-block-frameworks).
+For the fields of the framework file, see the [GovStack module reference](../../reference/govstack-overlay.md#building-block-frameworks).

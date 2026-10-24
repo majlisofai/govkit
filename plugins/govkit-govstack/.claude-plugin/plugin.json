@@ -1,9 +1,9 @@
 {
   "$schema": "https://json.schemastore.org/claude-code-plugin-manifest.json",
   "name": "govkit-govstack",
-  "displayName": "GovKit GovStack overlay",
+  "displayName": "GovKit GovStack module",
   "version": "0.1.0",
-  "description": "GovStack overlay for GovKit — map a government programme to GovStack building blocks and self-assess solutions against GovStack's cross-functional and building-block requirements (REQUIRED / RECOMMENDED, OBSERVABLE / AUDITABLE). Requires the govkit plugin.",
+  "description": "GovKit's GovStack module — map a government programme to GovStack building blocks and self-assess solutions against GovStack's cross-functional and building-block requirements (REQUIRED / RECOMMENDED, OBSERVABLE / AUDITABLE). Requires the govkit plugin.",
   "author": {
     "name": "The Majlis of AI"
   },

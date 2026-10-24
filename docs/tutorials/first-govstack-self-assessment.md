@@ -1,6 +1,6 @@
 # Your first GovStack self-assessment
 
-In this tutorial, we will use the GovStack overlay to assess a small government service against GovStack's requirements. We will install the overlay, map the service to GovStack building blocks, assess a sample solution, see it fail, fix two of its gaps, accept the third, and assess it again.
+In this tutorial, we will use GovKit's GovStack module to assess a small government service against GovStack's requirements. We will install the module, map the service to GovStack building blocks, assess a sample solution, see it fail, fix two of its gaps, accept the third, and assess it again.
 
 The service is invented: the *Licensing Service*, an API that takes business-licence applications for an imaginary business registry. We will use its evidence pack from the GovKit repository.
 
@@ -25,15 +25,15 @@ You need the repository from [Your first governed repository](first-governed-rep
 
 Claude writes the artefacts, so their wording will differ from run to run. The verdicts and blockers described here should match.
 
-## 1. Install the overlay
+## 1. Install the GovStack module
 
-In a terminal, install the plugin:
+The module comes from the GovKit marketplace you added in the first tutorial. In a terminal, install it:
 
 ```bash
 claude plugin install govkit-govstack@majlisofai
 ```
 
-Start Claude Code in your repository and apply the overlay:
+Start Claude Code in your repository and apply the module:
 
 ```text
 /govkit-govstack:apply --activate
@@ -41,7 +41,7 @@ Start Claude Code in your repository and apply the overlay:
 
 GovKit reports a table: two doc types created, one file created. Look at what changed.
 
-Open `.govkit/doc-types.json`. It now has two entries, `GSBB` and `GSCA`. These are the two kinds of document the overlay writes. GovKit's filename rules now accept them.
+Open `.govkit/doc-types.json`. It now has two entries, `GSBB` and `GSCA`. These are the two kinds of document the module writes. GovKit's filename rules now accept them.
 
 Open `.govkit/frameworks/govstack-cfr.yaml`. Notice the first line:
 
@@ -49,7 +49,7 @@ Open `.govkit/frameworks/govstack-cfr.yaml`. Notice the first line:
 # govkit-overlay govkit-govstack@0.1.0 — refreshed by /govkit-govstack:apply; …
 ```
 
-This line says the overlay owns the file. Running `apply` again after an upgrade refreshes it.
+This line says the module owns the file. Running `apply` again after an upgrade refreshes it.
 
 ## 2. Read one requirement
 
@@ -196,7 +196,7 @@ The verdict is still **Not compliant**. An exception records that the organisati
 
 You have:
 
-- installed the GovStack overlay through GovKit's own extension points
+- installed GovKit's GovStack module through GovKit's own extension points
 - read how a GovStack requirement is classified, and what that means for judging it
 - mapped a service to GovStack building blocks and found a need no building block covers
 - self-assessed a solution and seen three different reasons for failure
@@ -208,5 +208,5 @@ The verdict you produced is a self-assessment. GovStack certification and GovMar
 ## Next steps
 
 - Add the Registration building block's own requirements with `/govkit-govstack:bb add registration`, then assess the Licensing Service against `registration` instead of `cfr`. See [Add or refresh a building block](../how-to/govstack/add-a-building-block.md).
-- Look up every requirement and verdict rule in the [GovStack overlay reference](../reference/govstack-overlay.md).
-- Read [about GovKit overlays](../explanation/overlays.md) to see why the verdict is strict and binary.
+- Look up every requirement and verdict rule in the [GovStack module reference](../reference/govstack-overlay.md).
+- Read [about GovKit modules](../explanation/overlays.md) to see why the verdict is strict and binary.

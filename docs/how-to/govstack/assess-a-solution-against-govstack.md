@@ -3,7 +3,7 @@
 This guide shows you how to self-assess a product or component against GovStack's requirements before procurement, a gate or a GovMarket application.
 
 1. Make sure the frameworks exist:
-    - `govstack-cfr`, from [setting up the overlay](set-up-the-govstack-overlay.md)
+    - `govstack-cfr`, from [setting up the module](set-up-the-govstack-overlay.md)
     - `govstack-bb-<id>` for the building block, from [adding a building block](add-a-building-block.md). Skip this to assess against the core cross-functional requirements only.
 2. Gather evidence, matched to how each requirement is verified:
 

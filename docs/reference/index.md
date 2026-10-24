@@ -16,4 +16,4 @@ Technical descriptions of GovKit's commands, configuration, file formats and scr
 | [Team model](team-model.md) | Team types, interaction modes, rules and the model JSON |
 | [Scripts](scripts.md) | Plugin scripts and repository tooling |
 | [Compatibility](compatibility.md) | The interface with ArcKit, the compatibility gate and the tested range |
-| [GovStack overlay](govstack-overlay.md) | The `govkit-govstack` plugin: commands, doc types, the `govstack-cfr` framework and verdict rules |
+| [GovStack module](govstack-overlay.md) | GovKit's GovStack module, `govkit-govstack`: commands, doc types, the `govstack-cfr` framework and verdict rules |

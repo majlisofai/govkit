@@ -15,7 +15,7 @@ Required: `id`, `kind`, `name`, `version`, `publisher`, `url`, `type`, `verified
 | `verified` | Date the source was last checked. `validate` warns after 12 months. |
 | `text_policy` | Whether intents are verbatim (only where the licence allows) or paraphrased |
 | `related_arckit.overlay_commands` | ArcKit overlay commands that cover this framework, for example `["arckit-uae:uae-ai-charter"]`. GovKit hands off to them. |
-| `related_govkit.overlay_commands` | GovKit overlay commands that assess this framework, for example `["govkit-govstack:compliance"]`. GovKit hands off to them the same way. |
+| `related_govkit.overlay_commands` | GovKit module commands that assess this framework, for example `["govkit-govstack:compliance"]`. GovKit hands off to them the same way. |
 | `structure` | Grouping levels, for example `[domain]` |
 
 ## Control fields

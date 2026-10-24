@@ -83,15 +83,15 @@ The built-in frameworks hold **paraphrased** control intents only. Assess agains
 
 See the [how-to guides](docs/how-to/index.md) to customize methods, frameworks, templates and brands.
 
-## Overlays
+## Modules
 
-GovKit overlays are separate plugins, named `govkit-<name>`, that add a body of standards to GovKit. They reach GovKit the way GovKit reaches ArcKit: only through its extension points (`.govkit/doc-types.json` and the content layers). This marketplace ships one:
+GovKit modules are add-ons in the GovKit marketplace, named `govkit-<name>`, that add a body of standards to GovKit. They reach GovKit the way GovKit reaches ArcKit: only through its extension points (`.govkit/doc-types.json` and the content layers). This marketplace ships one:
 
-| Overlay | Install | Adds |
+| Module | Install | Adds |
 |---------|---------|------|
 | [`govkit-govstack`](plugins/govkit-govstack/README.md) | `claude plugin install govkit-govstack@majlisofai` | GovStack building blocks. Maps services to building blocks (GSBB), drafts building-block frameworks from GovStack's specifications, and self-assesses solutions against the 78 core cross-functional requirements and a building block's own requirements (GSCA), under GovStack's all-REQUIRED rule. |
 
-See [about GovKit overlays](docs/explanation/overlays.md).
+See [about GovKit modules](docs/explanation/overlays.md).
 
 ## Brand and diagrams
 

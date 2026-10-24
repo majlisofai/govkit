@@ -1,8 +1,8 @@
-# How to set up the GovStack overlay
+# How to set up the GovStack module
 
-This guide shows you how to add GovStack building-block governance to a repository that already uses GovKit. If you are new to the overlay, start with the tutorial [Your first GovStack self-assessment](../../tutorials/first-govstack-self-assessment.md).
+This guide shows you how to add GovStack building-block governance to a repository that already uses GovKit. If you are new to the module, start with the tutorial [Your first GovStack self-assessment](../../tutorials/first-govstack-self-assessment.md).
 
-1. Install the overlay. It needs GovKit 0.4.0 or later.
+1. Install GovKit's GovStack module from the GovKit marketplace. It needs GovKit 0.4.0 or later.
 
     ```bash
     claude plugin install govkit-govstack@majlisofai
@@ -16,13 +16,13 @@ This guide shows you how to add GovStack building-block governance to a reposito
     /govkit-govstack:apply --activate
     ```
 
-    This registers the overlay's two artefact types (GSBB and GSCA) in `.govkit/doc-types.json`, installs `govstack-cfr` into `.govkit/frameworks/`, and adds it to `frameworks.active`.
+    This registers the module's two artefact types (GSBB and GSCA) in `.govkit/doc-types.json`, installs `govstack-cfr` into `.govkit/frameworks/`, and adds it to `frameworks.active`.
 
     To share the framework across repositories, add `--central`. The framework goes into the organisation layer named by `extends:`. The doc types are always written to each repository, because GovKit's filename hook reads them there.
 
 3. Run `/govkit:profile validate`. Every check should PASS.
 
-## After upgrading the overlay
+## After upgrading the module
 
 Run `/govkit-govstack:apply` again. It refreshes every file whose first line is `# govkit-overlay govkit-govstack@…` and leaves the rest alone.
 
