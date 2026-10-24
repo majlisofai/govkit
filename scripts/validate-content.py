@@ -2,7 +2,8 @@
 """Validate GovKit YAML content against the GovKit and locked ArcKit registries.
 
 Checks frameworks, methods, the default profile and recipes in
-plugins/govkit/, plus, when given, a project's .govkit/ directory:
+plugins/govkit/ and in every GovKit overlay (plugins/govkit-<name>/ with a
+govkit-overlay.json), plus, when given, a project's .govkit/ directory:
 
     python3 scripts/validate-content.py               # built-in content
     python3 scripts/validate-content.py path/.govkit  # also a project's overrides
@@ -34,7 +35,12 @@ GOV_TYPES = set(
         )
     )
 )
-ALL_TYPES = ARCKIT_TYPES | GOV_TYPES
+OVERLAYS = sorted(p.parent for p in (ROOT / "plugins").glob("govkit-*/govkit-overlay.json"))
+OVERLAY_TYPES = {code for o in OVERLAYS for code in json.loads((o / "govkit-overlay.json").read_text()).get("doc_types", {})}
+ALL_TYPES = ARCKIT_TYPES | GOV_TYPES | OVERLAY_TYPES
+OBLIGATIONS = {"required", "recommended", "optional", "draft", "deprecated"}
+OVERLAY_CMD_RE = re.compile(r"^govkit-[a-z0-9-]+:[a-z0-9.-]+$")
+ARCKIT_CMD_RE = re.compile(r"^arckit(-[a-z0-9-]+)?:[a-z0-9.-]+$")
 FRAMEWORK_TYPES = {"regulation", "management-system", "risk-framework", "principles", "policy", "standard"}
 ID_RE = re.compile(r"^[a-z0-9]+(-[a-z0-9]+)*$")
 
@@ -69,6 +75,12 @@ def validate_framework(path: Path, known_frameworks: set[str]) -> None:
         err(path, "kind must be 'framework'")
     if fw.get("type") not in FRAMEWORK_TYPES:
         err(path, f"type must be one of {sorted(FRAMEWORK_TYPES)}")
+    for cmd in (fw.get("related_arckit") or {}).get("overlay_commands") or []:
+        if not ARCKIT_CMD_RE.match(str(cmd)):
+            err(path, f"related_arckit.overlay_commands: '{cmd}' is not arckit[-<overlay>]:<command>")
+    for cmd in (fw.get("related_govkit") or {}).get("overlay_commands") or []:
+        if not OVERLAY_CMD_RE.match(str(cmd)):
+            err(path, f"related_govkit.overlay_commands: '{cmd}' is not govkit-<overlay>:<command>")
     verified = fw.get("verified")
     if isinstance(verified, date) and (date.today() - verified).days > 365:
         warnings.append(f"{path.name}: verified {verified} is over 12 months old")
@@ -87,6 +99,11 @@ def validate_framework(path: Path, known_frameworks: set[str]) -> None:
         for target in (c.get("mappings") or {}):
             if target not in known_frameworks:
                 err(path, f"control {cid}: mapping to unknown framework '{target}'")
+        if "obligation" in c and c["obligation"] not in OBLIGATIONS:
+            err(path, f"control {cid}: obligation '{c['obligation']}' must be one of {sorted(OBLIGATIONS)}")
+        attrs = c.get("attributes")
+        if attrs is not None and not (isinstance(attrs, dict) and all(isinstance(v, str) for v in attrs.values())):
+            err(path, f"control {cid}: attributes must map names to strings")
 
 
 def validate_lifecycle(path: Path) -> None:
@@ -334,6 +351,7 @@ def validate_recipe(path: Path) -> None:
 def run(base: Path, project: Path | None) -> None:
     fw_files = [p for p in (base / "frameworks").glob("*.yaml") if not p.name.startswith("_")]
     known = {p.stem for p in (PLUGIN / "frameworks").glob("*.yaml")} | {p.stem for p in fw_files}
+    known |= {p.stem for o in OVERLAYS for p in (o / "frameworks").glob("*.yaml")}
     for p in fw_files:
         validate_framework(p, known)
     for p in (base / "methods/lifecycles").glob("*.yaml"):
@@ -354,6 +372,8 @@ def run(base: Path, project: Path | None) -> None:
 
 
 run(PLUGIN, None)
+for overlay in OVERLAYS:
+    run(overlay, None)
 validate_profile(PLUGIN / "config/profile.default.yaml", None)
 if len(sys.argv) > 1:
     project = Path(sys.argv[1]).resolve()

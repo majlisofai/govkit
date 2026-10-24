@@ -38,7 +38,7 @@ The registry is [`plugins/govkit/config/doc-types.mjs`](https://github.com/majli
 
 ## Custom types
 
-`.govkit/doc-types.json` at the repository root adds codes. A built-in code wins over a custom one with the same name.
+`.govkit/doc-types.json` at the repository root adds codes. A built-in code wins over a custom one with the same name. GovKit overlays register their codes here too: see the [GovStack overlay](govstack-overlay.md#doc-types) for GSBB and GSCA.
 
 | Field | Type | Description |
 |-------|------|-------------|

@@ -21,6 +21,13 @@
         "overlay_commands": { "type": "array", "items": { "type": "string", "pattern": "^arckit(-[a-z0-9-]+)?:[a-z0-9.-]+$" } }
       }
     },
+    "related_govkit": {
+      "type": "object",
+      "description": "GovKit overlay commands (plugins named govkit-<name>) that assess this framework. GovKit hands off to them as it does to ArcKit overlays.",
+      "properties": {
+        "overlay_commands": { "type": "array", "items": { "type": "string", "pattern": "^govkit-[a-z0-9-]+:[a-z0-9.-]+$" } }
+      }
+    },
     "structure": { "type": "array", "items": { "type": "string" } },
     "model": { "type": "array", "items": { "type": "string" } },
     "controls": {
@@ -37,7 +44,16 @@
           "evidence_hints": { "type": "array", "items": { "type": "string" } },
           "target": { "type": "integer", "minimum": 0 },
           "mappings": { "type": "object", "additionalProperties": { "type": "array", "items": { "type": "string" } } },
-          "citation_url": { "type": "string" }
+          "citation_url": { "type": "string" },
+          "obligation": {
+            "enum": ["required", "recommended", "optional", "draft", "deprecated"],
+            "description": "How binding the control is in its source. Absent means the framework does not distinguish."
+          },
+          "attributes": {
+            "type": "object",
+            "description": "Framework-specific classifiers and references, e.g. { ref: govstack-cfr-security#req-1, verification: observable }.",
+            "additionalProperties": { "type": "string" }
+          }
         }
       }
     }

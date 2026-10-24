@@ -49,9 +49,10 @@
 
 ## Delegated Assessments
 
-| Framework area | ArcKit command | Artefact | Result |
-|----------------|----------------|----------|--------|
+| Framework area | Overlay command | Artefact | Result |
+|----------------|-----------------|----------|--------|
 | [e.g. EU AI Act] | [/arckit-eu:eu-ai-act] | [ARC-…] | [summary or "not yet run"] |
+| [e.g. GovStack CFR] | [/govkit-govstack:compliance] | [GOV-…-GSCA-…] | [summary or "not yet run"] |
 
 ## Risks Raised
 

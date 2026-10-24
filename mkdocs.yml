@@ -105,6 +105,11 @@ nav:
           - Design teams for a project: how-to/design-teams.md
           - Evolve a team design: how-to/evolve-a-team-design.md
           - Change the team rules: how-to/change-the-team-rules.md
+      - GovStack overlay:
+          - Set up the overlay: how-to/govstack/set-up-the-govstack-overlay.md
+          - Map a project to building blocks: how-to/govstack/map-a-project-to-building-blocks.md
+          - Add or refresh a building block: how-to/govstack/add-a-building-block.md
+          - Assess a solution against GovStack: how-to/govstack/assess-a-solution-against-govstack.md
       - Maintain GovKit:
           - Take a new ArcKit release: how-to/maintainers/take-an-arckit-release.md
           - Fix a failing compatibility gate: how-to/maintainers/fix-a-failing-compatibility-gate.md
@@ -124,6 +129,7 @@ nav:
       - Team model: reference/team-model.md
       - Scripts: reference/scripts.md
       - Compatibility: reference/compatibility.md
+      - GovStack overlay: reference/govstack-overlay.md
   - Explanation:
       - explanation/index.md
       - The overlay model: explanation/overlay-model.md
@@ -134,3 +140,4 @@ nav:
       - Diagrams as draw.io files: explanation/drawio-diagrams.md
       - Team design: explanation/team-design.md
       - Tracking ArcKit: explanation/tracking-arckit.md
+      - GovKit overlays: explanation/overlays.md

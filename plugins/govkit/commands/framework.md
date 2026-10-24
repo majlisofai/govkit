@@ -22,13 +22,13 @@ Frameworks are data files, not code. A built-in framework lives in `${CLAUDE_PLU
 
 ## Sub-commands
 
-- **list**: glob both locations. Show a table of id, name, version, type, number of controls, source (built-in, custom, or override) and whether the framework is active in the profile.
+- **list**: glob both locations. Show a table of id, name, version, type, number of controls, source (built-in, custom, override, or `overlay <name>` when the file starts with a `# govkit-overlay` line) and whether the framework is active in the profile.
 - **show `<id>`**: header fields, then the controls grouped by `group`.
 - **add `<name or URL>`**:
   1. Dispatch the `govkit-framework-researcher` agent with `{ "query": "<name or URL>", "existing_ids": [...] }`. It returns a JSON draft that conforms to `framework.schema.json`, with a citation for every control.
   2. If the source is copyrighted (ISO, IEC, BSI and similar), keep `intent` to a one-sentence paraphrase and set `text_policy` to say so. Never paste licensed text.
   3. Suggest `evidence_hints` from ArcKit and GovKit doc-type codes. For ArcKit codes, glob ArcKit core's `config/doc-types.mjs`. For GovKit codes, read `${CLAUDE_PLUGIN_ROOT}/config/doc-types.mjs`.
-  4. If an installed ArcKit overlay already covers this framework (for example the EU AI Act is covered by `arckit-eu:eu-ai-act`), set `related_arckit.overlay_commands`. GovKit then hands off to that command and does not duplicate it.
+  4. If an installed ArcKit overlay already covers this framework (for example the EU AI Act is covered by `arckit-eu:eu-ai-act`), set `related_arckit.overlay_commands`. If a GovKit overlay covers it (for example GovStack is covered by `govkit-govstack:compliance`), set `related_govkit.overlay_commands`. GovKit then hands off to that command and does not duplicate it.
   5. Show the draft and ask for confirmation. Then write `.govkit/frameworks/<id>.yaml` and run **validate**.
 - **refresh `<id>`**: re-run the researcher against the framework's `url`. Show a diff of the controls (added, removed, retitled). Write the result to `.govkit/frameworks/<id>.yaml`, which overrides the built-in file and leaves it untouched. Update `verified`.
-- **validate `<id>`**: check that `id` equals the filename, every required field is present, control ids are unique, every `evidence_hints` code exists in the ArcKit or GovKit registry, every `mappings` target framework exists, and the `verified` date is no more than 12 months old (warning only). Report PASS or FAIL for each check.
+- **validate `<id>`**: check that `id` equals the filename, every required field is present, control ids are unique, every `evidence_hints` code exists in the ArcKit or GovKit registry or in `.govkit/doc-types.json`, every `related_*.overlay_commands` entry names an ArcKit overlay or a `govkit-<name>` overlay command, every `mappings` target framework exists, and the `verified` date is no more than 12 months old (warning only). Report PASS or FAIL for each check.

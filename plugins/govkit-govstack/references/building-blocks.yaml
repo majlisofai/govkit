@@ -1,0 +1,83 @@
+# GovStack building blocks in the current specification release.
+# Source: https://specs.govstack.global/technical-specifications/building-blocks
+# Verified: 2026-10-24
+#
+# id          — used in framework ids (govstack-bb-<id>) and GSCA filenames
+# spec        — the specification's home page; append .md for Markdown
+# wave        — GovStack's 2.0.0 alignment plan: foundational building blocks
+#               were due to align with govstack-cfr-2.0.0 by end of June 2026,
+#               feature building blocks by end of 2026. Check each spec's
+#               version history before relying on its classifiers.
+# summary     — a one-line paraphrase for mapping; the spec is authoritative.
+
+building_blocks:
+  - id: identity
+    name: Identity
+    spec: https://specs.govstack.global/identity
+    wave: foundational
+    summary: Establishes and verifies who a person or entity is, and authenticates them for other services.
+  - id: information-mediator
+    name: Information Mediator
+    spec: https://specs.govstack.global/information-mediator
+    wave: foundational
+    summary: Secure, logged exchange of data between building blocks and organisations, with service registry and access rights.
+  - id: workflow
+    name: Workflow
+    spec: https://specs.govstack.global/workflow
+    wave: foundational
+    summary: Orchestrates multi-step processes across building blocks and services.
+  - id: consent
+    name: Consent
+    spec: https://specs.govstack.global/consent
+    wave: feature
+    summary: Records, manages and checks individuals' consent for the use of their data.
+  - id: registries
+    name: Digital Registries
+    spec: https://specs.govstack.global/registries
+    wave: feature
+    summary: Configurable registers that store and serve authoritative records through APIs.
+  - id: emarketplace
+    name: E-Marketplace
+    spec: https://specs.govstack.global/emarketplace
+    wave: feature
+    summary: Lets parties offer, find and transact goods or services.
+  - id: esignature
+    name: E-Signature
+    spec: https://specs.govstack.global/esignature
+    wave: feature
+    summary: Creates and verifies electronic signatures on documents and transactions.
+  - id: gis
+    name: Geographic Information System (GIS)
+    spec: https://specs.govstack.global/gis
+    wave: feature
+    summary: Stores, queries and serves location and geospatial data.
+  - id: messaging
+    name: Messaging
+    spec: https://specs.govstack.global/messaging
+    wave: feature
+    summary: Sends notifications and messages to people and systems across channels.
+  - id: payments
+    name: Payments
+    spec: https://specs.govstack.global/payments
+    wave: feature
+    summary: Handles government payments to and from people and businesses.
+  - id: registration
+    name: Registration
+    spec: https://specs.govstack.global/registration
+    wave: feature
+    summary: Captures applications for services and entitlements, and manages their processing.
+  - id: scheduler
+    name: Scheduler
+    spec: https://specs.govstack.global/scheduler
+    wave: feature
+    summary: Plans and manages appointments, events and timed tasks.
+  - id: wallet
+    name: Wallet
+    spec: https://specs.govstack.global/wallet
+    wave: feature
+    summary: Holds and presents verifiable credentials on behalf of a person or organisation.
+  - id: cloud-infrastructure
+    name: Cloud Infrastructure
+    spec: https://specs.govstack.global/cloud-infrastructure
+    wave: feature
+    summary: Hosting and infrastructure services that building blocks run on.

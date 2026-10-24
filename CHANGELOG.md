@@ -1,5 +1,22 @@
 # Changelog
 
+## 0.4.0 — 2026-10-24
+
+Tested against ArcKit 6.18.2.
+
+- **GovKit overlays.** Plugins named `govkit-<name>` extend GovKit the way GovKit extends ArcKit: only through `.govkit/doc-types.json`, the content layers and their own `/govkit-<name>:*` commands. Runtime contract §5 defines the rules, including the `# govkit-overlay` provenance line on files an overlay installs.
+- **Framework schema.** New optional fields:
+  - `related_govkit.overlay_commands`: the twin of `related_arckit.overlay_commands`. `/govkit:assess`, `/govkit:start` and `/govkit:applicability` hand off to these commands.
+  - Control `obligation` (`required`, `recommended`, `optional`, `draft`, `deprecated`) and `attributes` (string map) carry a source's own classifiers.
+- **New plugin `govkit-govstack` 0.1.0**, the first overlay, for GovStack building-block specifications:
+  - `govstack-cfr` framework: all 78 GovStack core cross-functional requirements (architecture spec 2.1.0), with level, mutability and verification classifiers and paraphrased intents.
+  - `/govkit-govstack:apply` registers the GSBB and GSCA doc types and installs the framework.
+  - `/govkit-govstack:bb` drafts `govstack-bb-<id>` frameworks from the 14 published building-block specifications.
+  - `/govkit-govstack:map` (GSBB) maps services and needs to building blocks.
+  - `/govkit-govstack:compliance` (GSCA) self-assesses a solution under GovStack's all-REQUIRED rule, reports RECOMMENDED coverage, and requires runtime evidence for OBSERVABLE requirements. It reuses GovKit's evidence-reader and control-assessor agents.
+  - `govstack-method` skill and `govstack-spec-reader` agent.
+- `check-compat.mjs` and `validate-content.py` also check overlays: versions against the marketplace, doc-type collisions, `govkit-<overlay>:` references, templates, and framework content.
+
 ## 0.3.0 — 2026-10-19
 
 Tested against ArcKit 6.18.2.

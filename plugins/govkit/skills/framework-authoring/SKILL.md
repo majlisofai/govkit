@@ -22,7 +22,7 @@ allowed-tools:
 2. **`intent` is one sentence that says what must be true,** in your own words unless the source licence allows quotation. Record the choice in `text_policy`.
 3. **`evidence_hints` use doc-type codes.** ArcKit codes such as `RISK`, `DPIA`, `ADR` and `REQ` come from ArcKit's `config/doc-types.mjs`. GovKit codes are `GMOD APPL ASMT XWLK CTRL EVID GATE EXCP BRPT`, plus any in `.govkit/doc-types.json`. These hints steer `govkit-evidence-reader`.
 4. **`mappings` only where you can defend them.** Record the target framework's control ids. `/govkit:crosswalk` treats them as the strongest mapping source.
-5. **Delegate jurisdictional depth.** If an ArcKit overlay already has a command for the regulation, set `related_arckit.overlay_commands` and keep your file at the obligation level.
+5. **Delegate jurisdictional depth.** If an ArcKit overlay already has a command for the regulation, set `related_arckit.overlay_commands` and keep your file at the obligation level. A GovKit overlay command (`govkit-<name>:<cmd>`) goes in `related_govkit.overlay_commands`. When the source grades its rules (SHALL/SHOULD, REQUIRED/RECOMMENDED), set each control's `obligation`, and keep other source classifiers in `attributes`.
 6. **Set `verified`** every time you check the source.
 
 ## Lifecycles

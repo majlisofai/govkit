@@ -14,6 +14,8 @@ ArcKit produces the architecture artefacts: principles, requirements, risk, desi
 
 GovKit then runs assessments, crosswalks, control and evidence registers, stage gates, exceptions, board reports, team designs and diagrams on top of ArcKit. It never forks or edits ArcKit, so you can take every future ArcKit release.
 
+Overlays add further standards as separate plugins. The first, [`govkit-govstack`](reference/govstack-overlay.md), maps programmes to [GovStack](https://govstack.global/) building blocks and self-assesses solutions against GovStack's requirements.
+
 ## Install
 
 ```bash

@@ -15,6 +15,7 @@ Required: `id`, `kind`, `name`, `version`, `publisher`, `url`, `type`, `verified
 | `verified` | Date the source was last checked. `validate` warns after 12 months. |
 | `text_policy` | Whether intents are verbatim (only where the licence allows) or paraphrased |
 | `related_arckit.overlay_commands` | ArcKit overlay commands that cover this framework, for example `["arckit-uae:uae-ai-charter"]`. GovKit hands off to them. |
+| `related_govkit.overlay_commands` | GovKit overlay commands that assess this framework, for example `["govkit-govstack:compliance"]`. GovKit hands off to them the same way. |
 | `structure` | Grouping levels, for example `[domain]` |
 
 ## Control fields
@@ -29,6 +30,8 @@ Required: `id`, `kind`, `name`, `version`, `publisher`, `url`, `type`, `verified
 | `target` | no | Overrides the scale's `default_target` |
 | `mappings` | no | Framework id → control ids. Feeds `/govkit:crosswalk`. |
 | `citation_url` | no | Source of the control, set by the framework researcher |
+| `obligation` | no | How binding the control is in its source: `required`, `recommended`, `optional`, `draft` or `deprecated` |
+| `attributes` | no | Source-specific classifiers and references, as a map of strings, for example `{ ref: "govstack-cfr-security#req-1", verification: observable }` |
 
 ```yaml
 controls:

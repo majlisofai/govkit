@@ -29,6 +29,13 @@ How-to guides are directions for a specific task. They assume you know what you 
 - [Evolve a team design](evolve-a-team-design.md)
 - [Change the team rules](change-the-team-rules.md)
 
+## GovStack overlay
+
+- [Set up the GovStack overlay](govstack/set-up-the-govstack-overlay.md)
+- [Map a project to GovStack building blocks](govstack/map-a-project-to-building-blocks.md)
+- [Add or refresh a building block](govstack/add-a-building-block.md)
+- [Assess a solution against GovStack](govstack/assess-a-solution-against-govstack.md)
+
 ## Maintain GovKit
 
 For contributors to this repository:

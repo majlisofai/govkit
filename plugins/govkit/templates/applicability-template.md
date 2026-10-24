@@ -38,9 +38,9 @@
 
 ## Applicability Decision
 
-| Framework | Applies? | Rationale | Scope / exclusions | Target level | Delegated to ArcKit overlay |
+| Framework | Applies? | Rationale | Scope / exclusions | Target level | Delegated to overlay |
 |-----------|----------|-----------|--------------------|--------------|-----------------------------|
-| [id] | [Yes / No / Partial] | [why] | [controls out of scope + reason] | [n] | [/arckit-<overlay>:<command> or —] |
+| [id] | [Yes / No / Partial] | [why] | [controls out of scope + reason] | [n] | [/arckit-<overlay>:<command>, /govkit-<overlay>:<command> or —] |
 
 ## Excluded Controls
 

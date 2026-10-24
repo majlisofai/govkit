@@ -1,0 +1,665 @@
+# GovStack core cross-functional requirements (govstack-cfr), as a GovKit framework.
+#
+# Installed into a repository's .govkit/frameworks/ by /govkit-govstack:apply.
+# Every building-block specification inherits these requirements; a building
+# block's own requirements come from /govkit-govstack:bb add <bb>.
+#
+# Classifiers map to GovKit fields:
+#   REQUIRED / RECOMMENDED / DRAFT / DEPRECATED  -> obligation
+#   IMMUTABLE / EXTENSIBLE / REPLACEABLE          -> attributes.mutability
+#   OBSERVABLE / AUDITABLE                        -> attributes.verification
+#   govstack-cfr-<category>#req-<n>               -> attributes.ref
+
+id: govstack-cfr
+kind: framework
+name: GovStack Cross-Functional Requirements
+version: "2.1.0"
+publisher: GovStack (GovSpecs)
+url: https://specs.govstack.global/architecture/6-cross-functional-requirements
+document: GovStack Architecture Specification, section 6
+type: standard
+verified: 2026-10-24
+text_policy: >
+  Titles are GovStack's requirement titles. Intents are one-sentence paraphrases
+  written for GovKit, not GovStack's requirement text; read the linked section
+  for the authoritative wording. Version is the GovStack architecture
+  specification release (2.1.0, 2026-03-13) that carries govstack-cfr.
+related_govkit:
+  overlay_commands: ["govkit-govstack:compliance"]
+structure: [category]
+controls:
+  # 6.1 Development — govstack-cfr-development
+  - id: development-1
+    group: Development
+    title: All application source code uses version control
+    intent: Source, configuration and infrastructure definitions live in a distributed version control system with full, unrewritten history and traceable commits.
+    obligation: required
+    attributes: { ref: "govstack-cfr-development#req-1", mutability: extensible, verification: auditable }
+    evidence_hints: [CDAU, DEVOPS]
+    citation_url: https://specs.govstack.global/architecture/6-cross-functional-requirements/6.1-development
+  - id: development-2
+    group: Development
+    title: All application source code and comments are clear, maintainable and written in English
+    intent: Code, comments, commit messages and configuration are in English and follow a documented, consistent style guide.
+    obligation: required
+    attributes: { ref: "govstack-cfr-development#req-2", mutability: extensible, verification: auditable }
+    evidence_hints: [CDAU]
+    citation_url: https://specs.govstack.global/architecture/6-cross-functional-requirements/6.1-development
+  - id: development-3
+    group: Development
+    title: All software is published with a clear open-source license
+    intent: Each repository carries an OSI-approved licence at its root and dependency licences are checked for compatibility.
+    obligation: recommended
+    attributes: { ref: "govstack-cfr-development#req-3", mutability: extensible, verification: auditable }
+    evidence_hints: [CDAU]
+    citation_url: https://specs.govstack.global/architecture/6-cross-functional-requirements/6.1-development
+  - id: development-4
+    group: Development
+    title: Database schema changes are managed with migration scripts
+    intent: Every schema change is a versioned, re-runnable migration committed with the application code.
+    obligation: recommended
+    attributes: { ref: "govstack-cfr-development#req-4", mutability: extensible, verification: auditable }
+    evidence_hints: [DATA, CDAU]
+    citation_url: https://specs.govstack.global/architecture/6-cross-functional-requirements/6.1-development
+  - id: development-5
+    group: Development
+    title: Include unit and integration test coverage
+    intent: Automated unit and integration tests run unattended, give clear pass or fail results and meet a coverage threshold enforced in CI.
+    obligation: recommended
+    attributes: { ref: "govstack-cfr-development#req-5", mutability: extensible, verification: auditable }
+    evidence_hints: [DEVOPS, CDAU]
+    citation_url: https://specs.govstack.global/architecture/6-cross-functional-requirements/6.1-development
+  - id: development-6
+    group: Development
+    title: Regular security and code quality audits
+    intent: Automated static, dependency and quality scans gate merges or releases above a severity threshold, and security-sensitive code gets expert peer review.
+    obligation: recommended
+    attributes: { ref: "govstack-cfr-development#req-6", mutability: extensible, verification: auditable }
+    evidence_hints: [SECD, CDAU]
+    citation_url: https://specs.govstack.global/architecture/6-cross-functional-requirements/6.1-development
+  - id: development-7
+    group: Development
+    title: Used components End-of-Life is at least 5 years
+    intent: No runtime, framework or library is adopted with a known or projected end of support under five years, and the timelines are documented.
+    obligation: recommended
+    attributes: { ref: "govstack-cfr-development#req-7", mutability: replaceable, verification: auditable }
+    evidence_hints: [ADR, CDAU]
+    citation_url: https://specs.govstack.global/architecture/6-cross-functional-requirements/6.1-development
+  - id: development-8
+    group: Development
+    title: Preference for the top 25 languages listed in either the TIOBE Index or any of the three IEEE Spectrum rankings
+    intent: Core logic is written in a widely used language so that maintainers and auditors can be found, including in low-resource settings.
+    obligation: recommended
+    attributes: { ref: "govstack-cfr-development#req-8", mutability: replaceable, verification: auditable }
+    evidence_hints: [ADR]
+    citation_url: https://specs.govstack.global/architecture/6-cross-functional-requirements/6.1-development
+  - id: development-9
+    group: Development
+    title: Best practices for Public Code are followed
+    intent: Development follows the Standard for Public Code and the team periodically self-assesses against its checklist.
+    obligation: recommended
+    attributes: { ref: "govstack-cfr-development#req-9", mutability: extensible, verification: auditable }
+    evidence_hints: [CDAU]
+    citation_url: https://specs.govstack.global/architecture/6-cross-functional-requirements/6.1-development
+
+  # 6.2 Deployment — govstack-cfr-deployment
+  - id: deployment-1
+    group: Deployment
+    title: Building blocks are deployable as a container
+    intent: The building block ships as a self-contained, semantically versioned container image that anyone can rebuild reproducibly from the repository.
+    obligation: required
+    attributes: { ref: "govstack-cfr-deployment#req-1", mutability: extensible, verification: auditable }
+    evidence_hints: [DEVOPS, OPS]
+    citation_url: https://specs.govstack.global/architecture/6-cross-functional-requirements/6.2-deployment
+  - id: deployment-2
+    group: Deployment
+    title: Backup and restore-capable
+    intent: A documented, tested procedure backs up and restores all persistent state, including keys, to a working clean instance.
+    obligation: required
+    attributes: { ref: "govstack-cfr-deployment#req-2", mutability: extensible, verification: auditable }
+    evidence_hints: [OPS]
+    citation_url: https://specs.govstack.global/architecture/6-cross-functional-requirements/6.2-deployment
+  - id: deployment-3
+    group: Deployment
+    title: Include deployment documentation
+    intent: Current deployment instructions in the repository cover prerequisites, every setting, startup checks, manual steps and rollback.
+    obligation: required
+    attributes: { ref: "govstack-cfr-deployment#req-3", mutability: extensible, verification: auditable }
+    evidence_hints: [OPS, DEVOPS]
+    citation_url: https://specs.govstack.global/architecture/6-cross-functional-requirements/6.2-deployment
+  - id: deployment-4
+    group: Deployment
+    title: Verify container image integrity before deployment
+    intent: Images are signed and verified, and only trusted registries feed staging and production.
+    obligation: recommended
+    attributes: { ref: "govstack-cfr-deployment#req-4", mutability: extensible, verification: auditable }
+    evidence_hints: [SECD, DEVOPS]
+    citation_url: https://specs.govstack.global/architecture/6-cross-functional-requirements/6.2-deployment
+  - id: deployment-5
+    group: Deployment
+    title: Versioning and rollback-capable
+    intent: Operators can tell which release runs and revert it, including schema changes, using retained release artefacts and a documented procedure.
+    obligation: recommended
+    attributes: { ref: "govstack-cfr-deployment#req-5", mutability: extensible, verification: auditable }
+    evidence_hints: [DEVOPS, OPS]
+    citation_url: https://specs.govstack.global/architecture/6-cross-functional-requirements/6.2-deployment
+  - id: deployment-6
+    group: Deployment
+    title: Multi-environment support
+    intent: Development, test and production differ only by externalised configuration, with per-environment feature toggles.
+    obligation: recommended
+    attributes: { ref: "govstack-cfr-deployment#req-6", mutability: extensible, verification: auditable }
+    evidence_hints: [DEVOPS]
+    citation_url: https://specs.govstack.global/architecture/6-cross-functional-requirements/6.2-deployment
+  - id: deployment-7
+    group: Deployment
+    title: Include all deployment scripts
+    intent: Idempotent, preferably declarative deployment, scaling and rollback scripts for each environment live in the building block's repository.
+    obligation: recommended
+    attributes: { ref: "govstack-cfr-deployment#req-7", mutability: extensible, verification: auditable }
+    evidence_hints: [DEVOPS]
+    citation_url: https://specs.govstack.global/architecture/6-cross-functional-requirements/6.2-deployment
+  - id: deployment-8
+    group: Deployment
+    title: Continuous integration and continuous deployment compatibility
+    intent: Build, test, verification, promotion and rollback run in standard CI/CD pipelines without manual steps.
+    obligation: recommended
+    attributes: { ref: "govstack-cfr-deployment#req-8", mutability: extensible, verification: auditable }
+    evidence_hints: [DEVOPS]
+    citation_url: https://specs.govstack.global/architecture/6-cross-functional-requirements/6.2-deployment
+  - id: deployment-9
+    group: Deployment
+    title: High availability and scalability
+    intent: Disposable instances scale horizontally and recover automatically without tying the deployment to one cloud provider, and any non-scalable component is documented.
+    obligation: recommended
+    attributes: { ref: "govstack-cfr-deployment#req-9", mutability: extensible, verification: auditable }
+    evidence_hints: [HLDR, OPS]
+    citation_url: https://specs.govstack.global/architecture/6-cross-functional-requirements/6.2-deployment
+  - id: deployment-10
+    group: Deployment
+    title: Containers support graceful shutdown and fast startup
+    intent: Containers finish in-flight work and release resources on a termination signal, and become ready fast enough for rolling updates.
+    obligation: recommended
+    attributes: { ref: "govstack-cfr-deployment#req-10", mutability: extensible, verification: auditable }
+    evidence_hints: [DEVOPS, OPS]
+    citation_url: https://specs.govstack.global/architecture/6-cross-functional-requirements/6.2-deployment
+  - id: deployment-11
+    group: Deployment
+    title: Resource limits are declared in deployment artifacts
+    intent: Every manifest declares tested CPU, memory and any specialised resource requests and limits.
+    obligation: recommended
+    attributes: { ref: "govstack-cfr-deployment#req-11", mutability: extensible, verification: observable }
+    evidence_hints: [DEVOPS]
+    citation_url: https://specs.govstack.global/architecture/6-cross-functional-requirements/6.2-deployment
+  - id: deployment-12
+    group: Deployment
+    title: Container images use minimal base images
+    intent: Images hold only runtime dependencies, and any shell, compiler or package manager that remains is justified.
+    obligation: recommended
+    attributes: { ref: "govstack-cfr-deployment#req-12", mutability: extensible, verification: auditable }
+    evidence_hints: [SECD, DEVOPS]
+    citation_url: https://specs.govstack.global/architecture/6-cross-functional-requirements/6.2-deployment
+
+  # 6.3 Architecture — govstack-cfr-architecture
+  - id: architecture-1
+    group: Architecture
+    title: Building Blocks are autonomous
+    intent: Each building block runs on its own, owns its data and shares no database, file system or memory with another building block.
+    obligation: required
+    attributes: { ref: "govstack-cfr-architecture#req-1", mutability: immutable, verification: auditable }
+    evidence_hints: [HLDR, ADR]
+    citation_url: https://specs.govstack.global/architecture/6-cross-functional-requirements/6.3-architecture
+  - id: architecture-2
+    group: Architecture
+    title: Communicate with other Building Blocks only via API
+    intent: Building blocks exchange data and functions only through externalisable service interfaces over the network, never through back doors.
+    obligation: required
+    attributes: { ref: "govstack-cfr-architecture#req-2", mutability: replaceable, verification: auditable }
+    evidence_hints: [HLDR, DLDR, DFD]
+    citation_url: https://specs.govstack.global/architecture/6-cross-functional-requirements/6.3-architecture
+  - id: architecture-3
+    group: Architecture
+    title: APIs are versioned
+    intent: APIs carry semantic versions in the path or header, and breaking changes get a new versioned endpoint.
+    obligation: recommended
+    attributes: { ref: "govstack-cfr-architecture#req-3", mutability: extensible, verification: observable }
+    evidence_hints: [DLDR]
+    citation_url: https://specs.govstack.global/architecture/6-cross-functional-requirements/6.3-architecture
+  - id: architecture-4
+    group: Architecture
+    title: APIs are stateless
+    intent: Every call carries all the context it needs, and the server keeps no session state between requests.
+    obligation: recommended
+    attributes: { ref: "govstack-cfr-architecture#req-4", mutability: extensible, verification: auditable }
+    evidence_hints: [DLDR]
+    citation_url: https://specs.govstack.global/architecture/6-cross-functional-requirements/6.3-architecture
+  - id: architecture-5
+    group: Architecture
+    title: HTTP methods follow idempotency
+    intent: Safe and idempotent HTTP methods behave as RFC 9110 defines, so repeated calls cause no additional side effects.
+    obligation: recommended
+    attributes: { ref: "govstack-cfr-architecture#req-5", mutability: extensible, verification: observable }
+    evidence_hints: [DLDR]
+    citation_url: https://specs.govstack.global/architecture/6-cross-functional-requirements/6.3-architecture
+  - id: architecture-6
+    group: Architecture
+    title: Follows REST API Design Guidelines Part 1
+    intent: APIs follow the core TM Forum REST design principles, including no personal data or session keys in URLs and self-descriptive messages.
+    obligation: required
+    attributes: { ref: "govstack-cfr-architecture#req-6", mutability: extensible, verification: auditable }
+    evidence_hints: [DLDR]
+    citation_url: https://specs.govstack.global/architecture/6-cross-functional-requirements/6.3-architecture
+  - id: architecture-7
+    group: Architecture
+    title: Follows REST API Design Guidelines Parts 2-7
+    intent: APIs follow the extended TM Forum REST guidelines, and any documented deviation still gives a consistent contract.
+    obligation: recommended
+    attributes: { ref: "govstack-cfr-architecture#req-7", mutability: replaceable, verification: auditable }
+    evidence_hints: [DLDR]
+    citation_url: https://specs.govstack.global/architecture/6-cross-functional-requirements/6.3-architecture
+  - id: architecture-8
+    group: Architecture
+    title: User interface and service logic is logically separated
+    intent: The user interface reaches the backend only through APIs and holds no business rules or direct data access.
+    obligation: recommended
+    attributes: { ref: "govstack-cfr-architecture#req-8", mutability: extensible, verification: auditable }
+    evidence_hints: [HLDR]
+    citation_url: https://specs.govstack.global/architecture/6-cross-functional-requirements/6.3-architecture
+  - id: architecture-9
+    group: Architecture
+    title: Databases do not include business logic
+    intent: Business rules live in versioned, tested application code rather than in triggers or stored procedures.
+    obligation: recommended
+    attributes: { ref: "govstack-cfr-architecture#req-9", mutability: extensible, verification: auditable }
+    evidence_hints: [DLDR, DATA]
+    citation_url: https://specs.govstack.global/architecture/6-cross-functional-requirements/6.3-architecture
+  - id: architecture-10
+    group: Architecture
+    title: Domain Driven Design (DDD) and microservices architectural principles guide the design of components
+    intent: Services are drawn around bounded business domains that own their data and deploy independently.
+    obligation: recommended
+    attributes: { ref: "govstack-cfr-architecture#req-10", mutability: extensible, verification: auditable }
+    evidence_hints: [HLDR, ADR]
+    citation_url: https://specs.govstack.global/architecture/6-cross-functional-requirements/6.3-architecture
+  - id: architecture-11
+    group: Architecture
+    title: Designed for asynchronous first
+    intent: The design defaults to asynchronous patterns such as publish/subscribe so it tolerates poor connectivity and unavailable peers.
+    obligation: recommended
+    attributes: { ref: "govstack-cfr-architecture#req-11", mutability: extensible, verification: auditable }
+    evidence_hints: [HLDR, ADR]
+    citation_url: https://specs.govstack.global/architecture/6-cross-functional-requirements/6.3-architecture
+  - id: architecture-12
+    group: Architecture
+    title: Application is resilient to external system failures
+    intent: Retries, circuit breakers and fallbacks stop a failing dependency from cascading beyond the use cases that need it.
+    obligation: recommended
+    attributes: { ref: "govstack-cfr-architecture#req-12", mutability: extensible, verification: auditable }
+    evidence_hints: [HLDR, DLDR]
+    citation_url: https://specs.govstack.global/architecture/6-cross-functional-requirements/6.3-architecture
+  - id: architecture-13
+    group: Architecture
+    title: Include Transaction/Trace/Correlation IDs
+    intent: A correlation ID created at the entry point travels unchanged through every downstream call for end-to-end tracing.
+    obligation: recommended
+    attributes: { ref: "govstack-cfr-architecture#req-13", mutability: extensible, verification: observable }
+    evidence_hints: [DLDR, OPS]
+    citation_url: https://specs.govstack.global/architecture/6-cross-functional-requirements/6.3-architecture
+  - id: architecture-14
+    group: Architecture
+    title: Use Web Hooks for callbacks
+    intent: Event and completion notifications to other systems use webhooks registered by the subscriber.
+    obligation: recommended
+    attributes: { ref: "govstack-cfr-architecture#req-14", mutability: replaceable, verification: observable }
+    evidence_hints: [DLDR]
+    citation_url: https://specs.govstack.global/architecture/6-cross-functional-requirements/6.3-architecture
+  - id: architecture-15
+    group: Architecture
+    title: Observability and monitoring functionality is implemented
+    intent: Health checks, metrics and logs are exposed in forms that standard monitoring platforms consume.
+    obligation: recommended
+    attributes: { ref: "govstack-cfr-architecture#req-15", mutability: extensible, verification: observable }
+    evidence_hints: [OPS, DEVOPS]
+    citation_url: https://specs.govstack.global/architecture/6-cross-functional-requirements/6.3-architecture
+  - id: architecture-16
+    group: Architecture
+    title: Use NTP synchronization
+    intent: Clocks are synchronised where precise timestamps matter for ordering, logs, tokens and audit.
+    obligation: recommended
+    attributes: { ref: "govstack-cfr-architecture#req-16", mutability: replaceable, verification: auditable }
+    evidence_hints: [OPS]
+    citation_url: https://specs.govstack.global/architecture/6-cross-functional-requirements/6.3-architecture
+  - id: architecture-17
+    group: Architecture
+    title: APIs follow a published deprecation lifecycle
+    intent: Retiring endpoints are announced with a timeline and machine-readable signals, and keep working through a transition period.
+    obligation: recommended
+    attributes: { ref: "govstack-cfr-architecture#req-17", mutability: extensible, verification: auditable }
+    evidence_hints: [DLDR, ADR]
+    citation_url: https://specs.govstack.global/architecture/6-cross-functional-requirements/6.3-architecture
+  - id: architecture-18
+    group: Architecture
+    title: Consumers apply the tolerant reader pattern to received payloads
+    intent: Consumers ignore unknown fields in payloads so producers can add fields without breaking them.
+    obligation: recommended
+    attributes: { ref: "govstack-cfr-architecture#req-18", mutability: extensible, verification: auditable }
+    evidence_hints: [DLDR]
+    citation_url: https://specs.govstack.global/architecture/6-cross-functional-requirements/6.3-architecture
+  - id: architecture-19
+    group: Architecture
+    title: Asynchronous messages and events follow a published schema
+    intent: Every asynchronous message or event has a published, versioned schema available to consumers before integration.
+    obligation: recommended
+    attributes: { ref: "govstack-cfr-architecture#req-19", mutability: extensible, verification: auditable }
+    evidence_hints: [DLDR, DATA]
+    citation_url: https://specs.govstack.global/architecture/6-cross-functional-requirements/6.3-architecture
+
+  # 6.4 Quality — govstack-cfr-quality
+  - id: quality-1
+    group: Quality
+    title: English documentation is provided
+    intent: English installation, configuration and operating documentation is kept with the source code.
+    obligation: required
+    attributes: { ref: "govstack-cfr-quality#req-1", mutability: extensible, verification: auditable }
+    evidence_hints: [OPS, CDAU]
+    citation_url: https://specs.govstack.global/architecture/6-cross-functional-requirements/6.4-quality
+  - id: quality-2
+    group: Quality
+    title: Web user interfaces comply with HTML5 and CSS3 standards
+    intent: Any web interface produces valid, responsive HTML5 and CSS3; this applies only when the building block has a web UI.
+    obligation: required
+    attributes: { ref: "govstack-cfr-quality#req-2", mutability: extensible, verification: observable }
+    evidence_hints: [CDAU]
+    citation_url: https://specs.govstack.global/architecture/6-cross-functional-requirements/6.4-quality
+  - id: quality-3
+    group: Quality
+    title: Applications meet the accessibility requirements of WCAG 2.1 at the AA level
+    intent: User-facing applications conform to WCAG 2.1 AA, verified by automated scans and structured manual testing.
+    obligation: recommended
+    attributes: { ref: "govstack-cfr-quality#req-3", mutability: immutable, verification: observable }
+    evidence_hints: [REQ, CDAU]
+    citation_url: https://specs.govstack.global/architecture/6-cross-functional-requirements/6.4-quality
+  - id: quality-4
+    group: Quality
+    title: OpenAPI specification is provided
+    intent: Every external endpoint is described in a valid OpenAPI 3.x document that integrators can rely on.
+    obligation: recommended
+    attributes: { ref: "govstack-cfr-quality#req-4", mutability: extensible, verification: observable }
+    evidence_hints: [DLDR]
+    citation_url: https://specs.govstack.global/architecture/6-cross-functional-requirements/6.4-quality
+  - id: quality-5
+    group: Quality
+    title: Functional scope of the system is defined and documented in clear business use cases and user stories
+    intent: Use cases and user stories set the boundary of what the building block does and therefore what must be tested.
+    obligation: recommended
+    attributes: { ref: "govstack-cfr-quality#req-5", mutability: extensible, verification: auditable }
+    evidence_hints: [REQ, BKLG]
+    citation_url: https://specs.govstack.global/architecture/6-cross-functional-requirements/6.4-quality
+  - id: quality-6
+    group: Quality
+    title: All end-user functionality is covered by functional tests, including both UI and API interactions
+    intent: Every user-facing feature, through UI or API, has an automated functional test that runs in CI.
+    obligation: recommended
+    attributes: { ref: "govstack-cfr-quality#req-6", mutability: extensible, verification: auditable }
+    evidence_hints: [DEVOPS]
+    citation_url: https://specs.govstack.global/architecture/6-cross-functional-requirements/6.4-quality
+  - id: quality-7
+    group: Quality
+    title: Compliance test mock/example implementation is provided
+    intent: A standalone mock serves the OpenAPI endpoints with realistic payloads so third parties can run compliance tests.
+    obligation: recommended
+    attributes: { ref: "govstack-cfr-quality#req-7", mutability: replaceable, verification: observable }
+    evidence_hints: [DLDR, DEVOPS]
+    citation_url: https://specs.govstack.global/architecture/6-cross-functional-requirements/6.4-quality
+  - id: quality-8
+    group: Quality
+    title: Building blocks are localizable
+    intent: User-facing content can be presented in additional languages without changing application logic.
+    obligation: recommended
+    attributes: { ref: "govstack-cfr-quality#req-8", mutability: extensible, verification: auditable }
+    evidence_hints: [REQ]
+    citation_url: https://specs.govstack.global/architecture/6-cross-functional-requirements/6.4-quality
+
+  # 6.5 Security — govstack-cfr-security
+  - id: security-1
+    group: Security
+    title: Transport security is enforced
+    intent: All traffic uses HTTPS with TLS 1.3 or later, insecure ciphers are off and no plaintext endpoint exists outside isolated local development.
+    obligation: required
+    attributes: { ref: "govstack-cfr-security#req-1", mutability: immutable, verification: observable }
+    evidence_hints: [SECD]
+    citation_url: https://specs.govstack.global/architecture/6-cross-functional-requirements/6.5-security
+  - id: security-2
+    group: Security
+    title: Only up-to-date and industry-accepted cryptographic algorithms are used for data protection
+    intent: Cryptography uses currently recommended algorithms, avoids deprecated ones, and can be reconfigured without code changes.
+    obligation: recommended
+    attributes: { ref: "govstack-cfr-security#req-2", mutability: immutable, verification: auditable }
+    evidence_hints: [SECD]
+    citation_url: https://specs.govstack.global/architecture/6-cross-functional-requirements/6.5-security
+  - id: security-3
+    group: Security
+    title: Access control and authentication is enforced
+    intent: Least-privilege access is enforced through standards-based identity and access management, with OpenID Connect for users and short-lived OAuth 2.0 or JWT tokens for services.
+    obligation: required
+    attributes: { ref: "govstack-cfr-security#req-3", mutability: extensible, verification: observable }
+    evidence_hints: [SECD, HLDR]
+    citation_url: https://specs.govstack.global/architecture/6-cross-functional-requirements/6.5-security
+  - id: security-4
+    group: Security
+    title: Secure configuration is used
+    intent: Secrets reach the runtime through environment variables or a secret manager, never through source files or images.
+    obligation: required
+    attributes: { ref: "govstack-cfr-security#req-4", mutability: immutable, verification: auditable }
+    evidence_hints: [SECD, DEVOPS]
+    citation_url: https://specs.govstack.global/architecture/6-cross-functional-requirements/6.5-security
+  - id: security-5
+    group: Security
+    title: No sensitive data such as keys, certificates or passwords is stored in code repositories or documentation
+    intent: Repositories, documentation, pipelines and published artefacts contain no plaintext secrets, keys, certificates or real credentials.
+    obligation: required
+    attributes: { ref: "govstack-cfr-security#req-5", mutability: immutable, verification: auditable }
+    evidence_hints: [SECD, CDAU]
+    citation_url: https://specs.govstack.global/architecture/6-cross-functional-requirements/6.5-security
+  - id: security-6
+    group: Security
+    title: Input and output sanitization is used
+    intent: Inputs are validated and unsafe content rejected or sanitised, and outputs are encoded for their target context.
+    obligation: recommended
+    attributes: { ref: "govstack-cfr-security#req-6", mutability: extensible, verification: auditable }
+    evidence_hints: [SECD, CDAU]
+    citation_url: https://specs.govstack.global/architecture/6-cross-functional-requirements/6.5-security
+  - id: security-7
+    group: Security
+    title: Logging and monitoring of security events is implemented
+    intent: The building block emits logs the host can capture without platform changes, with security events tagged or separated and carrying time, trace and actor context.
+    obligation: required
+    attributes: { ref: "govstack-cfr-security#req-7", mutability: extensible, verification: auditable }
+    evidence_hints: [SECD, OPS]
+    citation_url: https://specs.govstack.global/architecture/6-cross-functional-requirements/6.5-security
+  - id: security-8
+    group: Security
+    title: Isolation and containment is ensured
+    intent: Least privilege, network segmentation and namespace isolation stop a compromise spreading to other building blocks.
+    obligation: recommended
+    attributes: { ref: "govstack-cfr-security#req-8", mutability: extensible, verification: auditable }
+    evidence_hints: [SECD, HLDR]
+    citation_url: https://specs.govstack.global/architecture/6-cross-functional-requirements/6.5-security
+  - id: security-9
+    group: Security
+    title: Secure API gateways are implemented
+    intent: Externally exposed APIs sit behind a gateway that enforces authentication, authorisation, rate limits, validation and encryption.
+    obligation: recommended
+    attributes: { ref: "govstack-cfr-security#req-9", mutability: extensible, verification: observable }
+    evidence_hints: [SECD, HLDR]
+    citation_url: https://specs.govstack.global/architecture/6-cross-functional-requirements/6.5-security
+  - id: security-10
+    group: Security
+    title: Clearly-defined key rotation policies are included
+    intent: A documented policy sets rotation frequency, key introduction, grace periods and emergency rotation for every key and certificate.
+    obligation: recommended
+    attributes: { ref: "govstack-cfr-security#req-10", mutability: extensible, verification: auditable }
+    evidence_hints: [SECD]
+    citation_url: https://specs.govstack.global/architecture/6-cross-functional-requirements/6.5-security
+  - id: security-11
+    group: Security
+    title: Continuous vulnerability scanning and patching is implemented
+    intent: SAST, DAST and dependency scanning run in CI/CD, and critical vulnerabilities are fixed before release.
+    obligation: recommended
+    attributes: { ref: "govstack-cfr-security#req-11", mutability: extensible, verification: auditable }
+    evidence_hints: [SECD, DEVOPS]
+    citation_url: https://specs.govstack.global/architecture/6-cross-functional-requirements/6.5-security
+  - id: security-12
+    group: Security
+    title: Disaster recovery and incident response plans are implemented
+    intent: Incident response and disaster recovery procedures exist and are tested periodically.
+    obligation: recommended
+    attributes: { ref: "govstack-cfr-security#req-12", mutability: extensible, verification: auditable }
+    evidence_hints: [OPS, SECD]
+    citation_url: https://specs.govstack.global/architecture/6-cross-functional-requirements/6.5-security
+  - id: security-13
+    group: Security
+    title: Compliance and audit readiness is documented
+    intent: Documentation shows alignment with OWASP ASVS, ISO/IEC 27001 and the GovStack Security Guide, with periodic third-party audits for production use.
+    obligation: recommended
+    attributes: { ref: "govstack-cfr-security#req-13", mutability: immutable, verification: auditable }
+    evidence_hints: [SECD]
+    citation_url: https://specs.govstack.global/architecture/6-cross-functional-requirements/6.5-security
+  - id: security-14
+    group: Security
+    title: Data at rest is encrypted
+    intent: Every persistent store, including backups and queues, is encrypted at rest with keys managed apart from the data.
+    obligation: recommended
+    attributes: { ref: "govstack-cfr-security#req-14", mutability: extensible, verification: auditable }
+    evidence_hints: [SECD, DATA]
+    citation_url: https://specs.govstack.global/architecture/6-cross-functional-requirements/6.5-security
+  - id: security-15
+    group: Security
+    title: A Software Bill of Materials is maintained and published
+    intent: Each release ships a CycloneDX or SPDX SBOM listing direct and transitive dependencies, versions and licences.
+    obligation: recommended
+    attributes: { ref: "govstack-cfr-security#req-15", mutability: extensible, verification: auditable }
+    evidence_hints: [SECD, CDAU]
+    citation_url: https://specs.govstack.global/architecture/6-cross-functional-requirements/6.5-security
+  - id: security-16
+    group: Security
+    title: Sensitive data is not exposed in error responses or log output
+    intent: Error responses reveal no internals, and logs hold no plaintext secrets or personal data.
+    obligation: required
+    attributes: { ref: "govstack-cfr-security#req-16", mutability: extensible, verification: auditable }
+    evidence_hints: [SECD, CDAU]
+    citation_url: https://specs.govstack.global/architecture/6-cross-functional-requirements/6.5-security
+
+  # 6.6 Data — govstack-cfr-data
+  - id: data-1
+    group: Data
+    title: Use only Unicode for text
+    intent: All stored, processed and transmitted text is UTF-8, and other encodings are rejected or converted on entry.
+    obligation: required
+    attributes: { ref: "govstack-cfr-data#req-1", mutability: immutable, verification: observable }
+    evidence_hints: [DATA]
+    citation_url: https://specs.govstack.global/architecture/6-cross-functional-requirements/6.6-data
+  - id: data-2
+    group: Data
+    title: Use ISO 8601/UTC for timestamps
+    intent: Timestamps are ISO 8601 in UTC in storage and APIs, with any local offset stated explicitly.
+    obligation: required
+    attributes: { ref: "govstack-cfr-data#req-2", mutability: immutable, verification: observable }
+    evidence_hints: [DATA, DLDR]
+    citation_url: https://specs.govstack.global/architecture/6-cross-functional-requirements/6.6-data
+  - id: data-3
+    group: Data
+    title: Use standardized data formats for inputs and outputs
+    intent: Payloads use JSON by default or another recognised standard format, never ad-hoc serialisation.
+    obligation: required
+    attributes: { ref: "govstack-cfr-data#req-3", mutability: replaceable, verification: auditable }
+    evidence_hints: [DATA, DLDR]
+    citation_url: https://specs.govstack.global/architecture/6-cross-functional-requirements/6.6-data
+  - id: data-4
+    group: Data
+    title: Comply with high quality data protection principles
+    intent: Personal data handling follows GDPR-compatible principles adapted to the national framework, which each deployment names.
+    obligation: recommended
+    attributes: { ref: "govstack-cfr-data#req-4", mutability: extensible, verification: auditable }
+    evidence_hints: [DATA]
+    citation_url: https://specs.govstack.global/architecture/6-cross-functional-requirements/6.6-data
+  - id: data-5
+    group: Data
+    title: Data quality and validation is implemented
+    intent: Data is validated on receipt and update against machine-readable schemas, with field-level errors and monitored quality metrics.
+    obligation: recommended
+    attributes: { ref: "govstack-cfr-data#req-5", mutability: extensible, verification: observable }
+    evidence_hints: [DATA]
+    citation_url: https://specs.govstack.global/architecture/6-cross-functional-requirements/6.6-data
+  - id: data-6
+    group: Data
+    title: Use existing standards for domain data
+    intent: Recognised domain data standards are adopted where they exist, and deviations are documented.
+    obligation: recommended
+    attributes: { ref: "govstack-cfr-data#req-6", mutability: extensible, verification: auditable }
+    evidence_hints: [DATA, ADR]
+    citation_url: https://specs.govstack.global/architecture/6-cross-functional-requirements/6.6-data
+  - id: data-7
+    group: Data
+    title: Deleting records preserves logical records unless hard deletion is mandated by law
+    intent: Deletion is soft by default, timestamped and attributed, and hard deletion happens only when law or a verified request requires it.
+    obligation: recommended
+    attributes: { ref: "govstack-cfr-data#req-7", mutability: replaceable, verification: auditable }
+    evidence_hints: [DATA]
+    citation_url: https://specs.govstack.global/architecture/6-cross-functional-requirements/6.6-data
+  - id: data-8
+    group: Data
+    title: All data is exportable in machine-readable and human-readable formats
+    intent: Stored data can be exported individually and in bulk in at least one machine-readable and one human-readable format.
+    obligation: recommended
+    attributes: { ref: "govstack-cfr-data#req-8", mutability: replaceable, verification: auditable }
+    evidence_hints: [DATA, DLDR]
+    citation_url: https://specs.govstack.global/architecture/6-cross-functional-requirements/6.6-data
+  - id: data-9
+    group: Data
+    title: Data lineage and provenance tracking is supported
+    intent: Each record carries queryable metadata on its source, changes and responsible service, so its chain of custody can be rebuilt.
+    obligation: recommended
+    attributes: { ref: "govstack-cfr-data#req-9", mutability: extensible, verification: auditable }
+    evidence_hints: [DATA]
+    citation_url: https://specs.govstack.global/architecture/6-cross-functional-requirements/6.6-data
+  - id: data-10
+    group: Data
+    title: Data retention and archival policy is implemented
+    intent: Configurable retention periods per data type drive logged archival or destruction, and archives keep the same protection.
+    obligation: recommended
+    attributes: { ref: "govstack-cfr-data#req-10", mutability: extensible, verification: auditable }
+    evidence_hints: [DATA]
+    citation_url: https://specs.govstack.global/architecture/6-cross-functional-requirements/6.6-data
+  - id: data-11
+    group: Data
+    title: Data sovereignty and localization is implemented
+    intent: Configuration controls where data is stored and processed so sensitive data can stay in the deploying jurisdiction.
+    obligation: recommended
+    attributes: { ref: "govstack-cfr-data#req-11", mutability: extensible, verification: auditable }
+    evidence_hints: [DATA, HLDR]
+    citation_url: https://specs.govstack.global/architecture/6-cross-functional-requirements/6.6-data
+  - id: data-12
+    group: Data
+    title: Data model and metadata schema is published
+    intent: The data model and metadata schema are published, aligned with recognised cataloguing standards and the GovStack Schema Registry where available.
+    obligation: recommended
+    attributes: { ref: "govstack-cfr-data#req-12", mutability: extensible, verification: auditable }
+    evidence_hints: [DATA]
+    citation_url: https://specs.govstack.global/architecture/6-cross-functional-requirements/6.6-data
+  - id: data-13
+    group: Data
+    title: Data is classified by sensitivity level
+    intent: Data is classified per type or field group into at least public, internal and confidential, and the labels drive handling rules.
+    obligation: recommended
+    attributes: { ref: "govstack-cfr-data#req-13", mutability: extensible, verification: auditable }
+    evidence_hints: [DATA]
+    citation_url: https://specs.govstack.global/architecture/6-cross-functional-requirements/6.6-data
+  - id: data-14
+    group: Data
+    title: Anonymization and pseudonymization is supported
+    intent: Personal data can be anonymised or pseudonymised for secondary use, and the supported technique is documented.
+    obligation: recommended
+    attributes: { ref: "govstack-cfr-data#req-14", mutability: extensible, verification: auditable }
+    evidence_hints: [DATA]
+    citation_url: https://specs.govstack.global/architecture/6-cross-functional-requirements/6.6-data
