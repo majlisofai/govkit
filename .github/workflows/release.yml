@@ -1,0 +1,41 @@
+name: Release
+
+# Publish every plugin whose version has no <plugin>--v<version> tag yet: run the
+# full CI gate, tag the commit and create a GitHub release whose notes are the
+# CHANGELOG.md entry. 0.x versions are published as pre-releases (beta).
+# Versions are bumped by the "Prepare release" workflow or scripts/release.mjs bump.
+on:
+  push:
+    branches: [main]
+    paths:
+      - ".claude-plugin/marketplace.json"
+      - "plugins/*/.claude-plugin/plugin.json"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: release
+  cancel-in-progress: false
+
+jobs:
+  checks:
+    uses: ./.github/workflows/ci.yml
+
+  publish:
+    needs: checks
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Tag and publish untagged versions
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: node scripts/release.mjs publish

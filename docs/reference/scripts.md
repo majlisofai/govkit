@@ -96,9 +96,10 @@ In `scripts/` at the repository root. Not shipped with the plugin.
 | `sync-arckit.mjs` | `[--ref <tag> \| --ref latest \| --source <dir> \| --check]` | Without options, re-syncs the locked ArcKit ref. With `--ref` or `--source`, vendors ArcKit's shared files and snapshots its commands, templates and doc types into `upstream/`. `--check` verifies the vendored files against the lock and changes nothing. |
 | `check-compat.mjs` | — | The compatibility gate. See [Compatibility](compatibility.md#compatibility-gate). |
 | `validate-content.py` | `[path/.govkit]` | Frameworks, methods, profile and recipes are valid against the GovKit and locked ArcKit registries. Needs PyYAML. |
+| `release.mjs` | `bump <plugin> <patch\|minor\|major\|X.Y.Z>` \| `check` \| `notes <plugin> [version]` \| `publish [--dry-run]` | `bump` sets a plugin's version in `plugin.json` and `marketplace.json` and adds a `CHANGELOG.md` stub. `check` fails on a non-`X.Y.Z` version, a missing `govkit` entry or an unfilled stub. `publish` tags each untagged version `<plugin>--v<version>` and creates its GitHub release with `gh`, as a pre-release while `0.x`. See [Release a new version](../how-to/maintainers/release-govkit.md). |
 
 Run every check before committing:
 
 ```bash
-node scripts/sync-arckit.mjs --check && node scripts/check-compat.mjs && python3 scripts/validate-content.py && node --test tests/
+node scripts/sync-arckit.mjs --check && node scripts/check-compat.mjs && python3 scripts/validate-content.py && node scripts/release.mjs check && node --test tests/
 ```
