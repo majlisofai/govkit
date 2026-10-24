@@ -4,6 +4,7 @@ on:
   push:
     branches: [main]
   pull_request:
+  workflow_call:
 
 jobs:
   test:
@@ -23,5 +24,7 @@ jobs:
         run: node scripts/check-compat.mjs
       - name: Content valid
         run: python3 scripts/validate-content.py
+      - name: Release metadata
+        run: node scripts/release.mjs check
       - name: Tests
         run: node --test tests/

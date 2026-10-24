@@ -21,11 +21,11 @@ GovKit is a Claude Code plugin (`plugins/govkit/`, namespace `/govkit:*`) that o
 ## Checks (run all before committing)
 
 ```bash
-node scripts/sync-arckit.mjs --check && node scripts/check-compat.mjs && python3 scripts/validate-content.py && node --test tests/
+node scripts/sync-arckit.mjs --check && node scripts/check-compat.mjs && python3 scripts/validate-content.py && node scripts/release.mjs check && node --test tests/
 ```
 
 ## Releasing
 
-Bump the version in `plugins/govkit/.claude-plugin/plugin.json` and in `.claude-plugin/marketplace.json` (both the plugin entry and the metadata), and update `CHANGELOG.md`. To take a new ArcKit release, use the `upstream-sync` skill in `.claude/skills/`.
+Bump a version with `node scripts/release.mjs bump <plugin> <patch|minor|major|X.Y.Z>` (or the "Prepare release" workflow), never by hand. Then fill in the `CHANGELOG.md` stub it adds. Merging to `main` makes the Release workflow tag `<plugin>--v<version>` and publish a GitHub release, as a pre-release (beta) while the version is `0.x`. Versions stay plain `X.Y.Z`. See `docs/how-to/maintainers/release-govkit.md`. To take a new ArcKit release, use the `upstream-sync` skill in `.claude/skills/`.
 
 Commits use conventional prefixes: `feat:`, `fix:`, `docs:`, `test:`, `chore:`, and `chore(upstream):` for ArcKit syncs.

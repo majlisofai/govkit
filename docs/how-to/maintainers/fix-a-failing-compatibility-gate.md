@@ -18,7 +18,7 @@ Find the failing check in the output, then:
 Then run all the checks again:
 
 ```bash
-node scripts/sync-arckit.mjs --check && node scripts/check-compat.mjs && python3 scripts/validate-content.py && node --test tests/
+node scripts/sync-arckit.mjs --check && node scripts/check-compat.mjs && python3 scripts/validate-content.py && node scripts/release.mjs check && node --test tests/
 ```
 
 For what each check verifies, see the [compatibility reference](../../reference/compatibility.md).

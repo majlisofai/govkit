@@ -28,7 +28,7 @@ Paraphrase control intents only, and use titles only for paywalled standards. Se
 ## Check
 
 ```bash
-node scripts/sync-arckit.mjs --check && node scripts/check-compat.mjs && python3 scripts/validate-content.py && node --test tests/
+node scripts/sync-arckit.mjs --check && node scripts/check-compat.mjs && python3 scripts/validate-content.py && node scripts/release.mjs check && node --test tests/
 ```
 
 Plugin scripts and hooks must be zero-dependency Node ESM, because plugins are cloned and never `npm install`ed. Repo tooling may use Python with PyYAML.

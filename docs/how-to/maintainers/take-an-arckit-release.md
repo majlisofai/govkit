@@ -24,7 +24,7 @@ The [`arckit-upstream`](https://github.com/majlisofai/govkit/blob/main/.github/w
 2. Run the gate:
 
     ```bash
-    node scripts/check-compat.mjs && python3 scripts/validate-content.py && node --test tests/
+    node scripts/check-compat.mjs && python3 scripts/validate-content.py && node scripts/release.mjs check && node --test tests/
     ```
 
 3. If anything fails, [fix the failing gate](fix-a-failing-compatibility-gate.md).
