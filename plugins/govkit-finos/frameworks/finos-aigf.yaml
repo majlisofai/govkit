@@ -1,0 +1,260 @@
+# FINOS AI Governance Framework mitigations (finos-aigf), as a GovKit framework.
+#
+# Installed into a repository's .govkit/frameworks/ by /govkit-finos:apply.
+# FINOS publishes a risk catalogue and a mitigation catalogue. The mitigations
+# are the controls here; the risks live in the module's
+# references/risk-catalogue.yaml and drive /govkit-finos:risk-assess.
+#
+# FINOS fields map to GovKit fields:
+#   mi-<n>                          -> id, attributes.ref
+#   type PREV / DET                 -> group Preventative / Detective, attributes.type
+#   mitigates [ri-<n>, ...]         -> attributes.mitigates (space-separated)
+#   doc-status Approved / Draft     -> obligation recommended / draft
+#   iso-42001_references A-<n>-...  -> mappings.iso-iec-42001 [A<n>] (Annex A area)
+#
+# Regenerate or check against upstream with scripts/check-finos.py
+# (pinned in upstream/finos.lock.json).
+
+id: finos-aigf
+kind: framework
+name: FINOS AI Governance Framework — mitigations
+version: "v2"
+publisher: FINOS (Fintech Open Source Foundation)
+url: https://air-governance-framework.finos.org/
+document: AI Governance Framework, mitigation catalogue
+type: risk-framework
+verified: 2026-10-24
+text_policy: >
+  Content from the FINOS AI Governance Framework is licensed CC BY 4.0
+  (© FINOS). Titles, identifiers, types and risk links are FINOS's, from the
+  repository at the commit pinned in upstream/finos.lock.json (v2 plus the
+  agentic additions published on the site). Intents are one-sentence
+  paraphrases written for GovKit, not FINOS's text; read the linked page for
+  the authoritative description. ISO/IEC 42001 mappings are FINOS's own,
+  reduced to GovKit's Annex A areas.
+related_govkit:
+  overlay_commands: ["govkit-finos:risk-assess"]
+related_arckit:
+  overlay_commands: ["arckit-eu:eu-ai-act", "arckit-eu:eu-dora", "arckit-agent-architecture:agent-security"]
+structure: [type]
+controls:
+  - id: mi-1
+    group: Detective
+    title: "AI Data Leakage Prevention and Detection"
+    intent: "Sensitive data is stopped from leaving through AI inputs, outputs and logs, and any leak is detected and alerted quickly."
+    obligation: recommended
+    attributes: { ref: "mi-1", type: DET, mitigates: "ri-1" }
+    evidence_hints: [DATA, SECD, OPS]
+    mappings: { iso-iec-42001: [A5, A6, A7] }
+    citation_url: https://air-governance-framework.finos.org/mitigations/mi-1_ai-data-leakage-prevention-and-detection.html
+  - id: mi-2
+    group: Preventative
+    title: "Data Filtering From External Knowledge Bases"
+    intent: "Content ingested from internal knowledge sources is cleaned of sensitive or untrusted material before it reaches retrieval or the model."
+    obligation: recommended
+    attributes: { ref: "mi-2", type: PREV, mitigates: "ri-1 ri-9" }
+    evidence_hints: [DATA, DSCT, SECD]
+    mappings: { iso-iec-42001: [A7] }
+    citation_url: https://air-governance-framework.finos.org/mitigations/mi-2_data-filtering-from-external-knowledge-bases.html
+  - id: mi-3
+    group: Preventative
+    title: "User/App/Model Firewalling/Filtering"
+    intent: "Traffic between users, application components, data sources and the model is inspected and filtered against agreed policies."
+    obligation: recommended
+    attributes: { ref: "mi-3", type: PREV, mitigates: "ri-7 ri-10 ri-18 ri-20" }
+    evidence_hints: [SECD, HLDR, DLDR]
+    mappings: { iso-iec-42001: [A6, A9] }
+    citation_url: https://air-governance-framework.finos.org/mitigations/mi-3_user-app-model-firewalling-filtering.html
+  - id: mi-4
+    group: Detective
+    title: "AI System Observability"
+    intent: "The system's behaviour, performance, interactions, costs and outcomes are logged and monitored so anomalies and incidents are found and investigated."
+    obligation: recommended
+    attributes: { ref: "mi-4", type: DET, mitigates: "ri-1 ri-5 ri-6 ri-7 ri-14 ri-18 ri-19 ri-24 ri-25 ri-26 ri-27 ri-28 ri-29" }
+    evidence_hints: [OPS, MLOPS, DEVOPS]
+    mappings: { iso-iec-42001: [A6] }
+    citation_url: https://air-governance-framework.finos.org/mitigations/mi-4_ai-system-observability.html
+  - id: mi-5
+    group: Preventative
+    title: "System Acceptance Testing"
+    intent: "Before release, the AI system is tested against business, user, safety and fairness criteria, with documented acceptance."
+    obligation: recommended
+    attributes: { ref: "mi-5", type: PREV, mitigates: "ri-4 ri-5 ri-6 ri-14 ri-16 ri-22" }
+    evidence_hints: [REQ, MLOPS, SVCASS]
+    mappings: { iso-iec-42001: [A6] }
+    citation_url: https://air-governance-framework.finos.org/mitigations/mi-5_system-acceptance-testing.html
+  - id: mi-6
+    group: Preventative
+    title: "Data Quality & Classification/Sensitivity"
+    intent: "Data used by the system is classified by sensitivity and checked for quality, provenance and fitness for purpose."
+    obligation: recommended
+    attributes: { ref: "mi-6", type: PREV, mitigates: "ri-1 ri-2 ri-4 ri-9 ri-16 ri-19 ri-22 ri-23" }
+    evidence_hints: [DATA, DSCT, DPIA]
+    mappings: { iso-iec-42001: [A4, A7] }
+    citation_url: https://air-governance-framework.finos.org/mitigations/mi-6_data-quality-classification-sensitivity.html
+  - id: mi-7
+    group: Preventative
+    title: "Legal and Contractual Frameworks for AI Systems"
+    intent: "Contracts and legal terms with AI providers and users set data use, liability, IP, audit rights and exit arrangements."
+    obligation: recommended
+    attributes: { ref: "mi-7", type: PREV, mitigates: "ri-1 ri-8 ri-20 ri-22 ri-23" }
+    evidence_hints: [SOW, EVAL, DPIA]
+    mappings: { iso-iec-42001: [A2, A8, A10] }
+    citation_url: https://air-governance-framework.finos.org/mitigations/mi-7_legal-and-contractual-frameworks-for-ai-systems.html
+  - id: mi-8
+    group: Preventative
+    title: "Quality of Service (QoS) and DDoS Prevention for AI Systems"
+    intent: "Capacity, rate limits and traffic protection keep the AI service available and fairly shared under load or attack."
+    obligation: recommended
+    attributes: { ref: "mi-8", type: PREV, mitigates: "ri-7" }
+    evidence_hints: [OPS, HLDR, SECD]
+    mappings: { iso-iec-42001: [A4, A6] }
+    citation_url: https://air-governance-framework.finos.org/mitigations/mi-8_quality-of-service-qos-and-ddos-prevention-for-ai-systems.html
+  - id: mi-9
+    group: Detective
+    title: "AI System Alerting and Denial of Wallet (DoW) / Spend Monitoring"
+    intent: "Usage and spend are tracked against budgets, and alerts fire on abnormal consumption before costs or quotas are exhausted."
+    obligation: recommended
+    attributes: { ref: "mi-9", type: DET, mitigates: "ri-7" }
+    evidence_hints: [FINOPS, OPS]
+    mappings: { iso-iec-42001: [A4, A6] }
+    citation_url: https://air-governance-framework.finos.org/mitigations/mi-9_ai-system-alerting-and-denial-of-wallet-dow-spend-monitoring.html
+  - id: mi-10
+    group: Preventative
+    title: "AI Model Version Pinning"
+    intent: "Production uses a fixed, recorded model version, and any change of version passes evaluation and change control."
+    obligation: recommended
+    attributes: { ref: "mi-10", type: PREV, mitigates: "ri-5 ri-6" }
+    evidence_hints: [MLOPS, ADR, DEVOPS]
+    mappings: { iso-iec-42001: [A4, A6] }
+    citation_url: https://air-governance-framework.finos.org/mitigations/mi-10_ai-model-version-pinning.html
+  - id: mi-11
+    group: Detective
+    title: "Human Feedback Loop for AI Systems"
+    intent: "Feedback from users and experts on outputs is collected, triaged and acted on to correct and improve the system."
+    obligation: recommended
+    attributes: { ref: "mi-11", type: DET, mitigates: "ri-5 ri-6 ri-14 ri-16 ri-18 ri-20" }
+    evidence_hints: [OPS, MLOPS]
+    mappings: { iso-iec-42001: [A3, A6, A8] }
+    citation_url: https://air-governance-framework.finos.org/mitigations/mi-11_human-feedback-loop-for-ai-systems.html
+  - id: mi-12
+    group: Preventative
+    title: "Role-Based Access Control for AI Data"
+    intent: "Users, models and services get only the data and functions their role needs, enforced through role-based access control."
+    obligation: recommended
+    attributes: { ref: "mi-12", type: PREV, mitigates: "ri-1 ri-8 ri-9" }
+    evidence_hints: [SECD, DATA]
+    mappings: { iso-iec-42001: [A3, A7] }
+    citation_url: https://air-governance-framework.finos.org/mitigations/mi-12_role-based-access-control-for-ai-data.html
+  - id: mi-13
+    group: Detective
+    title: "Providing Citations and Source Traceability for AI-Generated Information"
+    intent: "Generated information links back to verifiable sources so users and reviewers can check it."
+    obligation: recommended
+    attributes: { ref: "mi-13", type: DET, mitigates: "ri-4 ri-17 ri-20 ri-22" }
+    evidence_hints: [REQ, DLDR]
+    mappings: { iso-iec-42001: [A6, A8] }
+    citation_url: https://air-governance-framework.finos.org/mitigations/mi-13_providing-citations-and-source-traceability-for-ai-generated-information.html
+  - id: mi-14
+    group: Preventative
+    title: "Encryption of AI Data at Rest"
+    intent: "Stored AI data, including embeddings, prompts, logs and caches, is encrypted at rest with managed keys."
+    obligation: recommended
+    attributes: { ref: "mi-14", type: PREV, mitigates: "ri-2 ri-22" }
+    evidence_hints: [SECD, DATA]
+    mappings: { iso-iec-42001: [A7] }
+    citation_url: https://air-governance-framework.finos.org/mitigations/mi-14_encryption-of-ai-data-at-rest.html
+  - id: mi-15
+    group: Detective
+    title: "Using Large Language Models for Automated Evaluation (LLM-as-a-Judge)"
+    intent: "A separate model scores outputs against defined criteria, with the evaluator itself calibrated and reviewed by people."
+    obligation: recommended
+    attributes: { ref: "mi-15", type: DET, mitigates: "ri-1 ri-4 ri-5 ri-6 ri-14 ri-16 ri-19" }
+    evidence_hints: [MLOPS, OPS]
+    mappings: { iso-iec-42001: [A6] }
+    citation_url: https://air-governance-framework.finos.org/mitigations/mi-15_using-large-language-models-for-automated-evaluation-llm-as-a-judge-.html
+  - id: mi-16
+    group: Detective
+    title: "Preserving Source Data Access Controls in AI Systems"
+    intent: "Permissions on source data are carried into indexes and retrieval, so users only see content they are already entitled to."
+    obligation: recommended
+    attributes: { ref: "mi-16", type: DET, mitigates: "ri-2 ri-22" }
+    evidence_hints: [SECD, DATA, DLDR]
+    mappings: { iso-iec-42001: [A7, A9] }
+    citation_url: https://air-governance-framework.finos.org/mitigations/mi-16_preserving-source-data-access-controls-in-ai-systems.html
+  - id: mi-17
+    group: Preventative
+    title: "AI Firewall Implementation and Management"
+    intent: "A dedicated AI firewall inspects prompts, responses and agent traffic for attacks, policy breaches and data leakage, and is actively managed."
+    obligation: recommended
+    attributes: { ref: "mi-17", type: PREV, mitigates: "ri-7 ri-10 ri-18 ri-20" }
+    evidence_hints: [SECD, HLDR, OPS]
+    mappings: { iso-iec-42001: [A6, A9] }
+    citation_url: https://air-governance-framework.finos.org/mitigations/mi-17_ai-firewall-implementation-and-management.html
+  - id: mi-18
+    group: Preventative
+    title: "Agent Authority Least Privilege Framework"
+    intent: "Each agent can reach only the tools, APIs and data its task needs, with scoped, time-limited and reviewable permissions."
+    obligation: recommended
+    attributes: { ref: "mi-18", type: PREV, mitigates: "ri-24 ri-18" }
+    evidence_hints: [AASE, AAGR, SECD]
+    mappings: { iso-iec-42001: [A6, A9] }
+    citation_url: https://air-governance-framework.finos.org/mitigations/mi-18_agent-authority-least-privilege-framework.html
+  - id: mi-19
+    group: Preventative
+    title: "Tool Chain Validation and Sanitization"
+    intent: "Agent tool choices, parameters and call sequences are validated and sanitised before execution."
+    obligation: recommended
+    attributes: { ref: "mi-19", type: PREV, mitigates: "ri-25 ri-10 ri-24" }
+    evidence_hints: [AASE, AAIN, SECD]
+    citation_url: https://air-governance-framework.finos.org/mitigations/mi-19_tool-chain-validation-and-sanitization.html
+  - id: mi-20
+    group: Preventative
+    title: "MCP Server Security Governance"
+    intent: "MCP servers are vetted, pinned, authenticated and monitored before and while agents use them."
+    obligation: recommended
+    attributes: { ref: "mi-20", type: PREV, mitigates: "ri-26 ri-8 ri-1" }
+    evidence_hints: [AASE, AAIN, EVAL]
+    citation_url: https://air-governance-framework.finos.org/mitigations/mi-20_mcp-server-security-governance.html
+  - id: mi-21
+    group: Detective
+    title: "Agent Decision Audit and Explainability"
+    intent: "Agent actions, reasoning and tool calls are recorded so decisions can be audited, explained and investigated."
+    obligation: recommended
+    attributes: { ref: "mi-21", type: DET, mitigates: "ri-24 ri-25 ri-22" }
+    evidence_hints: [AAOV, AASE, OPS]
+    mappings: { iso-iec-42001: [A6, A8] }
+    citation_url: https://air-governance-framework.finos.org/mitigations/mi-21_agent-decision-audit-and-explainability.html
+  - id: mi-22
+    group: Preventative
+    title: "Multi-Agent Isolation and Segmentation"
+    intent: "Agents are separated by trust boundaries, so one compromised agent cannot spread to others through shared state or channels."
+    obligation: recommended
+    attributes: { ref: "mi-22", type: PREV, mitigates: "ri-28 ri-24 ri-27" }
+    evidence_hints: [AASE, AAGR, HLDR]
+    citation_url: https://air-governance-framework.finos.org/mitigations/mi-22_multi-agent-isolation-and-segmentation.html
+  - id: mi-23
+    group: Preventative
+    title: "Agentic System Credential Protection Framework"
+    intent: "Secrets and credentials are kept out of agent reach, issued just-in-time with least privilege, and their use is monitored."
+    obligation: recommended
+    attributes: { ref: "mi-23", type: PREV, mitigates: "ri-29 ri-24 ri-26" }
+    evidence_hints: [AASE, SECD]
+    citation_url: https://air-governance-framework.finos.org/mitigations/mi-23_agentic-system-credential-protection-framework.html
+  - id: mi-24
+    group: Preventative
+    title: "Human-in-the-Loop Action Approval Gate"
+    intent: "Designated high-risk agent actions wait for an explicit decision by a person with the authority to approve them."
+    obligation: draft
+    attributes: { ref: "mi-24", type: PREV, mitigates: "ri-24 ri-18 ri-22" }
+    evidence_hints: [AAOV, AAGR]
+    mappings: { iso-iec-42001: [A6, A9] }
+    citation_url: https://air-governance-framework.finos.org/mitigations/mi-24_human-in-the-loop-action-approval-gate.html
+  - id: mi-25
+    group: Preventative
+    title: "Skill/Plugin Integrity and Governance"
+    intent: "Skills and plugins are checked for provenance and integrity, reviewed and pinned before agents load them."
+    obligation: draft
+    attributes: { ref: "mi-25", type: PREV, mitigates: "ri-30 ri-8 ri-9" }
+    evidence_hints: [AASE, EVAL, DEVOPS]
+    citation_url: https://air-governance-framework.finos.org/mitigations/mi-25_skill-plugin-integrity-and-governance.html

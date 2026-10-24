@@ -1,0 +1,21 @@
+{
+  "$comment": "GovKit overlay manifest. /govkit-finos:apply installs doc_types into .govkit/doc-types.json and copies the installs files into a GovKit content layer. scripts/check-compat.mjs and scripts/validate-content.py read this file.",
+  "overlay": "govkit-finos",
+  "govkit": {
+    "min": "0.4.0",
+    "max_exclusive": "1.0.0"
+  },
+  "doc_types": {
+    "FNRA": {
+      "name": "FINOS AI Risk Assessment",
+      "category": "Assurance",
+      "command": "govkit-finos:risk-assess",
+      "template": "risk-assessment",
+      "multiInstance": true,
+      "subdir": "finos"
+    }
+  },
+  "installs": [
+    "frameworks/finos-aigf.yaml"
+  ]
+}

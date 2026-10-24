@@ -17,3 +17,4 @@ Technical descriptions of GovKit's commands, configuration, file formats and scr
 | [Scripts](scripts.md) | Plugin scripts and repository tooling |
 | [Compatibility](compatibility.md) | The interface with ArcKit, the compatibility gate and the tested range |
 | [GovStack module](govstack-overlay.md) | GovKit's GovStack module, `govkit-govstack`: commands, doc types, the `govstack-cfr` framework and verdict rules |
+| [FINOS module](finos-module.md) | GovKit's FINOS AI Governance Framework module, `govkit-finos`: commands, the FNRA doc type, the `finos-aigf` framework, the risk catalogue and assessment rules |

@@ -63,6 +63,32 @@
       ],
       "homepage": "https://majlisofai.github.io/govkit/",
       "repository": "https://github.com/majlisofai/govkit"
+    },
+    {
+      "name": "govkit-finos",
+      "source": "./plugins/govkit-finos",
+      "description": "GovKit's FINOS AI Governance Framework module — triage AI systems against the FINOS risk catalogue and check the evidence for their mitigations. Requires the govkit plugin.",
+      "version": "0.1.0",
+      "author": {
+        "name": "The Majlis of AI"
+      },
+      "license": "MIT",
+      "keywords": [
+        "finos",
+        "ai-governance",
+        "ai-risk",
+        "financial-services",
+        "govkit"
+      ],
+      "category": "productivity",
+      "dependencies": [
+        {
+          "name": "govkit",
+          "marketplace": "majlisofai"
+        }
+      ],
+      "homepage": "https://majlisofai.github.io/govkit/",
+      "repository": "https://github.com/majlisofai/govkit"
     }
   ]
 }

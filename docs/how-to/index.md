@@ -36,11 +36,17 @@ How-to guides are directions for a specific task. They assume you know what you 
 - [Add or refresh a building block](govstack/add-a-building-block.md)
 - [Assess a solution against GovStack](govstack/assess-a-solution-against-govstack.md)
 
+## FINOS module
+
+- [Set up the FINOS module](finos/set-up-the-finos-module.md)
+- [Assess an AI system against the FINOS risks](finos/assess-ai-system-risk.md)
+
 ## Maintain GovKit
 
 For contributors to this repository:
 
 - [Take a new ArcKit release](maintainers/take-an-arckit-release.md)
+- [Take a new FINOS release](maintainers/take-a-finos-release.md)
 - [Fix a failing compatibility gate](maintainers/fix-a-failing-compatibility-gate.md)
 - [Add a command or artefact type to GovKit](maintainers/add-a-command-or-doc-type.md)
 - [Release a new GovKit version](maintainers/release-govkit.md)

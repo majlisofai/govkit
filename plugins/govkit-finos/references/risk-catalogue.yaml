@@ -1,0 +1,294 @@
+# FINOS AI Governance Framework risk catalogue, for /govkit-finos:risk-assess.
+#
+# Identifiers, titles, categories, status, mitigated_by (the inverse of each
+# mitigation's `mitigates`), external_refs and related_risks are FINOS's, from
+# the commit pinned in upstream/finos.lock.json. Content © FINOS, CC BY 4.0.
+#
+# summary and triggers are GovKit's: summary paraphrases the risk, and
+# triggers are GovKit's judgement of which AI system features make the risk
+# applicable (vocabulary in references/finos-model.md). They are a starting
+# point for the applicability step, never a substitute for it.
+#
+# display_id is AIR-<category code>-<sequence>, as the FINOS site shows it.
+
+version: "v2"
+triggers:
+  foundation-model: The system uses a generative or foundation model.
+  hosted-model: The model is hosted by a third party and reached over an API.
+  confidential-data: Personal, customer, confidential or regulated data reaches the model, its prompts or its stores.
+  rag: The system retrieves from a knowledge base, vector store or search index.
+  fine-tuning: The firm trains or fine-tunes a model on its own data.
+  agentic: An agent chooses and calls tools or APIs that act on systems or data.
+  mcp: Agents use Model Context Protocol servers.
+  multi-agent: Several agents exchange messages, tasks or state.
+  persistent-memory: An agent keeps memory or state across sessions.
+  plugins: The system loads skills, plugins or extensions written by others.
+  customer-facing: Customers or the public see outputs directly.
+  decisions-about-people: Outputs inform decisions about individuals, such as credit, fraud, eligibility or pricing.
+  regulated-activity: The system supports an activity a financial regulator supervises, such as advice, suitability, trading or reporting.
+  generated-content: Generated text, code or media is published, sent or reused.
+risks:
+  - id: ri-1
+    display_id: AIR-RC-001
+    title: "Information Leaked To Hosted Model"
+    category: Regulatory and compliance
+    status: approved
+    summary: "Data sent to a third-party hosted model for inference may be retained, exposed by the provider or extracted through attacks."
+    triggers: [hosted-model, confidential-data]
+    mitigated_by: [mi-1, mi-2, mi-4, mi-6, mi-7, mi-12, mi-15, mi-20]
+    external_refs: { owasp-llm: [llm02-2026], eu-ai-act: [c3-s2-a10, c3-s2-a13, c5-s2-a53] }
+    related_risks: [ri-2, ri-23]
+    citation_url: https://air-governance-framework.finos.org/risks/ri-1_information-leaked-to-hosted-model.html
+  - id: ri-2
+    display_id: AIR-SEC-002
+    title: "Information Leaked to Vector Store"
+    category: Security
+    status: approved
+    summary: "Embeddings, vector stores, prompt logs and caches derived from sensitive data can leak it through inversion, inference or weak access control."
+    triggers: [rag, confidential-data]
+    mitigated_by: [mi-6, mi-14, mi-16]
+    external_refs: { owasp-llm: [llm02-2026, llm09-2026], eu-ai-act: [c3-s2-a10, c3-s2-a15, c3-s3-a16] }
+    related_risks: [ri-1, ri-9]
+    citation_url: https://air-governance-framework.finos.org/risks/ri-2_information-leaked-to-vector-store.html
+  - id: ri-4
+    display_id: AIR-OP-004
+    title: "Hallucination and Inaccurate Outputs"
+    category: Operational
+    status: approved
+    summary: "The model states fabricated or wrong information with confidence, and users or downstream processes act on it."
+    triggers: [foundation-model]
+    mitigated_by: [mi-5, mi-6, mi-13, mi-15]
+    external_refs: { owasp-llm: [llm07-2026], eu-ai-act: [c3-s2-a15, c3-s2-a13, c3-s2-a9] }
+    related_risks: [ri-14, ri-6, ri-19]
+    citation_url: https://air-governance-framework.finos.org/risks/ri-4_hallucination-and-inaccurate-outputs.html
+  - id: ri-5
+    display_id: AIR-OP-005
+    title: "Foundation Model Versioning"
+    category: Operational
+    status: approved
+    summary: "Upstream changes to a model, its version or its provider's system prompt alter behaviour without the firm changing anything."
+    triggers: [hosted-model]
+    mitigated_by: [mi-4, mi-5, mi-10, mi-11, mi-15]
+    external_refs: { owasp-llm: [llm07-2026], eu-ai-act: [c3-s2-a9, c3-s2-a15, c5-s2-a53] }
+    related_risks: [ri-7, ri-8]
+    citation_url: https://air-governance-framework.finos.org/risks/ri-5_foundation-model-versioning.html
+  - id: ri-6
+    display_id: AIR-OP-006
+    title: "Non-Deterministic Behaviour"
+    category: Operational
+    status: approved
+    summary: "The same input can give different outputs, which undermines consistency, testing and reproducibility."
+    triggers: [foundation-model]
+    mitigated_by: [mi-4, mi-5, mi-10, mi-11, mi-15]
+    external_refs: { owasp-llm: [llm07-2026], eu-ai-act: [c3-s2-a9, c3-s2-a15, c3-s2-a14] }
+    related_risks: [ri-4, ri-14]
+    citation_url: https://air-governance-framework.finos.org/risks/ri-6_non-deterministic-behaviour.html
+  - id: ri-7
+    display_id: AIR-OP-007
+    title: "Availability of Foundational Model"
+    category: Operational
+    status: approved
+    summary: "Outages, throttling, capacity limits or runaway cost at the model provider interrupt the service."
+    triggers: [hosted-model, foundation-model]
+    mitigated_by: [mi-3, mi-4, mi-8, mi-9, mi-17]
+    external_refs: { owasp-llm: [llm06-2026], eu-ai-act: [c3-s2-a15, c3-s3-a26, c5-s2-a53] }
+    related_risks: [ri-5, ri-8]
+    citation_url: https://air-governance-framework.finos.org/risks/ri-7_availability-of-foundational-model.html
+  - id: ri-8
+    display_id: AIR-SEC-008
+    title: "Tampering With the Foundational Model"
+    category: Security
+    status: approved
+    summary: "Model weights, training data or the serving stack are tampered with in the supply chain, planting backdoors or triggers."
+    triggers: [foundation-model, plugins]
+    mitigated_by: [mi-7, mi-12, mi-20, mi-25]
+    external_refs: { owasp-llm: [llm04-2026], eu-ai-act: [c3-s2-a15, c3-s3-a16, c5-s2-a53] }
+    related_risks: [ri-9, ri-7]
+    citation_url: https://air-governance-framework.finos.org/risks/ri-8_tampering-with-the-foundational-model.html
+  - id: ri-9
+    display_id: AIR-SEC-009
+    title: "Data Poisoning"
+    category: Security
+    status: approved
+    summary: "Training, fine-tuning or retrieval data is manipulated to change the model's behaviour in the attacker's favour."
+    triggers: [fine-tuning, rag]
+    mitigated_by: [mi-2, mi-6, mi-12, mi-25]
+    external_refs: { owasp-llm: [llm04-2026, llm05-2026, llm10-2026], eu-ai-act: [c3-s2-a10, c3-s2-a15, c5-s2-a53] }
+    related_risks: [ri-8, ri-19]
+    citation_url: https://air-governance-framework.finos.org/risks/ri-9_data-poisoning.html
+  - id: ri-10
+    display_id: AIR-SEC-010
+    title: "Prompt Injection"
+    category: Security
+    status: approved
+    summary: "Direct or indirect instructions in inputs or retrieved content make the model ignore its intended behaviour."
+    triggers: [foundation-model, rag, agentic]
+    mitigated_by: [mi-3, mi-17, mi-19]
+    external_refs: { owasp-llm: [llm01-2026, llm03-2026, llm05-2026, llm06-2026], owasp-asi: [asi01-2026], eu-ai-act: [c2-a5, c3-s2-a15, c3-s2-a14] }
+    related_risks: [ri-18, ri-20]
+    citation_url: https://air-governance-framework.finos.org/risks/ri-10_prompt-injection.html
+  - id: ri-14
+    display_id: AIR-OP-014
+    title: "Inadequate System Alignment"
+    category: Operational
+    status: approved
+    summary: "Responses drift from the business purpose, giving plausible but unsuitable advice, tone or recommendations."
+    triggers: [foundation-model, customer-facing, regulated-activity]
+    mitigated_by: [mi-4, mi-5, mi-11, mi-15]
+    external_refs: { owasp-llm: [llm08-2026], owasp-asi: [asi10-2026], eu-ai-act: [c2-a5, c3-s2-a9, c3-s2-a14] }
+    related_risks: [ri-4, ri-6]
+    citation_url: https://air-governance-framework.finos.org/risks/ri-14_inadequate-system-alignment.html
+  - id: ri-16
+    display_id: AIR-OP-016
+    title: "Bias and Discrimination"
+    category: Operational
+    status: approved
+    summary: "Outputs or decisions systematically disadvantage protected groups through data, design or proxy variables."
+    triggers: [decisions-about-people]
+    mitigated_by: [mi-5, mi-6, mi-11, mi-15]
+    external_refs: { eu-ai-act: [c2-a5, c3-s2-a9, c3-s2-a10, c3-s2-a14, c3-s3-a27] }
+    related_risks: [ri-19, ri-22]
+    citation_url: https://air-governance-framework.finos.org/risks/ri-16_bias-and-discrimination.html
+  - id: ri-17
+    display_id: AIR-OP-017
+    title: "Lack of Explainability"
+    category: Operational
+    status: approved
+    summary: "The firm cannot explain how an outcome was reached to customers, regulators or its own reviewers."
+    triggers: [decisions-about-people, regulated-activity]
+    mitigated_by: [mi-13]
+    external_refs: { owasp-asi: [asi09-2026], eu-ai-act: [c3-s2-a13, c3-s2-a14, c4-a50, c9-s4-a86] }
+    related_risks: [ri-22, ri-16, ri-18]
+    citation_url: https://air-governance-framework.finos.org/risks/ri-17_lack-of-explainability.html
+  - id: ri-18
+    display_id: AIR-OP-018
+    title: "Model Overreach / Expanded Use"
+    category: Operational
+    status: approved
+    summary: "The system is used beyond its intended purpose or trusted beyond its proven capability."
+    triggers: [foundation-model, agentic]
+    mitigated_by: [mi-3, mi-4, mi-11, mi-17, mi-18, mi-24]
+    external_refs: { owasp-llm: [llm03-2026], eu-ai-act: [c3-s1-a6, c3-s2-a14, c3-s3-a26] }
+    related_risks: [ri-10, ri-17, ri-22]
+    citation_url: https://air-governance-framework.finos.org/risks/ri-18_model-overreach-expanded-use.html
+  - id: ri-19
+    display_id: AIR-OP-019
+    title: "Data Quality and Drift"
+    category: Operational
+    status: approved
+    summary: "Stale, poor-quality or shifting data degrades outputs over time."
+    triggers: [foundation-model, rag, fine-tuning]
+    mitigated_by: [mi-4, mi-6, mi-15]
+    external_refs: { eu-ai-act: [c3-s2-a10, c3-s2-a9, c3-s2-a15] }
+    related_risks: [ri-4, ri-16, ri-9]
+    citation_url: https://air-governance-framework.finos.org/risks/ri-19_data-quality-and-drift.html
+  - id: ri-20
+    display_id: AIR-OP-020
+    title: "Reputational Risk"
+    category: Operational
+    status: approved
+    summary: "A visible AI failure, offensive output or unfair outcome damages trust in the firm."
+    triggers: [customer-facing, generated-content]
+    mitigated_by: [mi-3, mi-7, mi-11, mi-13, mi-17]
+    external_refs: { owasp-llm: [llm07-2026], eu-ai-act: [c2-a5, c3-s2-a9, c3-s2-a14] }
+    related_risks: [ri-10, ri-16, ri-4]
+    citation_url: https://air-governance-framework.finos.org/risks/ri-20_reputational-risk.html
+  - id: ri-22
+    display_id: AIR-RC-022
+    title: "Regulatory Compliance and Oversight"
+    category: Regulatory and compliance
+    status: approved
+    summary: "AI use falls short of the conduct, record-keeping, supervision and other rules that apply to the same activity done by people."
+    triggers: [regulated-activity, decisions-about-people]
+    mitigated_by: [mi-5, mi-6, mi-7, mi-13, mi-14, mi-16, mi-21, mi-24]
+    external_refs: { eu-ai-act: [c3-s2-a8, c3-s2-a10, c3-s3-a16, c3-s3-a21, c3-s3-a27] }
+    related_risks: [ri-16, ri-17, ri-18]
+    citation_url: https://air-governance-framework.finos.org/risks/ri-22_regulatory-compliance-and-oversight.html
+  - id: ri-23
+    display_id: AIR-RC-023
+    title: "Intellectual Property (IP) and Copyright"
+    category: Regulatory and compliance
+    status: approved
+    summary: "Training data or generated outputs infringe copyright or other IP, or expose proprietary material."
+    triggers: [generated-content, fine-tuning]
+    mitigated_by: [mi-6, mi-7]
+    external_refs: { eu-ai-act: [c3-s2-a10, c3-s2-a11, c5-s2-a53] }
+    related_risks: [ri-1, ri-22]
+    citation_url: https://air-governance-framework.finos.org/risks/ri-23_intellectual-property-ip-and-copyright.html
+  - id: ri-24
+    display_id: AIR-SEC-024
+    title: "Agent Action Authorization Bypass"
+    category: Security
+    status: approved
+    summary: "An agent performs actions outside its authorised scope, such as transactions or data access it should not have."
+    triggers: [agentic]
+    mitigated_by: [mi-4, mi-18, mi-19, mi-21, mi-22, mi-23, mi-24]
+    external_refs: { owasp-llm: [llm03-2026], owasp-asi: [asi02-2026, asi03-2026] }
+    related_risks: [ri-10, ri-18, ri-22]
+    citation_url: https://air-governance-framework.finos.org/risks/ri-24_agent-action-authorization-bypass.html
+  - id: ri-25
+    display_id: AIR-SEC-025
+    title: "Tool Chain Manipulation and Injection"
+    category: Security
+    status: approved
+    summary: "Manipulated inputs steer an agent to the wrong tools, dangerous call sequences or injected parameters."
+    triggers: [agentic]
+    mitigated_by: [mi-4, mi-19, mi-21]
+    external_refs: { owasp-llm: [llm01-2026], owasp-asi: [asi02-2026, asi05-2026] }
+    related_risks: [ri-10, ri-24, ri-4]
+    citation_url: https://air-governance-framework.finos.org/risks/ri-25_tool-chain-manipulation-and-injection.html
+  - id: ri-26
+    display_id: AIR-SEC-026
+    title: "MCP Server Supply Chain Compromise"
+    category: Security
+    status: approved
+    summary: "A malicious or compromised MCP server feeds agents tainted data, capabilities or execution environments."
+    triggers: [mcp]
+    mitigated_by: [mi-4, mi-20, mi-23]
+    external_refs: { owasp-asi: [asi04-2026] }
+    related_risks: [ri-8, ri-9, ri-1]
+    citation_url: https://air-governance-framework.finos.org/risks/ri-26_mcp-server-supply-chain-compromise.html
+  - id: ri-27
+    display_id: AIR-SEC-027
+    title: "Agent State Persistence Poisoning"
+    category: Security
+    status: approved
+    summary: "Poisoned memory or saved state carries malicious instructions into later sessions and transactions."
+    triggers: [persistent-memory]
+    mitigated_by: [mi-4, mi-22]
+    external_refs: { owasp-asi: [asi06-2026] }
+    related_risks: [ri-10, ri-24, ri-9]
+    citation_url: https://air-governance-framework.finos.org/risks/ri-27_agent-state-persistence-poisoning.html
+  - id: ri-28
+    display_id: AIR-OP-028
+    title: "Multi-Agent Trust Boundary Violations"
+    category: Operational
+    status: approved
+    summary: "A compromised agent spreads failure or compromise to other agents through shared channels, resources or state."
+    triggers: [multi-agent]
+    mitigated_by: [mi-4, mi-22]
+    external_refs: { owasp-asi: [asi07-2026, asi08-2026, asi10-2026] }
+    related_risks: [ri-24, ri-27, ri-20]
+    citation_url: https://air-governance-framework.finos.org/risks/ri-28_multi-agent-trust-boundary-violations.html
+  - id: ri-29
+    display_id: AIR-SEC-029
+    title: "Agent-Mediated Credential Discovery and Harvesting"
+    category: Security
+    status: approved
+    summary: "An agent is used to find, collect and exfiltrate credentials, keys and secrets it can reach."
+    triggers: [agentic]
+    mitigated_by: [mi-4, mi-23]
+    external_refs: { owasp-llm: [llm01-2026, llm03-2026], owasp-asi: [asi03-2026] }
+    related_risks: [ri-10, ri-24, ri-25, ri-26]
+    citation_url: https://air-governance-framework.finos.org/risks/ri-29_agent-mediated-credential-discovery-and-harvesting.html
+  - id: ri-30
+    display_id: AIR-SEC-030
+    title: "Skill/Plugin Supply Chain Compromise"
+    category: Security
+    status: draft
+    summary: "A community skill or plugin injects instructions or runs code inside an agent with full trust."
+    triggers: [plugins]
+    mitigated_by: [mi-25]
+    external_refs: { owasp-llm: [llm03-2025, llm06-2025], owasp-asi: [asi04-2026] }
+    related_risks: [ri-8, ri-9, ri-10, ri-25, ri-26, ri-27, ri-29]
+    citation_url: https://air-governance-framework.finos.org/risks/ri-30_skill-plugin-supply-chain-compromise.html

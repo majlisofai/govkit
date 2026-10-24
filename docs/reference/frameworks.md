@@ -52,3 +52,13 @@ controls:
 | `iso-iec-38500` | ISO/IEC 38500 — Governance of IT for the organisation | 2015 | ISO/IEC JTC 1/SC 40 | principles |
 
 The built-in frameworks hold paraphrased control intents only. For jurisdiction-specific regulation (EU AI Act, UAE AI Charter, NIST 800-53 and others), GovKit hands off to ArcKit's overlay plugins.
+
+## Module frameworks
+
+GovKit modules install further frameworks into `.govkit/frameworks/` (or the organisation layer) with their `apply` command.
+
+| Id | Name | Module | Type | Assessed by |
+|----|------|--------|------|-------------|
+| `govstack-cfr` | GovStack Cross-Functional Requirements | [`govkit-govstack`](govstack-overlay.md) | standard | `/govkit-govstack:compliance` |
+| `govstack-bb-<id>` | One GovStack building block's requirements | [`govkit-govstack`](govstack-overlay.md) | standard | `/govkit-govstack:compliance` |
+| `finos-aigf` | FINOS AI Governance Framework — mitigations | [`govkit-finos`](finos-module.md) | risk-framework | `/govkit-finos:risk-assess` |

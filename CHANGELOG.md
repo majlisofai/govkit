@@ -1,5 +1,18 @@
 # Changelog
 
+## govkit-finos 0.1.0 — 2026-10-24
+
+Supports GovKit >=0.4.0 <1.0.0.
+
+- **New plugin `govkit-finos`**, GovKit's module for the [FINOS AI Governance Framework](https://air-governance-framework.finos.org/) (CC BY 4.0, © FINOS), pinned to FINOS commit `8b0e801` (v2 plus the agentic additions on the published site).
+- `finos-aigf` framework: the 25 FINOS mitigations as controls (Preventative / Detective), with the risks each mitigates, FINOS's ISO/IEC 42001 references as `mappings`, and paraphrased intents. `mi-24` and `mi-25` are Draft.
+- Risk catalogue: the 24 FINOS risks (operational, security, regulatory, agentic and MCP), with FINOS's links and external references, and GovKit's applicability triggers.
+- `/govkit-finos:apply` registers the FNRA doc type and installs the framework.
+- `/govkit-finos:risk-assess` (FNRA, one per AI system): profiles the system, triages every FINOS risk, rates inherent risk with the profile's risk method, checks mitigation evidence with GovKit's evidence-reader and control-assessor agents, and rates residual risk against appetite. It proposes risks above appetite for `/arckit:risk`, and hands off to `/arckit-eu:eu-ai-act`, `/arckit-eu:eu-dora` and `/arckit-agent-architecture:agent-security`.
+- `finos-method` skill.
+- `scripts/check-finos.py` and `upstream/finos.lock.json` check the module against FINOS upstream.
+- Docs: tutorial *Your first FINOS AI risk assessment*, with the sample evidence pack `examples/finos/advisor-copilot/`; how-to guides to set up the module, assess an AI system and take a new FINOS release; the FINOS module reference; and a FINOS section in *GovKit modules*.
+
 ## 0.4.0 — 2026-10-24
 
 Tested against ArcKit 6.18.2.
