@@ -84,6 +84,7 @@ nav:
       - tutorials/index.md
       - Your first governed repository: tutorials/first-governed-repository.md
       - Your first team matrix: tutorials/first-team-matrix.md
+      - Your first GovStack self-assessment: tutorials/first-govstack-self-assessment.md
   - How-to guides:
       - how-to/index.md
       - Set up and configure:

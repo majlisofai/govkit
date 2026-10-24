@@ -2,6 +2,11 @@
 
 GovKit can be extended by overlays: separate plugins, named `govkit-<name>`, that bring a body of standards into GovKit governance. The first is `govkit-govstack`, for GovStack building blocks. This page explains why overlays are separate plugins, why they're limited the way they are, and why the GovStack overlay judges compliance as it does.
 
+<figure markdown>
+  ![Integration view: GovStack specifications feed the govkit-govstack overlay, which reaches GovKit only through its extension points; ArcKit core stays unmodified beneath](../assets/diagrams/govkit-govstack-integration.drawio.png){ .diagram loading=lazy }
+  <figcaption>Sheet A1.1, integration view. Edit the <a href="../../assets/diagrams/govkit-govstack-integration.drawio">.drawio source</a> in draw.io; the PNG also opens for editing.</figcaption>
+</figure>
+
 ## Why a separate plugin
 
 GovKit's built-in frameworks are governance frameworks: ISO/IEC 42001, the NIST AI RMF, ISO/IEC 38500. Each is a single file of control intents that slots into GovKit's existing commands. GovStack is a different kind of thing. It is a family of technical specifications with its own vocabulary (building blocks, key functionalities), its own requirement classifiers, its own compliance rule, and fourteen specifications that version independently. Fitting all of that into GovKit core would make every GovKit user carry concepts that only some need, and tie GovKit's releases to GovStack's.

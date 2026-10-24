@@ -1,6 +1,6 @@
 # GovStack overlay
 
-Plugin `govkit-govstack` 0.1.0, namespace `/govkit-govstack:*`. Requires GovKit 0.4.0 or later and below 1.0.0. Source: [`plugins/govkit-govstack/`](https://github.com/majlisofai/govkit/tree/main/plugins/govkit-govstack).
+Plugin `govkit-govstack` 0.1.0, namespace `/govkit-govstack:*`. Requires GovKit 0.4.0 or later and below 1.0.0. Source: [`plugins/govkit-govstack/`](https://github.com/majlisofai/govkit/tree/main/plugins/govkit-govstack). For a picture of how it fits between GovStack, GovKit and ArcKit, see the [integration view](../explanation/overlays.md).
 
 ## Commands
 

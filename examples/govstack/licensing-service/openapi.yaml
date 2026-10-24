@@ -1,0 +1,109 @@
+openapi: 3.0.3
+info:
+  title: Licensing Service API
+  version: 1.4.0
+  description: Receives business-licence applications, tracks their status and records decisions.
+servers:
+  - url: https://licensing.example.org/api/v1
+security:
+  - bearer: []
+paths:
+  /applications:
+    post:
+      summary: Submit a licence application
+      operationId: submitApplication
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: '#/components/schemas/ApplicationRequest' }
+      responses:
+        '201':
+          description: Application accepted
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/Application' }
+        '401': { $ref: '#/components/responses/Error' }
+        '403': { $ref: '#/components/responses/Error' }
+  /applications/{applicationId}:
+    get:
+      summary: Get an application
+      operationId: getApplication
+      parameters:
+        - name: applicationId
+          in: path
+          required: true
+          schema: { type: string, format: uuid }
+      responses:
+        '200':
+          description: The application
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/Application' }
+        '404': { $ref: '#/components/responses/Error' }
+    put:
+      summary: Replace an application's details before review
+      operationId: replaceApplication
+      parameters:
+        - name: applicationId
+          in: path
+          required: true
+          schema: { type: string, format: uuid }
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: '#/components/schemas/ApplicationRequest' }
+      responses:
+        '200':
+          description: The updated application
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/Application' }
+  /health:
+    get:
+      summary: Service health
+      operationId: getHealth
+      security: []
+      responses:
+        '200':
+          description: Healthy
+components:
+  securitySchemes:
+    bearer:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+  responses:
+    Error:
+      description: Error
+      content:
+        application/json:
+          schema: { $ref: '#/components/schemas/Error' }
+  schemas:
+    ApplicationRequest:
+      type: object
+      required: [businessName, category, applicant]
+      properties:
+        businessName: { type: string }
+        category: { type: string, enum: [retail, food, trade, services] }
+        applicant:
+          type: object
+          required: [name]
+          properties:
+            name: { type: string }
+    Application:
+      allOf:
+        - $ref: '#/components/schemas/ApplicationRequest'
+        - type: object
+          properties:
+            applicationId: { type: string, format: uuid }
+            status: { type: string, enum: [received, fee-due, under-review, granted, refused] }
+            submittedAt: { type: string, format: date-time }
+    Error:
+      type: object
+      required: [code, message, correlationId]
+      properties:
+        code: { type: string }
+        message: { type: string }
+        correlationId: { type: string }

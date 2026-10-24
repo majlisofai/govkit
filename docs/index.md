@@ -33,7 +33,7 @@ The documentation follows the [Diátaxis](https://diataxis.fr/) framework. Choos
 
 -   **[Tutorials](tutorials/index.md)**
 
-    *Learning.* Lessons that take you step by step through your first governed repository and your first team matrix.
+    *Learning.* Lessons that take you step by step through your first governed repository, your first team matrix and your first GovStack self-assessment.
 
 -   **[How-to guides](how-to/index.md)**
 

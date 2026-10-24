@@ -25,7 +25,7 @@ Then, in a GovKit-governed repository:
 
 It also ships the `govstack-method` skill and the `govstack-spec-reader` agent, and reuses GovKit's evidence-reader and control-assessor agents.
 
-See the [GovStack overlay documentation](https://majlisofai.github.io/govkit/reference/govstack-overlay/).
+New to the overlay? Follow the tutorial [Your first GovStack self-assessment](https://majlisofai.github.io/govkit/tutorials/first-govstack-self-assessment/), which uses the sample evidence pack in [`examples/govstack/`](../../examples/govstack/). For details, see the [GovStack overlay reference](https://majlisofai.github.io/govkit/reference/govstack-overlay/).
 
 ## Data
 

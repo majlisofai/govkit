@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- API test run against the staging deployment of Licensing Service 1.4.0. -->
+<testsuites name="licensing-service staging" tests="8" failures="0" timestamp="2026-10-20T09:14:02Z">
+  <testsuite name="authentication" tests="3" failures="0">
+    <testcase name="rejects a request without a token with 401" classname="auth" time="0.12"/>
+    <testcase name="rejects a token without the licensing scope with 403" classname="auth" time="0.10"/>
+    <testcase name="accepts a valid OpenID Connect token from the Identity provider" classname="auth" time="0.15"/>
+  </testsuite>
+  <testsuite name="data" tests="2" failures="0">
+    <testcase name="round-trips UTF-8 applicant names (Zoë, مريم, अनन्या) unchanged" classname="data" time="0.21"/>
+    <testcase name="rejects a request body that is not valid UTF-8 with 400" classname="data" time="0.08"/>
+  </testsuite>
+  <testsuite name="api" tests="3" failures="0">
+    <testcase name="every endpoint is served under /api/v1" classname="api" time="0.05"/>
+    <testcase name="repeating an identical PUT leaves the application unchanged and sends no extra notification" classname="api" time="0.33"/>
+    <testcase name="a forced server error returns only code, message and correlationId" classname="api" time="0.09"/>
+  </testsuite>
+</testsuites>

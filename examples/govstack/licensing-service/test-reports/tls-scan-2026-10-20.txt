@@ -1,0 +1,16 @@
+TLS scan — licensing.example.org:443 (staging)
+Date: 2026-10-20T09:30:11Z
+Tool: testssl.sh 3.2
+
+Protocols
+  SSLv2      not offered (OK)
+  SSLv3      not offered (OK)
+  TLS 1.0    not offered (OK)
+  TLS 1.1    not offered (OK)
+  TLS 1.2    offered
+  TLS 1.3    offered (OK)
+
+Plain HTTP (port 80)   not offered (OK)
+Weak ciphers (RC4, 3DES, NULL, EXPORT)   not offered (OK)
+
+Note: TLS 1.2 remains enabled because the legacy payment gateway does not support TLS 1.3.

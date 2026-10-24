@@ -1,6 +1,6 @@
 # How to set up the GovStack overlay
 
-This guide shows you how to add GovStack building-block governance to a repository that already uses GovKit.
+This guide shows you how to add GovStack building-block governance to a repository that already uses GovKit. If you are new to the overlay, start with the tutorial [Your first GovStack self-assessment](../../tutorials/first-govstack-self-assessment.md).
 
 1. Install the overlay. It needs GovKit 0.4.0 or later.
 
