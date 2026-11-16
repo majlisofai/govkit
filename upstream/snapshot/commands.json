@@ -85,6 +85,13 @@
     "agent-maturity",
     "agent-security"
   ],
+  "arckit-arc42": [
+    "arc42",
+    "arc42-concepts",
+    "arc42-debt",
+    "arc42-handover",
+    "arc42-quality"
+  ],
   "arckit-at": [
     "at-barrierefreiheit",
     "at-bvergg",
@@ -152,6 +159,8 @@
     "nl-bio",
     "nl-cloud",
     "nl-exit",
+    "nl-gemma",
+    "nl-nora",
     "nl-tbb"
   ],
   "arckit-oaa": [
@@ -212,6 +221,9 @@
     "social-value",
     "submission-pack",
     "supplier-profile"
+  ],
+  "arckit-uk-legacy": [
+    "uk-legacy-assessment"
   ],
   "arckit-uk-nhs": [
     "uk-mdr-classification",

@@ -95,7 +95,7 @@ export const DOC_TYPES = {
   'AAIN':      { name: 'Agent Integration Architecture',   category: 'Architecture' },
   'AASE':      { name: 'Agent Security Architecture',      category: 'Governance', severity: 'HIGH' },
   'AAMT':      { name: 'Agent Maturity Assessment',        category: 'Governance' },
-  // Open Agile Architecture overlay (arckit-oaa, community) — O-AA C208 agile
+  // Open Agile Architecture overlay (arckit-oaa, community) — O-AA v2.0 agile
   // enterprise architecture: strategy canvas, product-centric architecture,
   // ADM Lite sprint mapping, security embedded in sprint rhythm, governance cadence.
   'OASTR':     { name: 'Agile Strategy',                   category: 'Planning' },
@@ -103,6 +103,14 @@ export const DOC_TYPES = {
   'OAAL':      { name: 'ADM Lite Sprint Mapping',          category: 'Architecture' },
   'OASEC':     { name: 'Agile Security',                   category: 'Governance', severity: 'HIGH' },
   'OAGOV':     { name: 'Agile Governance',                 category: 'Governance' },
+  // arc42 overlay (arckit-arc42, community) — an arc42 architecture description
+  // assembled from the project's existing artefacts, one per project, plus the
+  // source artefacts for its sections 8, 10 and 11 and the SDD handover pack.
+  'ARC42':     { name: 'arc42 Architecture Description',   category: 'Architecture' },
+  'QUAL':      { name: 'Quality Scenarios',                category: 'Architecture' },
+  'CONC':      { name: 'Crosscutting Concepts',            category: 'Architecture' },
+  'DEBT':      { name: 'Technical Debt Register',          category: 'Architecture' },
+  'SDDH':      { name: 'SDD Handover Pack',                category: 'Planning' },
   // Governance — universal best-practice (no regime tag, HIGH-severity)
   'RISK':      { name: 'Risk Register',                    category: 'Governance', severity: 'HIGH' },
   'TRAC':      { name: 'Traceability Matrix',              category: 'Governance', severity: 'HIGH' },
@@ -123,6 +131,7 @@ export const DOC_TYPES = {
   'ATRS':      { name: 'ATRS Record',                      category: 'Compliance', regime: 'UK',  severity: 'HIGH' },
   'DPIA':      { name: 'Data Protection Impact Assessment', category: 'Compliance', regime: 'UK',  severity: 'HIGH' },
   'JSP936':    { name: 'JSP 936 Assessment',               category: 'Compliance', regime: 'MOD', severity: 'HIGH' },
+  'LEGACY':    { name: 'Legacy IT Assessment',               category: 'Compliance', regime: 'UK' },
   'SVCASS':    { name: 'Service Assessment',               category: 'Compliance', regime: 'UK',  severity: 'HIGH' },
   // Operations
   'SNOW':      { name: 'ServiceNow Design',                category: 'Operations' },
@@ -207,14 +216,14 @@ export const DOC_TYPES = {
   'AIA':       { name: 'Canada Algorithmic Impact Assessment',         category: 'Compliance',   regime: 'CA' },
   'CHRT':      { name: 'Canada Charter Rights Design Review',          category: 'Governance',   regime: 'CA' },
   'ITSG':      { name: 'Canada ITSG-33 Statement of Applicability',    category: 'Architecture', regime: 'CA' },
-  'SOIA':      { name: 'Canada Security of Information Act Handling Plan', category: 'Compliance',   regime: 'CA' },
+  'SOIA':      { name: 'Canada Foreign Interference and Security of Information Act Handling Plan', category: 'Compliance',   regime: 'CA' },
   'CACR':      { name: 'Canada Sovereign Cloud Residency Assessment',  category: 'Architecture', regime: 'CA' },
   'DIGSTD':    { name: 'Canada GC Digital Standards Conformance',      category: 'Governance',   regime: 'CA' },
   'OLA':       { name: 'Canada Official Languages Act Review',         category: 'Compliance',   regime: 'CA' },
   'PROC':      { name: 'Canada Federal Procurement Strategy',          category: 'Procurement',  regime: 'CA' },
   'OCAP':      { name: 'Canada First Nations OCAP Sovereignty Assessment', category: 'Governance',   regime: 'CA' },
   // USA Federal Civilian Overlay (community) — FedRAMP, FISMA/NIST 800-53, CISA Zero Trust,
-  // OMB M-19-17 ICAM, NIST AI RMF + OMB M-24-10/M-25-21, E-Gov §208 PIA, EO 14028 SBOM
+  // OMB M-19-17 ICAM, NIST AI RMF + OMB M-25-21/M-25-22, E-Gov §208 PIA, EO 14028 SBOM
   'FIPS199':   { name: 'US FIPS 199 System Categorization',            category: 'Compliance',   regime: 'US', severity: 'HIGH' },
   'NIST':      { name: 'US NIST SP 800-53 Rev 5 Tailored Control Set', category: 'Architecture', regime: 'US', severity: 'HIGH' },
   'FRSSP':     { name: 'US FedRAMP System Security Plan',              category: 'Compliance',   regime: 'US', severity: 'HIGH' },
@@ -222,7 +231,7 @@ export const DOC_TYPES = {
   'ZTA':       { name: 'US CISA Zero Trust Maturity Posture',          category: 'Architecture', regime: 'US' },
   'ICAM':      { name: 'US ICAM Architecture (OMB M-19-17 / NIST SP 800-63-3)', category: 'Architecture', regime: 'US' },
   'AIRMF':     { name: 'US NIST AI Risk Management Framework Assessment', category: 'Compliance', regime: 'US', severity: 'HIGH' },
-  'AIIA':      { name: 'US AI Impact Assessment (OMB M-24-10 / M-25-21)', category: 'Compliance', regime: 'US', severity: 'HIGH' },
+  'AIIA':      { name: 'US AI Impact Assessment (OMB M-25-21 / M-25-22)', category: 'Compliance', regime: 'US', severity: 'HIGH' },
   'USPIA':     { name: 'US Privacy Impact Assessment (E-Gov §208)',    category: 'Compliance',   regime: 'US', severity: 'HIGH' },
   'SBOM':      { name: 'US SBOM + Secure-Software Self-Attestation (EO 14028)', category: 'Compliance', regime: 'US' },
   // Australian Federal Overlay (Community-contributed, maintained by @royster70) — ASD Essential Eight, ISM, DTA DSS, Privacy Act 1988 PIA,
@@ -242,12 +251,16 @@ export const DOC_TYPES = {
   'AUDISP':    { name: 'AU DISP Member Self-Attestation Pack',         category: 'Compliance',  regime: 'AU', severity: 'HIGH' },
   // Netherlands Public Sector Overlay (arckit-nl) — community-contributed,
   // EXPERIMENTAL. Outputs require review by qualified NL counsel and, for any
-  // rubricering determination, a departmental beveiligingsautoriteit or
-  // rubriceringsambtenaar before reliance.
+  // TBB category determination, a departmental beveiligingsautoriteit or
+  // rubriceringsambtenaar before reliance. TBB is a category determination
+  // only: /arckit:nl-tbb records an existing rubricering as a floor and never
+  // produces one (TBB systematiek v1.0, §2.1 and §3.1).
   'RBCLOUD':   { name: 'Rijksbreed Cloudbeleid Compliance Assessment',  category: 'Compliance',  regime: 'NL', severity: 'HIGH' },
-  'TBB':       { name: 'Te Beschermen Belangen / VIRBI 2025 Rubricering', category: 'Compliance', regime: 'NL', severity: 'HIGH' },
+  'TBB':       { name: 'Te Beschermen Belangen (TBB) Category Determination', category: 'Compliance', regime: 'NL', severity: 'HIGH' },
   'BIO2':      { name: 'BIO2 Conformance Assessment',                   category: 'Compliance',  regime: 'NL', severity: 'HIGH' },
   'NLEXIT':    { name: 'NL Cloud Exit Plan',                            category: 'Governance',  regime: 'NL' },
+  'NORA':      { name: 'NORA Conformance Assessment',                   category: 'Governance',  regime: 'NL' },
+  'GEMMA':     { name: 'GEMMA Alignment Assessment',                    category: 'Architecture', regime: 'NL' },
   // UK Financial Services Payments Overlay (arckit-uk-finance) — community-contributed,
   // EXPERIMENTAL. Outputs require review by qualified UK FS regulatory counsel + firm
   // MLRO / Compliance Officer before reliance.
@@ -260,7 +273,7 @@ export const DOC_TYPES = {
   // SAFETY-CASE.md / HAZARD-LOG.md) deliberately do NOT carry an ArcKit doc-type code or ARC- prefix — they
   // pass through validate-arc-filename untouched and are cross-referenced by relative path
   // (clinical-safety/SAFETY-CASE.md) rather than document ID.
-  'NHSDTAC':   { name: 'NHS Digital Technology Assessment Criteria (DTAC v3)', category: 'Compliance', regime: 'UK', severity: 'HIGH' },
+  'NHSDTAC':   { name: 'NHS Digital Technology Assessment Criteria (DTAC)', category: 'Compliance', regime: 'UK', severity: 'HIGH' },
   'NHSMDR':    { name: 'UK MDR + EU MDR SaMD/AIaMD Classification',       category: 'Compliance', regime: 'UK', severity: 'HIGH' },
   'MMOD':      { name: 'Maturity Model Assessment',       category: 'Governance', severity: 'HIGH' },
 };
@@ -361,6 +374,10 @@ export const MULTI_INSTANCE_TYPES = new Set([
   'WGAM', 'WCLM', 'WVCH',
   'GOVR', 'GCSR', 'GLND', 'GRNT',
   'CDAU',
+  // arckit-togaf-adm: /arckit:architecture-change numbers each TOGAF Phase H
+  // change request (ARC-001-ACHG-001-v1.0.md in changes/). Missing from both
+  // lists, the hook read ACHG-001 as the doc-type and blocked every write (#949).
+  'ACHG',
 ]);
 
 // Type code -> required subdirectory
@@ -389,6 +406,16 @@ export const SUBDIR_MAP = {
   'GRNT': 'research',
   'CDAU': 'audits',
   'FWRK': 'framework',
+  'ACHG': 'changes',
+  // /arckit:gcloud-search writes procurement/ARC-001-GCLD-v1.0.md, and
+  // /arckit:evaluate and /arckit:gcloud-clarify look for it there. Unmapped,
+  // the context hook and the manifest never scanned procurement/.
+  'GCLD': 'procurement',
+  // /arckit:dos writes procurement/ARC-001-DOS-v1.0.md and /arckit:gcloud-clarify
+  // writes procurement/ARC-001-GCLC-v1.0.md. Unmapped, the filename hook let
+  // either land in the project root and --relpath dropped procurement/.
+  'DOS':  'procurement',
+  'GCLC': 'procurement',
 };
 
 // Derived: set of all valid type codes
